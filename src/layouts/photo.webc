@@ -1,0 +1,6 @@
+---
+layout: default.webc
+---
+<photo-details :photo="photo">
+    <div webc:if="content?.trim()" @raw="content"></div>
+</photo-details>

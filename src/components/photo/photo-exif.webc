@@ -1,0 +1,58 @@
+<dialog
+    webc:if="photo.data.exif"
+    :id="`photo-metadata-${photo.data.id}`"
+    popover="auto"
+    class="fixed inset-0 w-auto h-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop-blur-3xl"
+>
+    <div
+        class="flex justify-center items-center w-full min-h-full p-4 outline-none"
+    >
+        <div class="w-full max-w-md sm:max-w-xl mx-auto rounded-xl border border-zinc-200 p-4 shadow-xl bg-white dark:bg-zinc-800 dark:border-zinc-900">
+            <div class="relative mb-4 flex items-start justify-between">
+                <div>
+                    <p class="text-xs uppercase tracking-wider text-zinc-500 dark:text-zinc-300">Photo Metadata</p>
+                    <h3 class="text-2xl font-semibold">Details</h3>
+                </div>
+
+                <button
+                    type="button"
+                    class="p-1.5 rounded-full border cursor-pointer border-zinc-200 text-zinc-500 dark:bg-zinc-800 dark:border-zinc-900 dark:text-zinc-300 hover:border-accent hover:text-accent focus-visible:outline-accent focus-visible:outline-2"
+                    aria-label="Close photo metadata"
+                    :popovertarget="`photo-metadata-${photo.data.id}`"
+                    popovertargetaction="hide"
+                >
+                    <svg
+                        width="26"
+                        height="26"
+                        aria-hidden="true"
+                        class="icon h-6 w-6"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        data-slot="icon"
+                    >
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <dl class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                <div
+                    class="flex items-center align-center gap-x-2 px-3 py-2 rounded border border-zinc-200 bg-zinc-50 dark:bg-zinc-700 dark:border-zinc-600"
+                    webc:for="(index, item) in photo.data.exif"
+                >
+                    <dt class="flex items-center gap-x-2 text-zinc-500 dark:text-zinc-300">
+                        <span aria-hidden="true" class="shrink-0 [&_svg]:block [&_svg]:h-6 [&_svg]:w-6" @raw="item.icon"></span>
+                        <span @text="item.title" class="sr-only"></span>
+                    </dt>
+                    <dd
+                        class="text-sm text-zinc-900 dark:text-zinc-300"
+                        @text="item.value"
+                    ></dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+</dialog>

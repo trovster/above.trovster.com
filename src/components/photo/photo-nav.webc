@@ -1,0 +1,37 @@
+<nav class="absolute inset-x-0 bottom-4 flex items-start justify-between gap-4 px-4 sm:justify-center" aria-label="Photo navigation">
+    <a
+        webc:if="photo.data.previous"
+        :href="photo.data.previous.url"
+        rel="prev"
+        class="group outline-offset-2 focus-visible:outline-2 focus-visible:outline-accent"
+        :title="`Previous Photo: ${photo.data.previous.data.title}`">
+        <svg width="26" height="26" class="h-6 w-6 text-accent transition group-hover:-translate-x-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/>
+        </svg>
+    </a>
+
+    <span webc:if="!photo.data.previous" class="pointer-events-none text-zinc-300">
+        <svg width="26" height="26" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/>
+        </svg>
+    </span>
+
+    <site-nav :page="page"></site-nav>
+
+    <a
+        webc:if="photo.data.next"
+        :href="photo.data.next.url"
+        rel="next"
+        class="group outline-offset-2 focus-visible:outline-2 focus-visible:outline-accent"
+        :title="`Next Photo: ${photo.data.next.data.title}`">
+        <svg width="26" height="26" class="h-6 w-6 text-accent transition group-hover:translate-x-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+        </svg>
+    </a>
+
+    <span webc:if="!photo.data.next" class="pointer-events-none text-zinc-300">
+        <svg width="26" height="26" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+        </svg>
+    </span>
+</nav>

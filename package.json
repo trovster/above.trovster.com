@@ -1,0 +1,49 @@
+{
+  "name": "photos-website",
+  "version": "0.0.1",
+  "description": "A small personal photo website, built with 11ty.",
+  "keywords": [],
+  "homepage": "https://photos.trovster.com",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "author": {
+    "name": "Trevor Morris",
+    "url": "https://www.trovster.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trovster/photos-website.git"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "11ty": "npx @11ty/eleventy $npm_config_pathprefix",
+    "css": "npx postcss ./public/css/site.css -o ./dist/css/site.css",
+    "prestart": "npm run clean",
+    "start": "npm run 11ty -- --serve --quiet & npm run css -- --watch",
+    "prebuild": "npm run clean",
+    "build": "npm run 11ty",
+    "postbuild": "npm run css -- --minify",
+    "test": "node --test",
+    "prettier": "npx prettier --write ."
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.5",
+    "@11ty/eleventy-fetch": "^4.0.1",
+    "@11ty/eleventy-img": "^6.0.4",
+    "@11ty/eleventy-plugin-rss": "^3.0.0",
+    "@11ty/eleventy-plugin-webc": "^0.11.2",
+    "@tailwindcss/postcss": "^4.2.4",
+    "colorthief": "^3.3.1",
+    "cssnano": "^8.0.0",
+    "dotenv": "^16.4.5",
+    "exifr": "^7.1.3",
+    "postcss": "^8.5.14",
+    "postcss-cli": "^11.0.1",
+    "prettier": "^3.8.3",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.2.4"
+  }
+}

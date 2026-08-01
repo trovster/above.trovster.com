@@ -1,0 +1,6 @@
+<ul class="flex space-x-2 mt-2" webc:if="palette?.length">
+    <li webc:for="(index, hex) in palette" class="grow text-center">
+        <span :style="`background-color: ${index, hex};`" :title="index, hex" class="block w-full aspect-video max-h-14 rounded"></span>
+        <span class="sr-only text-xs text-zinc-500" @text="index, hex"></span>
+    </li>
+</ul>

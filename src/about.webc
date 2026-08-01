@@ -1,0 +1,46 @@
+---
+title: About
+description: More about this website.
+bodyClass: page page-about page-general
+---
+<section class="mx-4 mb-8 md:mx-10 rounded-xl flex flex-col gap-y-8 border border-accent p-6 md:p-10">
+    <div>
+        <p class="text-xs uppercase tracking-widest text-accent">About</p>
+        <h2 class="font-display text-2xl sm:text-3xl">My Photos</h2>
+    </div>
+
+    <div class="prose space-y-4">
+        <p>
+            This is an example website that showcases photos.
+        </p>
+
+        <p>
+            The project is built using the static site generator
+            <a href="https://www.11ty.dev" class="link" rel="external">11ty</a>.
+            It uses <a href="https://tailwindcss.com" class="link" rel="external">tailwindcss</a>
+            for the basic styling. The EXIF data is pulled using the
+            <a href="https://www.npmjs.com/package/exifr" class="link" rel="external">exifr</a> package,
+            and <a href="colorthief" class="link" rel="external">colorthief</a> is used
+            for the photo colour palette. <a href="https://blurha.sh" class="link" rel="external">
+            BlurHash</a> is used as photo placeholder during loading.
+        </p>
+
+        <p>
+            You can create your own version from the
+            <a href="https://github.com/trovster/photos-website" class="link" rel="external">git repository</a>.
+        </p>
+
+        <p>
+            The navigation icons are from <a href="https://heroicons.com" class="link" rel="external">Heroicons</a>.
+            The icons for Exposure Time, Aperture, Focal Length, Camera, and
+            Flash are by Denis Klyuchnikov from <a href="https://thenounproject.com" class="link" rel="external">Noun Project</a>.
+        </p>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-3">
+        <a href="/" class="button"> Browse the Photos</a>
+        <a webc:if="profile.website.length" :href="profile.website" rel="me external" class="button button--secondary">Visit Website</a>
+    </div>
+</section>
+
+<site-footer :page="page"></site-footer>

@@ -1,0 +1,30 @@
+<section class="mx-4 pb-10">
+    <div class="relative overflow-hidden bg-zinc-100">
+        <canvas
+            webc:if="photo.data.blurhash"
+            :data-blurhash="photo.data.blurhash"
+            data-blurhash-width="32"
+            data-blurhash-height="48"
+            aria-hidden="true"
+            class="pointer-events-none absolute inset-0 h-full w-full scale-110 object-cover blur-3xl transition duration-300"
+        ></canvas>
+
+        <img class="relative h-auto w-full object-contain" :src="photo.data.src" :alt="photo.data.alt" />
+    </div>
+
+    <photo-palette :palette="photo.data.palette"></photo-palette>
+
+    <div class="mt-2 flex flex-wrap items-center justify-between gap-1">
+        <h2 class="font-display text-lg" @text="photo.data.title"></h2>
+
+        <photo-exif-button :photo="photo"></photo-exif-button>
+    </div>
+
+    <p class="text-sm text-zinc-500 mb-1" @text="date(photo.date, 'cccc dS LLLL y')"></p>
+
+    <slot></slot>
+
+    <photo-exif :photo="photo"></photo-exif>
+</section>
+
+<photo-nav :photo="photo"></photo-nav>

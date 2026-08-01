@@ -1,0 +1,3 @@
+<p class="text-sm text-zinc-500">
+    © 2026–<span @text="year()" webc:nokeep></span>
+</p>

@@ -1,0 +1,4 @@
+<footer class="space-y-4 text-center">
+    <site-nav :page="page"></site-nav>
+    <copyright></copyright>
+</footer>
