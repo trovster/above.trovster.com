@@ -1,45 +1,50 @@
 ---
 title: About
 description: More about this website.
-bodyClass: page page-about page-general
+bodyClass: page page--about
 ---
-<section class="mx-4 mb-8 md:mx-10 rounded-xl flex flex-col gap-y-8 border border-accent p-6 md:p-10">
+<section class="page-section page-section--about">
     <div>
-        <p class="text-xs uppercase tracking-widest text-accent">About</p>
-        <h2 class="font-display text-2xl sm:text-3xl">My Photos</h2>
+        <h1>About</h1>
     </div>
 
-    <div class="prose space-y-4">
-        <p>
-            This is an example website that showcases photos.
+    <div class="prose">
+        <p class="lede">
+            This project is a collection of aerial photographs taken
+            around Lincolnshire, and captured
+            by <a :href="profile.website" @text="profile.name" class="link" rel="me external"></a>
+            using consumer drones.
         </p>
+
+        <p>
+            I first started flying drones in the summer of 2017, when I purchased
+            a small entry-level consumer drone; the DJI Spark.
+            In September 2025, I upgraded to the newly released DJI Mini 5 Pro.
+        </p>
+
+        <p>
+            I love how these devices allow you to see and appreciate the world from
+            not just great heights but a whole new perspective. I enjoy taking it to
+            familiar places and seeing what new angles I can capture.
+        </p>
+
+        <hr />
 
         <p>
             The project is built using the static site generator
             <a href="https://www.11ty.dev" class="link" rel="external">11ty</a>.
-            It uses <a href="https://tailwindcss.com" class="link" rel="external">tailwindcss</a>
-            for the basic styling. The EXIF data is pulled using the
+            The design uses plain HTML, BEM-based CSS, and a small amount of
+            JavaScript for progressive navigation behavior. The EXIF data is pulled using the
             <a href="https://www.npmjs.com/package/exifr" class="link" rel="external">exifr</a> package,
             and <a href="colorthief" class="link" rel="external">colorthief</a> is used
             for the photo colour palette. <a href="https://blurha.sh" class="link" rel="external">
             BlurHash</a> is used as photo placeholder during loading.
         </p>
-
-        <p>
-            You can create your own version from the
-            <a href="https://github.com/trovster/photos-website" class="link" rel="external">git repository</a>.
-        </p>
-
-        <p>
-            The navigation icons are from <a href="https://heroicons.com" class="link" rel="external">Heroicons</a>.
-            The icons for Exposure Time, Aperture, Focal Length, Camera, and
-            Flash are by Denis Klyuchnikov from <a href="https://thenounproject.com" class="link" rel="external">Noun Project</a>.
-        </p>
     </div>
 
-    <div class="flex flex-wrap items-center gap-3">
-        <a href="/" class="button"> Browse the Photos</a>
-        <a webc:if="profile.website.length" :href="profile.website" rel="me external" class="button button--secondary">Visit Website</a>
+    <div>
+        <a href="/" class="button">Browse the Photos</a>
+        <a webc:if="profile.website.length" :href="profile.website" rel="me external" class="button button--secondary">Visit my Website</a>
     </div>
 </section>
 

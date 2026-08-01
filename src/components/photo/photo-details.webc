@@ -1,30 +1,41 @@
-<section class="mx-4 pb-10">
-    <div class="relative overflow-hidden bg-zinc-100">
+<article class="photo-detail">
+    <figure>
         <canvas
             webc:if="photo.data.blurhash"
             :data-blurhash="photo.data.blurhash"
             data-blurhash-width="32"
-            data-blurhash-height="48"
+            data-blurhash-height="18"
             aria-hidden="true"
-            class="pointer-events-none absolute inset-0 h-full w-full scale-110 object-cover blur-3xl transition duration-300"
         ></canvas>
 
-        <img class="relative h-auto w-full object-contain" :src="photo.data.src" :alt="photo.data.alt" />
-    </div>
+        <img :src="photo.data.src" :alt="photo.data.alt" />
+    </figure>
 
     <photo-palette :palette="photo.data.palette"></photo-palette>
 
-    <div class="mt-2 flex flex-wrap items-center justify-between gap-1">
-        <h2 class="font-display text-lg" @text="photo.data.title"></h2>
+    <header>
+        <p class="pre-title" webc:if="photo.data.category" @text="photo.data.category"></p>
 
-        <photo-exif-button :photo="photo"></photo-exif-button>
+        <div>
+            <h1 @text="photo.data.title"></h1>
+            <photo-exif-button :photo="photo"></photo-exif-button>
+        </div>
+
+        <p>Taken on <time @text="date(photo.date, 'cccc dS LLLL y')"></time></p>
+    </header>
+
+    <div>
+        <section aria-labelledby="photo-description-title" webc:if="description?.trim()">
+            <p class="pre-title">Field Notes</p>
+            <h2 id="photo-description-title">Description</h2>
+            <div class="prose" webc:if="description?.trim()" @raw="description"></div>
+            <p webc:if="!description?.trim()">Field notes pending.</p>
+        </section>
+
+        <photo-location-map :photo="photo"></photo-location-map>
+
+        <photo-exif :photo="photo"></photo-exif>
     </div>
-
-    <p class="text-sm text-zinc-500 mb-1" @text="date(photo.date, 'cccc dS LLLL y')"></p>
-
-    <slot></slot>
-
-    <photo-exif :photo="photo"></photo-exif>
-</section>
+</article>
 
 <photo-nav :photo="photo"></photo-nav>

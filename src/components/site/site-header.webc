@@ -1,15 +1,10 @@
-<header class="p-4 md:mx-6 md:flex md:items-center md:gap-4 md:pb-8">
-    <avatar :profile="profile"></avatar>
+<header class="site-header">
+    <nav aria-label="Primary navigation">
+        <a class="site-logo" href="/" :aria-label="site.title" @raw="site.logo"></a>
 
-    <div>
-        <h1 class="font-display text-lg" @text="profile.name"></h1>
-        <p class="text-sm text-gray-500 mb-1" @text="profile.location"></p>
-        <p class="text-pretty text-base max-w-lg" @text="profile.bio"></p>
-        <a
-            webc:if="profile.website.length"
-            :href="profile.website"
-            class="text-accent underline decoration-accent decoration-2 outline-none underline-offset-4 outline-offset-2 hover:no-underline focus-visible:no-underline focus-visible:outline-accent"
-            rel="me"
-            @text="shorten(profile.website)"></a>
-    </div>
+        <div>
+            <a href="/">Photos</a>
+            <a href="/about/">About</a>
+        </div>
+    </nav>
 </header>

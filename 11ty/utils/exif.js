@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs"
 
 import exifr from "exifr"
+import sharp from "sharp"
 
 const pick = ["FocalLength", "FNumber", "ExposureTime", "ISO", "ApertureValue", "Make", "Model"]
 
@@ -60,10 +61,38 @@ export const formatExifData = (exif) => {
     return items.length ? items : null
 }
 
-export default async (file) => {
-    const exif = await exifr.parse(file, {
-        pick,
-    })
+const isUnsupportedFileFormat = (error) => error?.message === "Unknown file format"
 
-    return formatExifData(exif)
+const parseExif = async (file) => {
+    try {
+        return await exifr.parse(file, {
+            pick,
+        })
+    } catch (error) {
+        if (!isUnsupportedFileFormat(error)) {
+            throw error
+        }
+    }
+
+    const metadata = await sharp(file).metadata()
+
+    if (!metadata.exif) {
+        return null
+    }
+
+    try {
+        return await exifr.parse(metadata.exif, {
+            pick,
+        })
+    } catch (error) {
+        if (!isUnsupportedFileFormat(error)) {
+            throw error
+        }
+
+        return null
+    }
+}
+
+export default async (file) => {
+    return formatExifData(await parseExif(file))
 }

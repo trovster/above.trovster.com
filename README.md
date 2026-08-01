@@ -1,12 +1,18 @@
-# Photo Website
+<p>
+  <img src="./above.svg" alt="Above" width="360" />
+</p>
 
-This is a small personal photo website, built with [11ty](https://www.11ty.dev).
+This project is a collection of aerial photographs captured by **Trevor Morris**,
+using consumer drones.
+
+Built with [11ty](https://www.11ty.dev).
 
 ## Stack
 
 - 11ty for static site generation
 - WebC for layouts and components
-- Tailwind CSS via PostCSS for styling
+- Vite for CSS and JavaScript bundling
+- Basic BEM-oriented CSS for styling
 - Sharp, BlurHash, colorthief, and Eleventy image tooling for photo processing
 
 ## Development
@@ -41,14 +47,3 @@ alt: Description of the photo.
 The folder name becomes the photo URL, and `src` in the front-matter should
 match the image filename in that folder. You can also add text in the main
 content.
-
-## Customising
-
-- Update site title, description, and URL in `src/data/site.js`
-- Update your profile details in `src/data/profile.js`
-- Edit the about page in `src/about.webc`
-- Change your avatar at `src/avatar.webp`
-- Change the homepage, layouts, and components in `src/index.webc`,
-  `src/layouts/`, and `src/components/`
-- Update styles in `public/css/site.css`; Tailwind is compiled through
-  `postcss.config.js`

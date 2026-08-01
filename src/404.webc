@@ -1,24 +1,23 @@
 ---
 title: Page Not Found
 description: The page you requested could not be found.
-bodyClass: page page-general
+bodyClass: page page--not-found
 permalink: 404.html
 ---
-<section class="mx-4 mb-8 md:mx-10 rounded-xl flex flex-col gap-y-8 border border-accent p-6 md:p-10">
+<section class="page-section page-section--error">
 
     <div>
-        <p class="text-xs uppercase tracking-widest text-accent">404</p>
-        <h2 class="font-display text-2xl sm:text-3xl">Page Not Found</h2>
+        <h1>Page Not Found</h1>
     </div>
 
-    <div class="prose space-y-4">
-        <p>The page you requested does not exist in this archive.</p>
+    <div class="prose">
+        <p>Sorry, the page you requested does not exist on this website.</p>
 
-        <p>You can head back to the photo listing or <a href="/about/" class="link">read more about the project</a>.</p>
+        <p>You can head back to the homepage or <a href="/about/" class="link">read more about the project</a>.</p>
     </div>
 
-    <div class="flex flex-wrap items-center gap-3">
-        <a href="/" class="button"> Browse the Photos</a>
-        <a href="/about/" rel="me external" class="button button--secondary">About this Website</a>
+    <div>
+        <a href="/" class="button">Browse the Photos</a>
+        <a href="/about/" rel="me external" class="button button--secondary">About this Project</a>
     </div>
 </section>

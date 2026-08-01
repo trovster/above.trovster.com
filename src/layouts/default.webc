@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta name="author" :content="site.author"/>
         <meta name="robots" content="index,follow"/>
-        <meta name="color-scheme" content="light dark"/>
+        <meta name="color-scheme" content="dark"/>
 
         <meta name="keywords" :content="site.keywords.join(', ')"/>
         <meta name="apple-mobile-web-app-title" :content="site.title"/>
@@ -16,22 +16,22 @@
         <meta property="og:description" name="description" :content="description ?? site.description"/>
         <meta property="og:site_name" :content="profile.name"/>
 
-        <title @text="title === site.title ? site.title : `${title} | ${site.title}`"></title>
+        <title @text="title === site.title ? `${site.title} – Aerial Landscape Photography` : `${title} | ${site.title}`"></title>
 
         <script webc:keep>
             document.documentElement.classList.replace("no-js", "js")
         </script>
 
-        <link webc:keep rel="stylesheet" href="/css/site.css"/>
+        <script webc:if="assets.dev" webc:keep src="/@vite/client" type="module"></script>
+        <script webc:if="assets.dev" webc:keep :src="assets.entry" type="module"></script>
+        <link webc:for="(index, href) in assets.styles" webc:keep rel="stylesheet" :href="href"/>
 
         <link rel="alternate" type="application/atom+xml" :title="site.title" href="/feed.xml" />
 
-        <script webc:keep src="/js/site.js" type="module"></script>
+        <script webc:for="(index, src) in assets.scripts" webc:keep :src="src" type="module"></script>
     </head>
     <body :class="bodyClass ?? ''">
-        <div class="container relative min-h-screen mx-auto max-w-4xl py-4">
-            <site-header :profile="profile"></site-header>
-            <main @raw="content"></main>
-        </div>
+        <site-header :profile="profile" :site="site"></site-header>
+        <main id="main" class="site-main" @raw="content"></main>
     </body>
 </html>

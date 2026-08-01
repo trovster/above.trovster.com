@@ -1,24 +1,22 @@
-<article class="m-1 md:m-3">
-    <a :href="photo.url" :title="photo.title" class="group block overflow-hidden rounded-md outline-none ring-0 transition">
-        <div class="relative aspect-square overflow-hidden bg-zinc-200">
+<article class="photo-card">
+    <a :href="photo.url" :title="photo.title">
+        <figure>
             <canvas
                 webc:if="photo.data.blurhash"
                 :data-blurhash="photo.data.blurhash"
                 data-blurhash-width="32"
-                data-blurhash-height="32"
+                data-blurhash-height="18"
                 aria-hidden="true"
-                class="pointer-events-none absolute inset-0 h-full w-full scale-110 object-cover blur-2xl transition duration-300"
             ></canvas>
 
-            <img :src="photo.data.src" :alt="photo.data.alt" loading="lazy" class="relative h-full w-full object-cover transition duration-200 group-hover:scale-105" />
-
-            <div class="pointer-events-none absolute inset-0 bg-black/35 opacity-0 transition duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"></div>
-
-            <div class="pointer-events-none absolute inset-0 hidden items-center justify-center group-hover:flex group-focus-visible:flex">
-                <svg viewBox="0 0 24 24" fill="none" class="h-12 w-12 stroke-white">
-                    <path d="M20 20L14.9497 14.9498M14.9497 14.9498C16.2165 13.683 17 11.933 17 10C17 6.13401 13.866 3 10 3C6.13401 3 3 6.13401 3 10C3 13.866 6.13401 17 10 17C11.933 17 13.683 16.2165 14.9497 14.9498ZM7 10H13M10 7V13" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
-            </div>
-        </div>
+            <img :src="photo.data.src" :alt="photo.data.alt" loading="lazy" />
+        </figure>
     </a>
+
+    <div>
+        <p webc:if="photo.data.category" class="pre-title" @text="photo.data.category"></p>
+        <h2>
+            <a :href="photo.url" @text="photo.data.title"></a>
+        </h2>
+    </div>
 </article>

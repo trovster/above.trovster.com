@@ -1,0 +1,26 @@
+<section webc:if="photo.data.map" class="photo-location" aria-labelledby="photo-location-title">
+    <div>
+        <p class="pre-title">Location</p>
+        <h2 id="photo-location-title" @text="photo.data.location.name"></h2>
+        <p webc:if="photo.data.location.region" @text="photo.data.location.region"></p>
+
+        <dl webc:if="photo.data.meta?.length">
+            <div webc:for="(index, item) in photo.data.meta">
+                <dt @text="item.key"></dt>
+                <dd @text="item.value"></dd>
+            </div>
+        </dl>
+
+        <!-- <a class="button button--secondary" :href="photo.data.map.linkUrl" rel="external">Open map</a> -->
+    </div>
+
+    <div aria-label="Location map">
+        <iframe
+            :src="photo.data.map.embedUrl"
+            :title="`Map showing ${photo.data.location.name}`"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            tabindex="-1"
+        ></iframe>
+    </div>
+</section>

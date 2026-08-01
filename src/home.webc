@@ -1,9 +1,16 @@
-<section>
-    <ul class="mx-3 mb-4 flex flex-wrap md:mx-1" data-photo-list data-end-text="End">
-        <li webc:for="(index, photo) in paginatedPhotos" class="flex-[0_0_33.333%]">
+<section class="gallery" aria-labelledby="gallery-title">
+    <header>
+        <p class="lede">
+            Aerial landscape photography, from around Lincolnshire,
+            captured by <strong @text="profile.name"></strong>.
+        </p>
+    </header>
+
+    <ol data-photo-list data-end-text="End of archive">
+        <li webc:for="(index, photo) in paginatedPhotos">
             <photo-card :photo="photo"></photo-card>
         </li>
-    </ul>
+    </ol>
 
     <photo-pagination :pagination="pagination"></photo-pagination>
 </section>
