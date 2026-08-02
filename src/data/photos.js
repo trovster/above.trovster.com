@@ -1,3 +1,3 @@
 export default {
-    pagination: 9,
+    pagination: 10,
 }
