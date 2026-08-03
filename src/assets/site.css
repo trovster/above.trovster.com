@@ -123,8 +123,7 @@
             color var(--transition-fast),
             filter var(--transition-fast),
             opacity var(--transition-fast),
-            text-decoration-color var(--transition-fast)
-            text-underline-offset var(--transition-fast);
+            text-decoration-color var(--transition-fast) text-underline-offset var(--transition-fast);
     }
 
     a:hover,
@@ -486,7 +485,7 @@
     .lede em,
     .lede strong {
         color: var(--color-primary);
-        font-weight: normal
+        font-weight: normal;
     }
 
     .link:hover,
@@ -545,10 +544,7 @@
         position: relative;
         min-block-size: 22rem;
         overflow: hidden;
-        background:
-            linear-gradient(90deg, rgb(241 210 143 / 0.08) 1px, transparent 1px),
-            linear-gradient(0deg, rgb(140 199 255 / 0.07) 1px, transparent 1px),
-            var(--color-surface-raised);
+        background: linear-gradient(90deg, rgb(241 210 143 / 0.08) 1px, transparent 1px), linear-gradient(0deg, rgb(140 199 255 / 0.07) 1px, transparent 1px), var(--color-surface-raised);
         background-size: 2rem 2rem;
     }
 
@@ -747,7 +743,6 @@
         padding: var(--space-m) var(--page-padding) 0;
         text-align: center;
     }
-
 }
 
 @layer utilities {
@@ -798,9 +793,7 @@
         animation:
             site-logo-draw 900ms cubic-bezier(0.7, 0, 0.2, 1) forwards,
             site-logo-fill 900ms ease forwards;
-        animation-delay:
-            calc(var(--letter-index) * 120ms),
-            calc(120ms + 1500ms);
+        animation-delay: calc(var(--letter-index) * 120ms), calc(120ms + 1500ms);
     }
 }
 

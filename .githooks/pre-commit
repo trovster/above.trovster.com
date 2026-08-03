@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+npm run image:process:photos --
+
+find src/photos -type f \( -iname "*.jpg" -o -iname "*.jpeg" \) -print | while IFS= read -r image
+
+do
+    webp="${image%.*}.webp"
+
+    if [ -f "$webp" ]; then
+        git add -- "$webp"
+    fi
+done

@@ -20,6 +20,8 @@
   "scripts": {
     "clean": "rm -rf dist",
     "11ty": "eleventy $npm_config_pathprefix",
+    "prepare": "npm run hooks:install",
+    "hooks:install": "git config core.hooksPath .githooks",
     "prestart": "npm run clean",
     "start": "eleventy $npm_config_pathprefix --serve --quiet",
     "prebuild": "npm run clean",
