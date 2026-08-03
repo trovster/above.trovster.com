@@ -47,3 +47,30 @@ alt: Description of the photo.
 The folder name becomes the photo URL, and `src` in the front-matter should
 match the image filename in that folder. You can also add text in the main
 content.
+
+Process source photos before referencing them in front-matter:
+
+```bash
+npm run image:process -- src/photos/photo-title/photo.jpg
+```
+
+The command writes an optimized WebP image beside the source, resizes only when
+the image is wider than 2500px, preserves image metadata, and adds the Above SVG
+watermark in the bottom-right corner. Re-run it with options to tune the output:
+
+```bash
+npm run image:process -- src/photos/photo-title/photo.jpg --quality 88 --watermark-opacity 0.45 --watermark-width 420 --watermark-margin 80
+```
+
+Add `--watermark-fill` to fill the SVG watermark. It uses `--watermark-color`
+by default, or `--watermark-fill-color` when you want a different fill.
+
+Run `npm run image:process -- --help` for all options.
+
+Process every original JPG/JPEG image in `src/photos/` with:
+
+```bash
+npm run image:process:photos --
+```
+
+Use `--dry-run` to preview the files and output paths without writing images.
