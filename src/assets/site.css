@@ -123,7 +123,8 @@
             color var(--transition-fast),
             filter var(--transition-fast),
             opacity var(--transition-fast),
-            text-decoration-color var(--transition-fast);
+            text-decoration-color var(--transition-fast)
+            text-underline-offset var(--transition-fast);
     }
 
     a:hover,
@@ -296,9 +297,7 @@
         z-index: 1;
         block-size: 100%;
         inline-size: 100%;
-        filter: blur(28px);
         object-fit: cover;
-        scale: 1.08;
         transition: opacity 300ms ease;
     }
 
@@ -324,7 +323,7 @@
 
     .photo-card:has(> a:is(:hover, :focus-visible)) img,
     .photo-card:has(> div h2 a:is(:hover, :focus-visible)) img {
-        scale: 1.015;
+        scale: 1.01;
     }
 
     .photo-card > div {
@@ -338,17 +337,15 @@
         line-height: 1.1;
     }
 
-    .photo-card h2 a {
-        text-decoration-thickness: 0.06em;
-    }
-
     .photo-card > a:is(:hover, :focus-visible) + div h2 a,
     .photo-card:has(> a:is(:hover, :focus-visible)) > div h2 a,
     .photo-card h2 a:hover,
     .photo-card h2 a:focus-visible {
-        color: var(--color-primary);
+        color: var(--color-text);
         outline: 0;
-        text-decoration: none;
+        text-decoration-color: currentColor;
+        /* text-decoration-thickness: 0.11em; */
+        text-underline-offset: 0.22em;
     }
 
     .photo-pagination {
