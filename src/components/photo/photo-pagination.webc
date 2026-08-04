@@ -14,10 +14,4 @@
     >
         Next
     </a>
-
-    <p
-        data-photo-list-status
-        aria-live="polite"
-        @text="pagination.href.next ? '' : 'End of archive'"
-    ></p>
 </nav>

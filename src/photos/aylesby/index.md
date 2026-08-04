@@ -1,9 +1,9 @@
 ---
-date: "2026-04-08T12:00:00+00:00"
+date: "2026-07-30T15:38:17+00:00"
 enabled: 1
 title: Aylesby
-src: aylesby.webp
-alt: The church in Aylesby, Lincolnshire.
+src: image.webp
+alt: Aerial photograph of the church in Aylesby, Lincolnshire.
 category: Church
 meta:
   Name: St Lawrence
@@ -12,6 +12,9 @@ meta:
 location:
   name: Aylesby
   region: Lincolnshire, England
-  latitude: 53.5512
-  longitude: -0.1858
+  latitude: 53.550794
+  longitude: -0.185831
+wikipedia:
+  title: Aylesby
+  url: https://en.wikipedia.org/wiki/Aylesby
 ---

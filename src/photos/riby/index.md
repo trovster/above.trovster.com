@@ -1,9 +1,9 @@
 ---
-date: "2026-04-08T12:00:00+00:00"
+date: "2026-07-30T16:04:59+00:00"
 enabled: 1
 title: Riby
-src: riby.webp
-alt: The church in Riby, Lincolnshire.
+src: image.webp
+alt: Aerial photograph of the church in Riby, Lincolnshire.
 category: Church
 meta:
   Name: St. Edmunds
@@ -12,8 +12,11 @@ meta:
 location:
   name: Riby
   region: Lincolnshire, England
-  latitude: 53.5506
-  longitude: -0.2134
+  latitude: 53.550344
+  longitude: -0.212808
+wikipedia:
+  title: Riby
+  url: https://en.wikipedia.org/wiki/Riby
 ---
 The Church of St Edmund retains a Decorated or Perpendicular tower, although was
 almost entirely rebuilt in 1868. In the north wall of the nave is a Norman

@@ -467,10 +467,20 @@
         margin-block-start: var(--space-s);
     }
 
+    .photo-detail section > .prose + .photo-source {
+        margin-block-start: var(--space-s);
+    }
+
     .prose {
         max-inline-size: var(--copy-width);
         color: var(--color-text);
         font-size: clamp(1rem, 1.4vw, 1.16rem);
+    }
+
+    .prose .lede {
+        font-size: 1.5rem;
+        line-height: 1.333;
+        text-wrap: pretty;
     }
 
     .prose > * + * {

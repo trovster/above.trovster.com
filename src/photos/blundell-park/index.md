@@ -1,18 +1,23 @@
 ---
-date: "2026-04-08T12:00:00+00:00"
-enabled: 0
+date: "2026-07-03T14:57:41+00:00"
+enabled: 1
 title: Blundell Park
-src: gtfc.webp
-alt: The football stadium of Grimsby Town Football Club.
+src: image.webp
+alt: Aerial photograph of Blundell Park in Cleethorpes.
 category: Sports
 meta:
   Type: Stadium
+  Club: Grimsby Town Football Club
+  Capacity: 9,546
   Built: 1899
 location:
   name: Cleethorpes
   region: Lincolnshire, England
-  latitude: 53.57019
-  longitude: -0.04651
+  latitude: 53.573806
+  longitude: -0.043556
+wikipedia:
+  title: Blundell Park
+  url: https://en.wikipedia.org/wiki/Blundell_Park
 ---
 Blundell Park is a football ground in Cleethorpes, North East Lincolnshire,
 England and home to Grimsby Town Football Club. The stadium was built in 1899.

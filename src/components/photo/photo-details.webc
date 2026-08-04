@@ -25,11 +25,14 @@
     </header>
 
     <div>
-        <section aria-labelledby="photo-description-title" webc:if="description?.trim()">
+        <section aria-labelledby="photo-description-title" webc:if="description?.trim() || photo.data.wikipedia?.url">
             <p class="pre-title">Field Notes</p>
-            <h2 id="photo-description-title">Description</h2>
+            <h2 id="photo-description-title" @text="description?.trim() ? 'Description' : 'Source'"></h2>
             <div class="prose" webc:if="description?.trim()" @raw="description"></div>
-            <p webc:if="!description?.trim()">Field notes pending.</p>
+            <p class="prose photo-source" webc:if="photo.data.wikipedia?.url">
+                Wikipedia:
+                <a :href="photo.data.wikipedia.url" rel="external noopener" @text="photo.data.wikipedia.title || photo.data.title"></a>.
+            </p>
         </section>
 
         <photo-location-map :photo="photo"></photo-location-map>
