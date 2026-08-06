@@ -26,6 +26,7 @@
     "start": "eleventy $npm_config_pathprefix --serve --quiet",
     "prebuild": "npm run clean",
     "build": "eleventy $npm_config_pathprefix",
+    "image:metadata": "node scripts/update-photo-metadata.js",
     "image:process": "node scripts/process-image.js",
     "image:process:photos": "node scripts/process-photo-images.js",
     "test": "node --test",
