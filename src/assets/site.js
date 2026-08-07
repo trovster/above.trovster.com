@@ -1,8 +1,9 @@
+import "pannellum/build/pannellum.css"
 import "./site.css"
 import { initBlurhashPlaceholders } from "./blurhash.js"
-// import { initInfinitePhotoPagination } from "./infinite-scroll.js"
+import { initPanoramaViewers } from "./panorama.js"
 
 if (typeof document !== "undefined" && typeof window !== "undefined") {
     initBlurhashPlaceholders()
-    // initInfinitePhotoPagination()
+    initPanoramaViewers()
 }

@@ -8,7 +8,9 @@ import { fileURLToPath } from "node:url"
 import { CliError, parseArgs, printResult, processImage } from "./process-image.js"
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
-const defaultPhotosDirectory = path.join(projectRoot, "src/photos")
+const photosDirectory = path.join(projectRoot, "src/photos")
+const panoramasDirectory = path.join(projectRoot, "src/360")
+const defaultPhotosDirectories = [photosDirectory, panoramasDirectory]
 const jpegExtensions = new Set([".jpg", ".jpeg"])
 
 const usage = `Usage:
@@ -20,9 +22,10 @@ Examples:
   npm run image:process:photos -- src/photos/wold-newton --quality 88 --watermark-fill
 
 Scans each directory recursively for original JPG/JPEG images and processes each
-one with the same options as npm run image:process. --output is not supported
-for batch processing because each image writes its own .webp file beside the
-source.
+one with the same options as npm run image:process. Images in src/360 are
+always resized to 6000px wide and processed without a watermark. --output is not
+supported for batch processing because each image writes its own .webp file
+beside the source.
 `
 
 const isJpeg = (file) => jpegExtensions.has(path.extname(file).toLowerCase())
@@ -60,6 +63,24 @@ const collectJpegs = async (directory) => {
 
 const unique = (files) => [...new Set(files)]
 
+const isInside = (file, directory) => {
+    const relative = path.relative(directory, file)
+
+    return relative && !relative.startsWith("..") && !path.isAbsolute(relative)
+}
+
+const optionsForImage = (image, options) => {
+    if (isInside(image, panoramasDirectory)) {
+        return {
+            ...options,
+            maxWidth: 6000,
+            watermark: null,
+        }
+    }
+
+    return options
+}
+
 const main = async () => {
     const args = process.argv.slice(2)
 
@@ -72,7 +93,7 @@ const main = async () => {
         allowOutput: false,
         requireInputs: false,
     })
-    const roots = directories.length ? directories.map((directory) => path.resolve(directory)) : [defaultPhotosDirectory]
+    const roots = directories.length ? directories.map((directory) => path.resolve(directory)) : defaultPhotosDirectories
     const images = unique((await Promise.all(roots.map(collectJpegs))).flat())
 
     if (images.length === 0) {
@@ -83,7 +104,7 @@ const main = async () => {
     console.log(`${options.dryRun ? "Would process" : "Processing"} ${images.length} JPG image${images.length === 1 ? "" : "s"}.`)
 
     for (const image of images) {
-        printResult(await processImage(image, options))
+        printResult(await processImage(image, optionsForImage(image, options)))
     }
 }
 

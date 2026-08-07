@@ -112,6 +112,12 @@
         line-height: var(--line-height-body);
     }
 
+    @supports (min-block-size: 100dvh) {
+        body {
+            min-block-size: 100dvh;
+        }
+    }
+
     a {
         color: inherit;
         text-decoration-color: var(--color-primary);
@@ -201,6 +207,24 @@
         text-transform: uppercase;
     }
 
+    .site-nav__link {
+        position: relative;
+    }
+
+    .site-nav__link::after {
+        content: "";
+        position: absolute;
+        inset-block-end: -0.45rem;
+        inset-inline: 0;
+        block-size: 1px;
+        background: currentColor;
+        opacity: 0;
+        scale: 0.5 1;
+        transition:
+            opacity var(--transition-fast),
+            scale var(--transition-fast);
+    }
+
     .site-header nav a:hover,
     .site-header nav a:focus-visible,
     .site-nav a:hover,
@@ -208,6 +232,25 @@
         color: var(--color-primary);
         outline: 0;
         text-decoration: none;
+    }
+
+    .page--home .site-nav__link--photos,
+    .page--gallery:not(.page--360) .site-nav__link--photos,
+    .page--photo:not(.page--360-photo) .site-nav__link--photos,
+    .page--360 .site-nav__link--360,
+    .page--360-photo .site-nav__link--360,
+    .page--about .site-nav__link--about {
+        color: var(--color-primary);
+    }
+
+    .page--home .site-nav__link--photos::after,
+    .page--gallery:not(.page--360) .site-nav__link--photos::after,
+    .page--photo:not(.page--360-photo) .site-nav__link--photos::after,
+    .page--360 .site-nav__link--360::after,
+    .page--360-photo .site-nav__link--360::after,
+    .page--about .site-nav__link--about::after {
+        opacity: 1;
+        scale: 1 1;
     }
 
     .site-main {
@@ -270,6 +313,7 @@
 
     .photo-card > a,
     .photo-card > div,
+    .photo-card--panorama > .photo-panorama,
     .photo-detail > figure,
     .photo-detail > .photo-palette {
         inline-size: 100%;
@@ -284,9 +328,8 @@
     .photo-card figure,
     .photo-detail > figure {
         position: relative;
-        aspect-ratio: 16 / 9;
         overflow: hidden;
-        background: var(--color-surface-raised);
+        aspect-ratio: 16 / 9;
     }
 
     .photo-card canvas,
@@ -322,7 +365,8 @@
 
     .photo-card:has(> a:is(:hover, :focus-visible)) img,
     .photo-card:has(> div h2 a:is(:hover, :focus-visible)) img {
-        scale: 1.01;
+        scale: 0.99;
+        filter: grayscale(1);
     }
 
     .photo-card > div {
@@ -334,6 +378,32 @@
         font-size: var(--font-size-medium);
         font-weight: 400;
         line-height: 1.1;
+
+        a {
+            position: relative;
+            display: inline-block;
+            text-decoration: none;
+            transition: color ease 0.3s;
+
+            &::before, &::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: -5px;
+                background-color: var(--color-primary);
+                height: 2px;
+            }
+
+            &::before {
+                width: 0%;
+                transition: width ease 400ms;
+            }
+
+            &::after {
+                width: 100%;
+                transition: all ease 800ms;
+            }
+        }
     }
 
     .photo-card > a:is(:hover, :focus-visible) + div h2 a,
@@ -342,9 +412,16 @@
     .photo-card h2 a:focus-visible {
         color: var(--color-text);
         outline: 0;
-        text-decoration-color: currentColor;
-        /* text-decoration-thickness: 0.11em; */
-        text-underline-offset: 0.22em;
+
+        &::before {
+            width: 100%;
+        }
+
+        &::after {
+            left: 100%;
+            width: 0%;
+            transition: all ease 300ms
+        }
     }
 
     .photo-pagination {
@@ -716,8 +793,8 @@
         grid-template-columns: 2.75rem auto 2.75rem;
         align-items: center;
         gap: var(--space-s);
-        inline-size: min(calc(100% - var(--page-padding) - var(--page-padding)), var(--content-width));
-        margin: var(--space-m) auto 0;
+        inline-size: min(100%, var(--content-width));
+        margin-inline: auto;
     }
 
     .photo-nav > span {
@@ -748,10 +825,15 @@
         display: grid;
         justify-items: center;
         gap: var(--space-s);
-        margin-block-start: var(--space-l);
+        min-block-size: var(--site-footer-mobile-block-size);
         border-block-start: 1px solid var(--color-border);
-        padding: var(--space-m) var(--page-padding) 0;
+        background: var(--color-background);
+        padding: var(--space-s) var(--page-padding);
         text-align: center;
+    }
+
+    .site-footer > .site-nav {
+        justify-content: center;
     }
 }
 
@@ -786,8 +868,40 @@
         align-items: start;
     }
 
+    body {
+        --site-footer-mobile-block-size: calc(4.1rem + env(safe-area-inset-bottom, 0px));
+    }
+
+    .site-main {
+        padding-block-end: calc(var(--space-m) + var(--site-footer-mobile-block-size));
+    }
+
+    .site-footer {
+        position: fixed;
+        z-index: 20;
+        inset-block-end: 0;
+        inset-inline: 0;
+        min-block-size: var(--site-footer-mobile-block-size);
+        margin: 0;
+        padding-block: var(--space-s) max(var(--space-s), env(safe-area-inset-bottom, 0px));
+        padding-inline: var(--page-padding);
+        background: color-mix(in srgb, var(--color-background) 92%, transparent);
+        backdrop-filter: blur(14px);
+    }
+
+    .site-footer > .site-nav {
+        min-block-size: 2.75rem;
+        flex-wrap: wrap;
+    }
+
     .photo-nav {
         grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem;
+    }
+
+    @supports (max-block-size: 100dvh) {
+        .site-footer {
+            max-block-size: 100dvh;
+        }
     }
 }
 
@@ -814,6 +928,68 @@
         scroll-behavior: auto !important;
         transition-duration: 1ms !important;
     }
+}
+
+.photo-detail > figure.photo-panorama,
+.photo-card--panorama > .photo-panorama,
+.photo-card--panorama > div,
+.page--360-photo .photo-detail > .photo-palette {
+    max-inline-size: min(100%, calc(90svh * 2));
+}
+
+.photo-detail > figure.photo-panorama,
+.photo-card--panorama > .photo-panorama {
+    aspect-ratio: 2 / 1;
+    background: var(--color-surface);
+}
+
+.page--360-photo .photo-detail > header {
+    text-align: center;
+}
+
+.page--360-photo .photo-detail > header > div {
+    justify-content: center;
+}
+
+[data-panorama-mount] {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    block-size: 100%;
+    inline-size: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 300ms ease;
+}
+
+.photo-panorama[data-panorama-ready="true"] [data-panorama-mount] {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.photo-panorama .pnlm-container {
+    background: var(--color-surface);
+    font-family: var(--font-body);
+}
+
+.photo-panorama .pnlm-ui {
+    z-index: 4;
+}
+
+.photo-panorama .pnlm-render-container canvas {
+    position: static;
+    z-index: auto;
+    object-fit: initial;
+    opacity: 1;
+    transition: none;
+}
+
+.photo-panorama .pnlm-controls,
+.photo-panorama .pnlm-controls-container,
+.photo-panorama .pnlm-compass,
+.photo-panorama .pnlm-load-button,
+.photo-panorama .pnlm-panorama-info {
+    display: none !important;
 }
 
 @keyframes site-logo-draw {

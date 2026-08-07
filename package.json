@@ -19,11 +19,11 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "11ty": "npm run image:process:photos && eleventy $npm_config_pathprefix",
+    "11ty": "eleventy $npm_config_pathprefix",
     "prepare": "npm run hooks:install",
     "hooks:install": "git config core.hooksPath .githooks",
     "prestart": "npm run clean",
-    "start": "npm run image:process:photos && eleventy $npm_config_pathprefix --serve --quiet",
+    "start": "eleventy $npm_config_pathprefix --serve --quiet",
     "prebuild": "npm run clean",
     "build": "npm run image:process:photos && eleventy $npm_config_pathprefix",
     "image:metadata": "node scripts/update-photo-metadata.js",
@@ -33,16 +33,19 @@
     "prettier": "npx prettier --write ."
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.5",
-    "@11ty/eleventy-fetch": "^4.0.1",
-    "@11ty/eleventy-img": "^6.0.4",
+    "@11ty/eleventy": "^3.1.6",
+    "@11ty/eleventy-fetch": "^5",
+    "@11ty/eleventy-img": "^7",
     "@11ty/eleventy-plugin-rss": "^3.0.0",
     "@11ty/eleventy-plugin-webc": "^0.11.2",
-    "colorthief": "^3.3.1",
-    "dotenv": "^16.4.5",
+    "colorthief": "^3.5.0",
+    "dotenv": "^17.4.2",
     "exifr": "^7.1.3",
-    "prettier": "^3.8.3",
-    "sharp": "^0.34.5",
-    "vite": "^8.2.0"
+    "prettier": "^3.9.6",
+    "sharp": "^0.35.3",
+    "vite": "^8.2.1"
+  },
+  "dependencies": {
+    "pannellum": "^2.5.7"
   }
 }

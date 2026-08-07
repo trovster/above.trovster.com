@@ -1,5 +1,5 @@
 <article class="photo-detail">
-    <figure>
+    <figure webc:if="photo.data.viewer !== 'pannellum'">
         <canvas
             webc:if="photo.data.blurhash"
             :data-blurhash="photo.data.blurhash"
@@ -9,6 +9,25 @@
         ></canvas>
 
         <img :src="photo.data.src" :alt="photo.data.alt" />
+    </figure>
+
+    <figure
+        webc:if="photo.data.viewer === 'pannellum'"
+        class="photo-panorama"
+        data-panorama-viewer
+        :aria-label="`360 panorama viewer for ${photo.data.title}`"
+    >
+        <canvas
+            webc:if="photo.data.blurhash"
+            :data-blurhash="photo.data.blurhash"
+            data-blurhash-width="32"
+            data-blurhash-height="16"
+            aria-hidden="true"
+        ></canvas>
+
+        <img data-panorama-image :src="photo.data.src" :alt="photo.data.alt" />
+
+        <div class="photo-panorama__mount" data-panorama-mount aria-hidden="true"></div>
     </figure>
 
     <photo-palette :palette="photo.data.palette"></photo-palette>
@@ -24,7 +43,7 @@
         <p>Taken on <time @text="date(photo.date, 'cccc dS LLLL y')"></time></p>
     </header>
 
-    <div>
+    <div webc:if="photo.data.viewer !== 'pannellum'">
         <section aria-labelledby="photo-description-title" webc:if="description?.trim() || photo.data.wikipedia?.url">
             <p class="pre-title">Field Notes</p>
             <h2 id="photo-description-title" @text="description?.trim() ? 'Description' : 'Source'"></h2>
@@ -40,5 +59,3 @@
         <photo-exif :photo="photo"></photo-exif>
     </div>
 </article>
-
-<photo-nav :photo="photo"></photo-nav>

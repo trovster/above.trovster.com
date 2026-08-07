@@ -1,5 +1,5 @@
-<article class="photo-card">
-    <a :href="photo.url" :title="photo.title">
+<article :class="`photo-card${photo.data.viewer === 'pannellum' ? ' photo-card--panorama' : ''}`">
+    <a webc:if="photo.data.viewer !== 'pannellum'" :href="photo.url" :title="photo.title">
         <figure>
             <canvas
                 webc:if="photo.data.blurhash"
@@ -12,6 +12,25 @@
             <img :src="photo.data.src" :alt="photo.data.alt" loading="lazy" />
         </figure>
     </a>
+
+    <figure
+        webc:if="photo.data.viewer === 'pannellum'"
+        class="photo-panorama"
+        data-panorama-viewer
+        :aria-label="`360 panorama viewer for ${photo.data.title}`"
+    >
+        <canvas
+            webc:if="photo.data.blurhash"
+            :data-blurhash="photo.data.blurhash"
+            data-blurhash-width="32"
+            data-blurhash-height="16"
+            aria-hidden="true"
+        ></canvas>
+
+        <img data-panorama-image :src="photo.data.src" :alt="photo.data.alt" loading="lazy" />
+
+        <div class="photo-panorama__mount" data-panorama-mount aria-hidden="true"></div>
+    </figure>
 
     <div>
         <p webc:if="photo.data.category" class="pre-title" @text="photo.data.category"></p>

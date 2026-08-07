@@ -11,7 +11,8 @@ import exifr from "exifr"
 
 const execFileAsync = promisify(execFile)
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
-const photosRoot = path.join(projectRoot, "src/photos")
+const photoRoots = [path.join(projectRoot, "src/photos"), path.join(projectRoot, "src/360")]
+const photoRootPaths = photoRoots.map((root) => path.relative(projectRoot, root))
 const metadataExtensions = new Set([".jpg", ".jpeg", ".webp", ".tif", ".tiff", ".heic", ".heif", ".png"])
 const originalImageExtensions = new Set([".jpg", ".jpeg", ".tif", ".tiff", ".heic", ".heif", ".png"])
 
@@ -24,8 +25,9 @@ Examples:
   npm run image:metadata -- --all
   npm run image:metadata -- src/photos/beelsby
 
-By default, git status is used to find new images in src/photos and update the
-matching index.md front matter with EXIF date, latitude, and longitude.
+By default, git status is used to find new images in src/photos and src/360 and
+update the matching index.md front matter with EXIF date, latitude, and
+longitude.
 
 Options:
   --all       Process every photo directory with an image and index.md.
@@ -93,7 +95,7 @@ const parseArgs = (args) => {
 
 const gitStatus = async () => {
     try {
-        const { stdout } = await execFileAsync("git", ["status", "--porcelain=v1", "-z", "-uall", "--", "src/photos"], {
+        const { stdout } = await execFileAsync("git", ["status", "--porcelain=v1", "-z", "-uall", "--", ...photoRootPaths], {
             cwd: projectRoot,
         })
 
@@ -124,19 +126,24 @@ const parseGitStatusPath = (line) => {
 
 const photoDirectoryFor = (file) => {
     const absoluteFile = path.resolve(file)
-    const relative = path.relative(photosRoot, absoluteFile)
 
-    if (relative.startsWith("..") || path.isAbsolute(relative)) {
-        return null
+    for (const root of photoRoots) {
+        const relative = path.relative(root, absoluteFile)
+
+        if (relative.startsWith("..") || path.isAbsolute(relative)) {
+            continue
+        }
+
+        const [photoDirectory] = relative.split(path.sep)
+
+        if (!photoDirectory || photoDirectory === relative) {
+            return null
+        }
+
+        return path.join(root, photoDirectory)
     }
 
-    const [photoDirectory] = relative.split(path.sep)
-
-    if (!photoDirectory || photoDirectory === relative) {
-        return null
-    }
-
-    return path.join(photosRoot, photoDirectory)
+    return null
 }
 
 const collectNewImageFilesFromGit = async () => {
@@ -223,7 +230,7 @@ const chooseMetadataImage = (files) =>
 
 const discoverPhotoDirectories = async ({ inputs, options }) => {
     if (options.all) {
-        return collectPhotoDirectories(photosRoot)
+        return (await Promise.all(photoRoots.map(collectPhotoDirectories))).flat()
     }
 
     if (inputs.length) {
@@ -248,7 +255,7 @@ const discoverPhotoDirectories = async ({ inputs, options }) => {
             const directory = photoDirectoryFor(input)
 
             if (!directory) {
-                throw new CliError(`Image is not inside a src/photos/<name> directory: ${formatPath(input)}`)
+                throw new CliError(`Image is not inside a src/photos/<name> or src/360/<name> directory: ${formatPath(input)}`)
             }
 
             directories.push(directory)

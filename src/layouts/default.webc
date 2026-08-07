@@ -33,5 +33,6 @@
     <body :class="bodyClass ?? ''">
         <site-header :profile="profile" :site="site"></site-header>
         <main id="main" class="site-main" @raw="content"></main>
+        <site-footer :photo="photo"></site-footer>
     </body>
 </html>

@@ -41,6 +41,8 @@ bodyClass: page page--about
             and <a href="colorthief" class="link" rel="external">colorthief</a> is used
             for the photo colour palette. <a href="https://blurha.sh" class="link" rel="external">
             BlurHash</a> is used as photo placeholder during loading.
+            The 360-degree photos use <a href="https://pannellum.org" class="link" rel="external">Pannellum</a>,
+            a lightweight WebGL panorama viewer.
         </p>
     </div>
 
@@ -49,5 +51,3 @@ bodyClass: page page--about
         <a webc:if="profile.website.length" :href="profile.website" rel="me external" class="button button--secondary">Visit my Website</a>
     </div>
 </section>
-
-<site-footer :page="page"></site-footer>

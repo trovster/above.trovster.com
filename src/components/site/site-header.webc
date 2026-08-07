@@ -1,10 +1,11 @@
 <header class="site-header">
-    <nav aria-label="Primary navigation">
+    <nav aria-label="Primary Navigation">
         <a class="site-logo" href="/" :aria-label="site.title" @raw="site.logo"></a>
 
         <div>
-            <a href="/">Photos</a>
-            <a href="/about/">About</a>
+            <a class="site-nav__link site-nav__link--photos" href="/">Photos</a>
+            <a class="site-nav__link site-nav__link--360" href="/360/">360</a>
+            <a class="site-nav__link site-nav__link--about" href="/about/">About</a>
         </div>
     </nav>
 </header>

@@ -16,7 +16,7 @@
         </svg>
     </span>
 
-    <site-nav :page="page"></site-nav>
+    <site-nav></site-nav>
 
     <a
         webc:if="photo.data.next"

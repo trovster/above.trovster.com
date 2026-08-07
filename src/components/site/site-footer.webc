@@ -1,3 +1,4 @@
 <footer class="site-footer">
-    <site-nav :page="page"></site-nav>
+    <photo-nav webc:if="photo" :photo="photo"></photo-nav>
+    <site-nav webc:if="!photo"></site-nav>
 </footer>

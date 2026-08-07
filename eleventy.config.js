@@ -16,7 +16,7 @@ let viteDevServerResolve
 let viteDevServerReject
 let viteSignalCleanupRegistered = false
 
-const photosDirectory = "src/photos"
+const photoDirectories = ["src/photos", "src/360"]
 
 const isPhotoEnabled = (source) => {
     const enabled = source.match(/^enabled:\s*["']?([01])["']?\s*$/m)
@@ -25,14 +25,16 @@ const isPhotoEnabled = (source) => {
 }
 
 const getDisabledPhotoFiles = () => {
-    try {
-        return readdirSync(photosDirectory, { withFileTypes: true })
-            .filter((entry) => entry.isDirectory())
-            .map((entry) => join(photosDirectory, entry.name, "index.md"))
-            .filter((file) => !isPhotoEnabled(readFileSync(file, "utf8")))
-    } catch {
-        return []
-    }
+    return photoDirectories.flatMap((directory) => {
+        try {
+            return readdirSync(directory, { withFileTypes: true })
+                .filter((entry) => entry.isDirectory())
+                .map((entry) => join(directory, entry.name, "index.md"))
+                .filter((file) => !isPhotoEnabled(readFileSync(file, "utf8")))
+        } catch {
+            return []
+        }
+    })
 }
 
 const getViteDevServerPromise = () => {

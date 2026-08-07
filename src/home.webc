@@ -6,7 +6,7 @@
         </p>
     </header>
 
-    <ol data-photo-list data-end-text="End of archive">
+    <ol data-photo-list>
         <li webc:for="(index, photo) in paginatedPhotos">
             <photo-card :photo="photo"></photo-card>
         </li>
@@ -14,5 +14,3 @@
 
     <photo-pagination :pagination="pagination"></photo-pagination>
 </section>
-
-<site-footer :page="page"></site-footer>
