@@ -19,5 +19,8 @@ package-lock.json
 .DS_Store
 .env
 
+# Generated photo derivatives
+src/photos/**/*.webp
+
 # Editors
 .vscode
