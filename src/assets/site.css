@@ -67,14 +67,12 @@
         --color-text: #f7f1e7;
         --color-muted: #aaa398;
         --color-primary: #f1d28f;
-        --color-secondary: #8cc7ff;
         --color-border: rgb(247 241 231 / 0.16);
         --color-border-strong: rgb(247 241 231 / 0.34);
         --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
         --font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         --font-size-small: 0.78rem;
         --font-size-medium: clamp(1.35rem, 2vw, 2rem);
-        --font-size-large: clamp(2.75rem, 8vw, 8.5rem);
         --line-height-body: 1.6;
         --line-height-tight: 0.95;
         --pre-title-gap: 0.35rem;
@@ -105,6 +103,8 @@
     }
 
     body {
+        display: flex;
+        flex-direction: column;
         min-block-size: 100svh;
         font-family: var(--font-body);
         font-variant-ligatures: common-ligatures discretionary-ligatures;
@@ -145,26 +145,6 @@
 }
 
 @layer components {
-    .skip-link {
-        position: fixed;
-        inset-block-start: var(--space-s);
-        inset-inline-start: var(--space-s);
-        z-index: 20;
-        translate: 0 -200%;
-        border: 1px solid var(--color-border-strong);
-        background: var(--color-text);
-        color: var(--color-background);
-        padding: var(--space-xs) var(--space-s);
-        transition: translate var(--transition-fast);
-    }
-
-    .skip-link:focus,
-    .skip-link:focus-visible {
-        color: var(--color-background);
-        outline: 0;
-        translate: 0;
-    }
-
     .site-header {
         border-block-end: 1px solid var(--color-border);
         background: var(--color-background);
@@ -254,6 +234,7 @@
     }
 
     .site-main {
+        flex: 1 0 auto;
         padding-block: var(--space-m);
     }
 
@@ -280,15 +261,6 @@
         margin-inline: auto;
         margin-block-start: var(--space-m);
         padding-inline: var(--page-padding);
-    }
-
-    .gallery h1 {
-        max-inline-size: 10ch;
-        font-family: var(--font-display);
-        font-size: var(--font-size-large);
-        font-weight: 400;
-        line-height: var(--line-height-tight);
-        text-wrap: balance;
     }
 
     .gallery header > p:not(.pre-title) {
@@ -433,14 +405,8 @@
         padding-inline: var(--page-padding);
     }
 
-    [data-photo-list-next],
-    [data-photo-list-status] {
+    [data-photo-list-next] {
         margin-inline-start: auto;
-    }
-
-    [data-photo-list-status] {
-        color: var(--color-muted);
-        font-size: var(--font-size-small);
     }
 
     .button {
@@ -569,7 +535,6 @@
         color: var(--color-text);
     }
 
-    .lede em,
     .lede strong {
         color: var(--color-primary);
         font-weight: normal;
@@ -621,10 +586,6 @@
     .photo-location dd {
         color: var(--color-text);
         text-align: end;
-    }
-
-    .photo-location .button {
-        justify-self: start;
     }
 
     .photo-location > div:last-child {
@@ -823,9 +784,10 @@
 
     .site-footer {
         display: grid;
+        flex: 0 0 auto;
         justify-items: center;
         gap: var(--space-s);
-        min-block-size: var(--site-footer-mobile-block-size);
+        min-block-size: 5rem;
         border-block-start: 1px solid var(--color-border);
         background: var(--color-background);
         padding: var(--space-s) var(--page-padding);
@@ -868,40 +830,16 @@
         align-items: start;
     }
 
-    body {
-        --site-footer-mobile-block-size: calc(4.1rem + env(safe-area-inset-bottom, 0px));
-    }
-
-    .site-main {
-        padding-block-end: calc(var(--space-m) + var(--site-footer-mobile-block-size));
-    }
-
     .site-footer {
-        position: fixed;
-        z-index: 20;
-        inset-block-end: 0;
-        inset-inline: 0;
-        min-block-size: var(--site-footer-mobile-block-size);
-        margin: 0;
         padding-block: var(--space-s) max(var(--space-s), env(safe-area-inset-bottom, 0px));
-        padding-inline: var(--page-padding);
-        background: color-mix(in srgb, var(--color-background) 92%, transparent);
-        backdrop-filter: blur(14px);
     }
 
     .site-footer > .site-nav {
-        min-block-size: 2.75rem;
         flex-wrap: wrap;
     }
 
     .photo-nav {
         grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem;
-    }
-
-    @supports (max-block-size: 100dvh) {
-        .site-footer {
-            max-block-size: 100dvh;
-        }
     }
 }
 

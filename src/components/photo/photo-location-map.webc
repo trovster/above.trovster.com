@@ -10,8 +10,6 @@
                 <dd @text="item.value"></dd>
             </div>
         </dl>
-
-        <!-- <a class="button button--secondary" :href="photo.data.map.linkUrl" rel="external">Open map</a> -->
     </div>
 
     <div aria-label="Location map">
