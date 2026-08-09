@@ -22,13 +22,9 @@
             document.documentElement.classList.replace("no-js", "js")
         </script>
 
-        <script webc:if="assets.dev" webc:keep src="/@vite/client" type="module"></script>
-        <script webc:if="assets.dev" webc:keep :src="assets.entry" type="module"></script>
-        <link webc:for="(index, href) in assets.styles" webc:keep rel="stylesheet" :href="href"/>
-
         <link rel="alternate" type="application/atom+xml" :title="site.title" href="/feed.xml" />
 
-        <script webc:for="(index, src) in assets.scripts" webc:keep :src="src" type="module"></script>
+        <script webc:keep src="/assets/site.js" type="module"></script>
     </head>
     <body :class="bodyClass ?? ''">
         <site-header :profile="profile" :site="site"></site-header>

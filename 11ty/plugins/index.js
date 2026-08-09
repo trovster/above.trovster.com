@@ -1,9 +1,11 @@
 import { EleventyHtmlBasePlugin } from "@11ty/eleventy"
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img"
 import { feedPlugin } from "@11ty/eleventy-plugin-rss"
+import EleventyVitePlugin from "@11ty/eleventy-plugin-vite"
 import EleventyWebcPlugin from "@11ty/eleventy-plugin-webc"
 import site from "../../src/data/site.js"
 import { applyHtmlBasePathPrefix } from "../utils/html-base.js"
+import viteConfig from "../../vite.config.js"
 
 export default (config) => {
     const plugins = [
@@ -20,6 +22,12 @@ export default (config) => {
             plugin: EleventyWebcPlugin,
             options: {
                 components: [`${config.dir.input}/components/**/*.webc`],
+            },
+        },
+        {
+            plugin: EleventyVitePlugin,
+            options: {
+                viteOptions: viteConfig,
             },
         },
         {
