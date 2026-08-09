@@ -46,6 +46,7 @@ export default (config) => {
         config.ignores.add(file)
     }
 
+    config.addPassthroughCopy('CNAME')
     config.addPassthroughCopy({
         "src/assets": "assets",
     })
