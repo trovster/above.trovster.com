@@ -68,6 +68,7 @@ const initPanoramaViewer = (container) => {
             showControls: false,
             showFullscreenCtrl: false,
             showZoomCtrl: false,
+            pitch: -20,
             type: "equirectangular",
         })
 
