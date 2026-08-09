@@ -29,6 +29,7 @@
     "image:metadata": "node scripts/update-photo-metadata.js",
     "image:process": "node scripts/process-image.js",
     "image:process:photos": "node scripts/process-photo-images.js",
+    "mastodon:post": "node scripts/post-photo-to-mastodon.js",
     "test": "node --test",
     "prettier": "npx prettier --write ."
   },
@@ -42,6 +43,7 @@
     "colorthief": "^3.5.0",
     "dotenv": "^17.4.2",
     "exifr": "^7.1.3",
+    "gray-matter": "^4.0.3",
     "prettier": "^3.9.6",
     "sharp": "^0.35.3",
     "vite": "^8.2.1"

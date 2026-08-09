@@ -74,3 +74,24 @@ npm run image:process:photos --
 ```
 
 Use `--dry-run` to preview the files and output paths without writing images.
+
+## Posting to Mastodon
+
+Copy `.env.example` to `.env` and set `MASTODON_INSTANCE_URL` and
+`MASTODON_ACCESS_TOKEN`. The access token needs `write:media` and
+`write:statuses` scopes.
+
+Post a regular photo from `src/photos` with:
+
+```bash
+npm run mastodon:post -- beelsby
+```
+
+Preview the selected image and generated status without posting:
+
+```bash
+npm run mastodon:post -- beelsby --dry-run
+```
+
+Run `npm run mastodon:post -- --help` for visibility, language, content warning,
+and custom status options.
