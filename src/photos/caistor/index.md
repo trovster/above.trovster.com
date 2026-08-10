@@ -1,0 +1,20 @@
+---
+date: "2026-08-09T10:24:37+00:00"
+enabled: 1
+title: Caistor
+src: image.webp
+alt: Aerial photograph of the church in Caistor, Lincolnshire.
+category: Church
+meta:
+  Name: St Peter and St Paul
+  Listing: Grade I
+  Type: Church
+location:
+  name: Caistor
+  region: Lincolnshire, England
+  latitude: 53.496814
+  longitude: -0.317536
+wikipedia:
+  title: Caistor
+  url: https://en.wikipedia.org/wiki/Caistor
+---
