@@ -4,49 +4,45 @@
     popover="auto"
     class="photo-exif"
 >
-    <div>
+    <header>
         <div>
-            <header>
-                <div>
-                    <p class="pre-title">Photo Metadata</p>
-                    <h3>Details</h3>
-                </div>
-
-                <button
-                    type="button"
-                    aria-label="Close photo metadata"
-                    :popovertarget="`photo-metadata-${photo.data.id}`"
-                    popovertargetaction="hide"
-                >
-                    <svg
-                        width="26"
-                        height="26"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        data-slot="icon"
-                    >
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </header>
-
-            <dl>
-                <div
-                    webc:for="(index, item) in photo.data.exif"
-                >
-                    <dt>
-                        <span aria-hidden="true" @raw="item.icon"></span>
-                        <span @text="item.title" class="u-visually-hidden"></span>
-                    </dt>
-                    <dd
-                        @text="item.value"
-                    ></dd>
-                </div>
-            </dl>
+            <p class="pre-title">Photo Metadata</p>
+            <h3>Details</h3>
         </div>
-    </div>
+
+        <button
+            type="button"
+            aria-label="Close photo metadata"
+            :popovertarget="`photo-metadata-${photo.data.id}`"
+            popovertargetaction="hide"
+        >
+            <svg
+                width="26"
+                height="26"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                data-slot="icon"
+            >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+    </header>
+
+    <dl>
+        <div
+            webc:for="(index, item) in photo.data.exif"
+        >
+            <dt>
+                <span aria-hidden="true" @raw="item.icon"></span>
+                <span @text="item.title" class="u-visually-hidden"></span>
+            </dt>
+            <dd
+                @text="item.value"
+            ></dd>
+        </div>
+    </dl>
 </dialog>

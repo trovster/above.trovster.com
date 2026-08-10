@@ -9,12 +9,24 @@ const exifSignature = Uint8Array.from([0x45, 0x78, 0x69, 0x66, 0x00, 0x00])
 const roundToDecimal = (value) => Math.round(value * 10) / 10
 const readExifIcon = (filename) => readFileSync(new URL(`../../src/icons/exif/${filename}`, import.meta.url), "utf8")
 
+const cameraNames = new Map([["DJI FC9313", "DJI Mini 5 Pro"]])
+
+const formatCameraName = (exif) => {
+    if (!exif.Make || !exif.Model) {
+        return null
+    }
+
+    const camera = `${exif.Make} ${exif.Model}`
+
+    return cameraNames.get(camera) ?? camera
+}
+
 const exifFields = [
     {
         key: "Camera",
         title: "Camera",
         icon: readExifIcon("camera.svg"),
-        format: (exif) => (exif.Make && exif.Model ? `${exif.Make} ${exif.Model}` : null),
+        format: formatCameraName,
     },
     {
         key: "Focal_Length",

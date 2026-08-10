@@ -462,7 +462,7 @@
 
     .photo-detail > header > div {
         display: flex;
-        align-items: start;
+        align-items: center;
         justify-content: space-between;
         gap: var(--space-s);
     }
@@ -671,43 +671,35 @@
         outline: 0;
     }
 
-    .metadata-button svg,
     .photo-exif button svg,
     .photo-nav svg {
         inline-size: 1.35rem;
         block-size: 1.35rem;
     }
 
+    .metadata-button {
+        inline-size: 2.75rem;
+        block-size: 2.75rem;
+    }
+
     .photo-exif {
         position: fixed;
         inset: 0;
-        block-size: auto;
-        inline-size: auto;
-        max-block-size: none;
-        max-inline-size: none;
+        box-sizing: border-box;
+        block-size: fit-content;
+        inline-size: min(calc(100% - (2 * var(--page-padding))), 42rem);
+        max-block-size: calc(100dvb - (2 * var(--page-padding)));
+        margin: auto;
         overflow-y: auto;
-        border: 0;
-        background: transparent;
+        border: 1px solid var(--color-border-strong);
+        background: var(--color-surface-raised);
         color: var(--color-text);
+        padding: var(--space-m);
     }
 
     .photo-exif::backdrop {
         background: rgb(2 3 3 / 0.72);
         backdrop-filter: blur(18px);
-    }
-
-    .photo-exif > div {
-        display: grid;
-        min-block-size: 100%;
-        place-items: center;
-        padding: var(--page-padding);
-    }
-
-    .photo-exif > div > div {
-        inline-size: min(100%, 42rem);
-        border: 1px solid var(--color-border-strong);
-        background: var(--color-surface-raised);
-        padding: var(--space-m);
     }
 
     .photo-exif header {
@@ -840,6 +832,11 @@
 
     .photo-nav {
         grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem;
+    }
+
+    .metadata-button {
+        inline-size: 2rem;
+        block-size: 2rem;
     }
 }
 
