@@ -4,6 +4,7 @@ import exifr from "exifr"
 import sharp from "sharp"
 
 const pick = ["FocalLength", "FNumber", "ExposureTime", "ISO", "ApertureValue", "Make", "Model"]
+const exifSignature = Uint8Array.from([0x45, 0x78, 0x69, 0x66, 0x00, 0x00])
 
 const roundToDecimal = (value) => Math.round(value * 10) / 10
 const readExifIcon = (filename) => readFileSync(new URL(`../../src/icons/exif/${filename}`, import.meta.url), "utf8")
@@ -63,6 +64,16 @@ export const formatExifData = (exif) => {
 
 const isUnsupportedFileFormat = (error) => error?.message === "Unknown file format"
 
+const stripExifSignature = (buffer) => {
+    if (buffer.length < exifSignature.length) {
+        return buffer
+    }
+
+    const hasSignature = exifSignature.every((byte, index) => buffer[index] === byte)
+
+    return hasSignature ? buffer.subarray(exifSignature.length) : buffer
+}
+
 const parseExif = async (file) => {
     try {
         return await exifr.parse(file, {
@@ -81,7 +92,7 @@ const parseExif = async (file) => {
     }
 
     try {
-        return await exifr.parse(metadata.exif, {
+        return await exifr.parse(stripExifSignature(metadata.exif), {
             pick,
         })
     } catch (error) {
