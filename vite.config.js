@@ -1,11 +1,27 @@
+import { resolve } from "node:path"
 import { defineConfig } from "vite"
 
 export default defineConfig({
     appType: "mpa",
     publicDir: false,
+    server: {
+        mode: "development",
+        middlewareMode: true,
+        fs: {
+            allow: [resolve(".")],
+        },
+    },
+    resolve: {
+        alias: {
+            "/assets/site.js": resolve("src/assets/site.js"),
+        },
+    },
     build: {
         assetsDir: "assets",
+        mode: "production",
         emptyOutDir: true,
+        sourcemap: false,
+        manifest: true,
         rolldownOptions: {
             output: {
                 assetFileNames: "assets/[name].[hash][extname]",
