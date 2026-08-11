@@ -750,6 +750,7 @@
 
     .photo-palette li > span:first-child {
         display: block;
+        block-size: 0.4rem;
     }
 
     .metadata-button,
