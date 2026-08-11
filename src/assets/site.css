@@ -739,15 +739,17 @@
     }
 
     .photo-palette {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(2rem, 1fr));
+        display: flex;
         gap: var(--space-xs);
         margin-block-start: calc(-1 * var(--space-s));
     }
 
+    .photo-palette li {
+        flex: var(--proportion) 1 0;
+    }
+
     .photo-palette li > span:first-child {
         display: block;
-        block-size: 0.35rem;
     }
 
     .metadata-button,
