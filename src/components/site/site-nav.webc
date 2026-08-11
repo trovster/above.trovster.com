@@ -1,5 +1,3 @@
-<nav class="site-nav" aria-label="Secondary Navigation">
-    <a class="site-nav__link site-nav__link--photos" href="/">Photos</a>
-    <a class="site-nav__link site-nav__link--360" href="/360/">360</a>
-    <a class="site-nav__link site-nav__link--about" href="/about/">About</a>
+<nav class="site-nav" aria-label="Footer Navigation">
+    <site-nav-items></site-nav-items>
 </nav>

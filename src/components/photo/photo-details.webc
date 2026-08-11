@@ -56,6 +56,7 @@
 
         <photo-location-map :photo="photo"></photo-location-map>
 
-        <photo-exif :photo="photo"></photo-exif>
     </div>
+
+    <photo-exif :photo="photo"></photo-exif>
 </article>

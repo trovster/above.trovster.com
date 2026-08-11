@@ -1,12 +1,17 @@
 <nav webc:if="pagination.hrefs.length > 1" class="photo-pagination" aria-label="Photo pagination">
-    <a webc:if="pagination.href.previous" :href="pagination.href.previous" class="button button--secondary">
-        Previous
+    <a webc:if="pagination.href.previous" :href="pagination.href.previous" class="button button--secondary photo-pagination__previous">
+        Prev
     </a>
+
+    <p
+        class="photo-pagination__count"
+        @text="`Viewing ${pagination.pageNumber * pagination.size + 1}–${pagination.pageNumber * pagination.size + pagination.items.length} of ${pagination.pages.reduce((total, page) => total + page.length, 0)}`"
+    ></p>
 
     <a
         webc:if="pagination.href.next"
         :href="pagination.href.next"
-        class="button button--secondary"
+        class="button button--secondary photo-pagination__next"
         rel="next"
         data-photo-list-next
         data-ready-text="Next"

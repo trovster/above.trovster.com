@@ -1,0 +1,11 @@
+<ul class="site-nav__items">
+    <li class="site-nav__link--photos">
+        <a href="/">Photos</a>
+    </li>
+    <li class="site-nav__link--360">
+        <a href="/360/">360</a>
+    </li>
+    <li class="site-nav__link--about">
+        <a href="/about/">About</a>
+    </li>
+</ul>
