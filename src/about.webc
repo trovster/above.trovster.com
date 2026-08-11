@@ -38,7 +38,7 @@ bodyClass: page page--about
             The design uses plain HTML, BEM-based CSS, and a small amount of
             JavaScript for progressive navigation behavior. The EXIF data is pulled using the
             <a href="https://www.npmjs.com/package/exifr" class="link" rel="external">exifr</a> package,
-            and <a href="colorthief" class="link" rel="external">colorthief</a> is used
+            and <a href="https://lokeshdhakar.com/projects/color-thief/" class="link" rel="external">colorthief</a> is used
             for the photo colour palette. <a href="https://blurha.sh" class="link" rel="external">
             BlurHash</a> is used as photo placeholder during loading.
             The 360-degree photos use <a href="https://pannellum.org" class="link" rel="external">Pannellum</a>,
