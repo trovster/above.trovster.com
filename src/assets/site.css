@@ -339,7 +339,7 @@
         filter: brightness(0.8);
     }
 
-    .photo-list-cursor {
+    .pointer-cursor {
         display: none;
     }
 
@@ -349,7 +349,12 @@
             cursor: none;
         }
 
-        .photo-list-cursor {
+        .photo-panorama[data-panorama-ready="true"] [data-panorama-mount],
+        .photo-panorama[data-panorama-ready="true"] [data-panorama-mount] * {
+            cursor: none !important;
+        }
+
+        .pointer-cursor {
             position: fixed;
             inset-block-start: 0;
             inset-inline-start: 0;
@@ -358,17 +363,17 @@
             pointer-events: none;
             opacity: 0;
             translate:
-                calc(var(--photo-list-cursor-x, -4rem) - 50%)
-                calc(var(--photo-list-cursor-y, -4rem) - 50%);
+                calc(var(--pointer-cursor-x, -4rem) - 50%)
+                calc(var(--pointer-cursor-y, -4rem) - 50%);
             transition: opacity var(--transition-fast);
             will-change: translate;
         }
 
-        .photo-list-cursor.is-visible {
+        .pointer-cursor.is-visible {
             opacity: 1;
         }
 
-        .photo-list-cursor__circle {
+        .pointer-cursor__circle {
             display: grid;
             place-items: center;
             block-size: 0.625rem;
@@ -380,10 +385,11 @@
                 block-size var(--transition-base),
                 inline-size var(--transition-base),
                 background-color var(--transition-base),
-                box-shadow var(--transition-base);
+                box-shadow var(--transition-base),
+                scale var(--transition-fast);
         }
 
-        .photo-list-cursor svg {
+        .pointer-cursor svg {
             block-size: 2rem;
             inline-size: 2rem;
             color: var(--color-background);
@@ -394,7 +400,7 @@
                 scale var(--transition-base);
         }
 
-        .photo-list-cursor path {
+        .pointer-cursor path {
             fill: none;
             stroke: currentcolor;
             stroke-linecap: round;
@@ -402,25 +408,30 @@
             stroke-width: 1.5;
         }
 
-        .photo-list-cursor.is-expanded .photo-list-cursor__circle {
+        .pointer-cursor.is-expanded .pointer-cursor__circle {
             block-size: 4rem;
             inline-size: 4rem;
             background: var(--color-primary);
             box-shadow: 0 1.25rem 3.5rem rgb(0 0 0 / 0.42);
         }
 
-        .photo-list-cursor.is-expanded svg {
+        .pointer-cursor.is-expanded svg {
             opacity: 1;
             scale: 1;
         }
 
+        .pointer-cursor.is-dragging .pointer-cursor__circle {
+            scale: 0.85;
+            opacity: 0.75;
+        }
+
         @media (min-width: 52.001rem) {
-            .photo-list-cursor.is-expanded .photo-list-cursor__circle {
+            .pointer-cursor.is-expanded .pointer-cursor__circle {
                 block-size: 6rem;
                 inline-size: 6rem;
             }
 
-            .photo-list-cursor svg {
+            .pointer-cursor svg {
                 block-size: 3rem;
                 inline-size: 3rem;
             }

@@ -1,16 +1,12 @@
 import "pannellum/build/pannellum.js"
+import { createPointerCursor, createPointerCursorTracker, supportsFinePointer } from "./pointer-cursor.js"
 
 let panoramaObserver
+let panoramaCursor
 
-const firstSourceCandidate = (image) =>
-    image
-        .closest("picture")
-        ?.querySelector("source[srcset]")
-        ?.srcset.split(",")
-        .at(0)
-        ?.trim()
-        .split(/\s+/)
-        .at(0)
+const dragCursorIconPath = "M5 9 2 12l3 3m4-10 3-3 3 3m0 14-3 3-3-3m10-10 3 3-3 3M2 12h20M12 2v20"
+
+const firstSourceCandidate = (image) => image.closest("picture")?.querySelector("source[srcset]")?.srcset.split(",").at(0)?.trim().split(/\s+/).at(0)
 
 const getPanoramaSource = (image) => image.currentSrc || firstSourceCandidate(image) || image.src || image.getAttribute("src")
 
@@ -131,7 +127,41 @@ const observePanoramaViewer = (container) => {
     observer.observe(container)
 }
 
+const initPanoramaCursor = (root) => {
+    if (!supportsFinePointer()) {
+        return
+    }
+
+    const mounts = root.querySelectorAll("[data-panorama-mount]:not([data-panorama-cursor])")
+
+    if (!mounts.length) {
+        return
+    }
+
+    if (!panoramaCursor) {
+        const cursor = createPointerCursor(dragCursorIconPath)
+        const tracker = createPointerCursorTracker(cursor)
+
+        document.body.append(cursor)
+        panoramaCursor = { cursor, tracker }
+
+        window.addEventListener("pointerup", () => cursor.classList.remove("is-dragging"))
+    }
+
+    for (const mount of mounts) {
+        mount.dataset.panoramaCursor = "true"
+        mount.addEventListener("pointerenter", panoramaCursor.tracker.show)
+        mount.addEventListener("pointermove", panoramaCursor.tracker.move)
+        mount.addEventListener("pointerleave", panoramaCursor.tracker.hide)
+        mount.addEventListener("pointerdown", () => panoramaCursor.cursor.classList.add("is-dragging"))
+        mount.addEventListener("pointerup", () => panoramaCursor.cursor.classList.remove("is-dragging"))
+        mount.addEventListener("pointercancel", () => panoramaCursor.cursor.classList.remove("is-dragging"))
+    }
+}
+
 const initPanoramaViewers = (root = document) => {
+    initPanoramaCursor(root)
+
     for (const container of root.querySelectorAll("[data-panorama-viewer]")) {
         observePanoramaViewer(container)
     }
