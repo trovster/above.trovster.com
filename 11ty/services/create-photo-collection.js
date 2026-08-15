@@ -2,6 +2,7 @@ import path from "node:path"
 
 import blurhash from "../utils/blurhash.js"
 import exif from "../utils/exif.js"
+import createMarkerThumbnail from "../utils/marker-thumbnail.js"
 import palette from "../utils/palette.js"
 import siblings from "../utils/photo-siblings.js"
 
@@ -46,21 +47,11 @@ const buildMap = (location) => {
         return null
     }
 
-    const span = Number.isFinite(Number(location.span)) ? Number(location.span) : 0.03
-    const west = longitude - span
-    const south = latitude - span
-    const east = longitude + span
-    const north = latitude + span
-    const marker = `${latitude.toFixed(6)},${longitude.toFixed(6)}`
-    const bbox = `${west.toFixed(6)},${south.toFixed(6)},${east.toFixed(6)},${north.toFixed(6)}`
-
     return {
         latitude,
         longitude,
-        span,
         coordinates: `${formatCoordinate(latitude)}, ${formatCoordinate(longitude)}`,
-        embedUrl: `https://www.openstreetmap.org/export/embed.html?bbox=${encodeURIComponent(bbox)}&layer=mapnik&marker=${encodeURIComponent(marker)}`,
-        linkUrl: `https://www.openstreetmap.org/?mlat=${latitude.toFixed(6)}&mlon=${longitude.toFixed(6)}#map=14/${latitude.toFixed(6)}/${longitude.toFixed(6)}`,
+        linkUrl: `https://www.google.com/maps/search/?api=1&query=${latitude.toFixed(6)},${longitude.toFixed(6)}`,
     }
 }
 
@@ -87,6 +78,7 @@ const createPhotoCollection = async (api, { glob, panoramaGlob }) => {
             const file = path.join(path.dirname(photo.inputPath), photo.data.src)
             const src = path.join(path.dirname(photo.filePathStem), photo.data.src)
             const { previous, next } = siblings(photos, index)
+            const map = buildMap(photo.data.location)
 
             return {
                 url: photo.url,
@@ -98,7 +90,8 @@ const createPhotoCollection = async (api, { glob, panoramaGlob }) => {
                     palette: await palette(file),
                     exif: await exif(file),
                     meta: normalizeMeta(photo.data.meta),
-                    map: buildMap(photo.data.location),
+                    map,
+                    thumbnail: map ? await createMarkerThumbnail(file) : null,
                     src,
                     previous,
                     next,

@@ -49,6 +49,7 @@
     "vite": "^8.2.1"
   },
   "dependencies": {
+    "@googlemaps/markerclusterer": "^2.6.2",
     "pannellum": "^2.5.7"
   }
 }

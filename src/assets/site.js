@@ -8,4 +8,12 @@ if (typeof document !== "undefined" && typeof window !== "undefined") {
     initBlurhashPlaceholders()
     initPanoramaViewers()
     initPhotoListCursor()
+
+    if (document.querySelector("[data-photo-map]")) {
+        import("./photo-map.js").then(({ initPhotoMap }) => initPhotoMap())
+    }
+
+    if (document.querySelector("[data-photo-location-map]")) {
+        import("./photo-location-map.js").then(({ initPhotoLocationMaps }) => initPhotoLocationMaps())
+    }
 }

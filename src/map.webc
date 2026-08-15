@@ -1,0 +1,60 @@
+<section class="map-view" aria-labelledby="map-title">
+    <h1 id="map-title" class="u-visually-hidden">Map</h1>
+
+    <div
+        class="map-canvas"
+        data-photo-map
+        :data-api-key="googleMaps.apiKey"
+        :data-map-id="googleMaps.mapId"
+        aria-label="Map of photo locations"
+    >
+        <p class="map-canvas__fallback">Loading map&hellip;</p>
+    </div>
+
+    <ol class="u-visually-hidden" data-map-photo-list>
+        <li
+            webc:for="(index, photo) in mapPhotos"
+            :data-id="photo.id"
+            :data-lat="photo.latitude"
+            :data-lng="photo.longitude"
+            :data-title="photo.title"
+            :data-url="photo.url"
+            :data-thumbnail="photo.thumbnail"
+        >
+            <img :src="photo.src" :alt="photo.alt" width="800" loading="eager" decoding="async" />
+        </li>
+    </ol>
+
+    <dialog id="map-photo-popover" popover="auto" class="map-popover" aria-labelledby="map-popover-title">
+        <button
+            type="button"
+            class="metadata-button map-popover__close"
+            aria-label="Close"
+            popovertarget="map-photo-popover"
+            popovertargetaction="hide"
+        >
+            <svg
+                width="26"
+                height="26"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                data-slot="icon"
+            >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+
+        <figure>
+            <img data-map-popover-image src="" alt="" />
+        </figure>
+
+        <div class="map-popover__body">
+            <h2 id="map-popover-title" data-map-popover-title></h2>
+            <a class="button" data-map-popover-link href="#">View Photo</a>
+        </div>
+    </dialog>
+</section>

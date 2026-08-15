@@ -57,7 +57,7 @@
             </p>
         </section>
 
-        <photo-location-map :photo="photo"></photo-location-map>
+        <photo-location-map :photo="photo" :apikey="apikey" :mapid="mapid"></photo-location-map>
 
     </div>
 

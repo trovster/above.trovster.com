@@ -1,4 +1,4 @@
 ---
 layout: default.webc
 ---
-<photo-details webc:if="photo" :photo="photo" :description="content"></photo-details>
+<photo-details webc:if="photo" :photo="photo" :description="content" :apikey="googleMaps.apiKey" :mapid="googleMaps.mapId"></photo-details>

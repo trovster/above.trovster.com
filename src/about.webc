@@ -42,7 +42,7 @@ bodyClass: page page--about
             for the photo colour palette. <a href="https://blurha.sh" class="link" rel="external">
             BlurHash</a> is used as photo placeholder during loading.
             The 360-degree photos use <a href="https://pannellum.org" class="link" rel="external">Pannellum</a>,
-            a lightweight WebGL panorama viewer.
+            a lightweight WebGL panorama viewer. Google Maps is used to show the photo locations.
         </p>
     </div>
 

@@ -10,15 +10,19 @@
                 <dd @text="item.value"></dd>
             </div>
         </dl>
+
+        <a class="link" :href="photo.data.map.linkUrl" rel="external noopener" target="_blank">View on Google Maps</a>
     </div>
 
-    <div aria-label="Location map">
-        <iframe
-            :src="photo.data.map.embedUrl"
-            :title="`Map showing ${photo.data.location.name}`"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            tabindex="-1"
-        ></iframe>
-    </div>
+    <div
+        class="photo-location-map"
+        data-photo-location-map
+        :data-api-key="apikey"
+        :data-map-id="mapid"
+        :data-lat="photo.data.map.latitude"
+        :data-lng="photo.data.map.longitude"
+        :data-title="photo.data.location.name"
+        :data-thumbnail="photo.data.thumbnail"
+        aria-label="Location map"
+    ></div>
 </section>
