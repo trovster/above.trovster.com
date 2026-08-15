@@ -1,0 +1,4 @@
+---
+layout: default.webc
+---
+<view-details webc:if="view" :view="view"></view-details>

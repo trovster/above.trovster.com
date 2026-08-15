@@ -1,4 +1,5 @@
 <footer class="site-footer">
     <photo-nav webc:if="photo" :photo="photo"></photo-nav>
-    <site-nav webc:if="!photo"></site-nav>
+    <photo-nav webc:if="!photo && view" :photo="view"></photo-nav>
+    <site-nav webc:if="!photo && !view"></site-nav>
 </footer>

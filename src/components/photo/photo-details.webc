@@ -46,6 +46,10 @@
         <p>Taken on <time @text="date(photo.date, 'cccc dS LLLL y')"></time></p>
     </header>
 
+    <section  webc:if="photo.data.views" class="photo-views">
+        <view-carousel :images="photo.data.views.images" :id="photo.data.id"></view-carousel>
+    </section>
+
     <div webc:if="photo.data.viewer !== 'pannellum'">
         <section aria-labelledby="photo-description-title" webc:if="description?.trim() || photo.data.wikipedia?.url">
             <p class="pre-title">Field Notes</p>

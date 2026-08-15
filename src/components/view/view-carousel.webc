@@ -1,0 +1,44 @@
+<div class="photo-carousel" :data-count="images.length">
+    <ol>
+        <li webc:for="(index, image) in images">
+            <button
+                type="button"
+                class="photo-carousel__item"
+                :popovertarget="`${id}-view-${image.number}`"
+                popovertargetaction="show"
+            >
+                <figure>
+                    <canvas
+                        webc:if="image.blurhash"
+                        :data-blurhash="image.blurhash"
+                        data-blurhash-width="32"
+                        data-blurhash-height="18"
+                        aria-hidden="true"
+                    ></canvas>
+
+                    <img :src="image.src" :alt="image.alt" loading="lazy" width="1000" />
+
+                    <span class="photo-carousel__number" aria-hidden="true" @text="image.number"></span>
+                </figure>
+
+                <span class="u-visually-hidden" @text="`Open photo ${image.number} of ${images.length}`"></span>
+            </button>
+
+            <dialog :id="`${id}-view-${image.number}`" popover="auto" class="view-popover">
+                <button
+                    type="button"
+                    class="metadata-button view-popover__close"
+                    aria-label="Close"
+                    :popovertarget="`${id}-view-${image.number}`"
+                    popovertargetaction="hide"
+                >
+                    <svg width="26" height="26" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+
+                <img :src="image.src" :alt="image.alt" width="1600" />
+            </dialog>
+        </li>
+    </ol>
+</div>

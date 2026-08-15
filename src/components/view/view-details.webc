@@ -1,0 +1,8 @@
+<article class="photo-detail photo-detail--view">
+    <view-carousel :images="view.data.images" :id="view.data.id"></view-carousel>
+
+    <header>
+        <h1 @text="view.data.title"></h1>
+        <p>Taken on <time @text="date(view.date, 'cccc dS LLLL y')"></time></p>
+    </header>
+</article>
