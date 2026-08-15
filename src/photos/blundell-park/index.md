@@ -13,8 +13,8 @@ meta:
 location:
   name: Cleethorpes
   region: Lincolnshire, England
-  latitude: 53.573806
-  longitude: -0.043556
+  latitude: 53.570159
+  longitude: -0.046523
 wikipedia:
   title: Blundell Park
   url: https://en.wikipedia.org/wiki/Blundell_Park
