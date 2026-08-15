@@ -37,7 +37,10 @@
 
         <div>
             <h1 @text="photo.data.title"></h1>
-            <photo-exif-button :photo="photo"></photo-exif-button>
+            <div class="photo-detail-actions">
+                <photo-panorama-button :photo="photo"></photo-panorama-button>
+                <photo-exif-button :photo="photo"></photo-exif-button>
+            </div>
         </div>
 
         <p>Taken on <time @text="date(photo.date, 'cccc dS LLLL y')"></time></p>

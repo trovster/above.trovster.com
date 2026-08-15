@@ -64,8 +64,23 @@ const buildMap = (location) => {
     }
 }
 
-const createPhotoCollection = async (api, { glob }) => {
+const findPanorama = (panoramas, photo) => panoramas.find((panorama) => panorama.page.fileSlug === photo.page.fileSlug) ?? null
+
+const buildPanoramaReference = (panorama) => {
+    if (!panorama) {
+        return null
+    }
+
+    return {
+        url: panorama.url,
+        title: panorama.data.title,
+    }
+}
+
+const createPhotoCollection = async (api, { glob, panoramaGlob }) => {
     const photos = api.getFilteredByGlob(glob).filter((photo) => isEnabled(photo.data.enabled))
+
+    const panoramas = panoramaGlob ? api.getFilteredByGlob(panoramaGlob).filter((photo) => isEnabled(photo.data.enabled)) : []
 
     return Promise.all(
         photos.map(async (photo, index) => {
@@ -87,6 +102,7 @@ const createPhotoCollection = async (api, { glob }) => {
                     src,
                     previous,
                     next,
+                    panorama: buildPanoramaReference(findPanorama(panoramas, photo)),
                 },
             }
         }),

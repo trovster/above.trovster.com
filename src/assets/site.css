@@ -588,6 +588,13 @@
         gap: var(--space-s);
     }
 
+    .photo-detail-actions {
+        display: flex;
+        align-items: center;
+        gap: var(--space-xs);
+        flex: 0 0 auto;
+    }
+
     .photo-detail h1,
     .page-section h1 {
         font-family: var(--font-display);
