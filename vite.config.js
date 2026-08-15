@@ -7,6 +7,9 @@ export default defineConfig({
     server: {
         mode: "development",
         middlewareMode: true,
+        allowedHosts: [
+            "above.trovster.test",
+        ],
         fs: {
             allow: [resolve(".")],
         },
