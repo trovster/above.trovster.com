@@ -8,7 +8,7 @@ import functions from "./11ty/functions/index.js"
 import plugins from "./11ty/plugins/index.js"
 import shortcodes from "./11ty/shortcodes/index.js"
 
-const photoDirectories = ["src/photos", "src/360", "src/views"]
+const photoDirectories = ["src/content/photos", "src/content/360", "src/content/views"]
 
 const isPhotoEnabled = (source) => {
     const enabled = source.match(/^enabled:\s*["']?([01])["']?\s*$/m)
@@ -33,7 +33,7 @@ const getDisabledPhotoFiles = () => {
                     // Views items list individually enabled/disabled images. An item with
                     // no enabled images should be treated as disabled, regardless of its
                     // own top-level `enabled` flag.
-                    return directory === "src/views" && !hasEnabledImage(source)
+                    return directory === "src/content/views" && !hasEnabledImage(source)
                 })
         } catch {
             return []

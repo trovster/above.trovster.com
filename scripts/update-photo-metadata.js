@@ -11,7 +11,7 @@ import exifr from "exifr"
 
 const execFileAsync = promisify(execFile)
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
-const photoRoots = [path.join(projectRoot, "src/photos"), path.join(projectRoot, "src/360")]
+const photoRoots = [path.join(projectRoot, "src/content/photos"), path.join(projectRoot, "src/content/360")]
 const photoRootPaths = photoRoots.map((root) => path.relative(projectRoot, root))
 const metadataExtensions = new Set([".jpg", ".jpeg", ".webp", ".tif", ".tiff", ".heic", ".heif", ".png"])
 const originalImageExtensions = new Set([".jpg", ".jpeg", ".tif", ".tiff", ".heic", ".heif", ".png"])
@@ -23,9 +23,9 @@ Examples:
   npm run image:metadata --
   npm run image:metadata -- --dry-run
   npm run image:metadata -- --all
-  npm run image:metadata -- src/photos/beelsby
+  npm run image:metadata -- src/content/photos/beelsby
 
-By default, git status is used to find new images in src/photos and src/360 and
+By default, git status is used to find new images in src/content/photos and src/content/360 and
 update the matching index.md front matter with EXIF date, latitude, and
 longitude.
 
@@ -255,7 +255,7 @@ const discoverPhotoDirectories = async ({ inputs, options }) => {
             const directory = photoDirectoryFor(input)
 
             if (!directory) {
-                throw new CliError(`Image is not inside a src/photos/<name> or src/360/<name> directory: ${formatPath(input)}`)
+                throw new CliError(`Image is not inside a src/content/photos/<name> or src/content/360/<name> directory: ${formatPath(input)}`)
             }
 
             directories.push(directory)

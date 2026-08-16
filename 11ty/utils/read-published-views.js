@@ -5,7 +5,7 @@ import matter from "gray-matter"
 
 import { hasEnabledImages } from "./view-images.js"
 
-const VIEWS_DIR = "src/views"
+const VIEWS_DIR = "src/content/views"
 
 const isEnabled = (value) => Number(value) === 1
 

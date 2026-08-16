@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url"
 import matter from "gray-matter"
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
-const photosRoot = path.join(projectRoot, "src/photos")
+const photosRoot = path.join(projectRoot, "src/content/photos")
 const defaultVisibility = "public"
 const visibilityValues = new Set(["public", "unlisted", "private", "direct"])
 
@@ -20,7 +20,7 @@ const usage = `Usage:
 
 Examples:
   npm run mastodon:post -- beelsby --dry-run
-  npm run mastodon:post -- src/photos/beelsby --visibility unlisted
+  npm run mastodon:post -- src/content/photos/beelsby --visibility unlisted
   npm run mastodon:post -- riby --status "Riby from above"
 
 Required .env values:
@@ -151,7 +151,7 @@ const parseArgs = (args) => {
     }
 
     if (inputs.length !== 1) {
-        throw new CliError("Provide exactly one photo slug or src/photos/<slug> directory")
+        throw new CliError("Provide exactly one photo slug or src/content/photos/<slug> directory")
     }
 
     if (!visibilityValues.has(options.visibility)) {
@@ -199,7 +199,7 @@ const resolvePhotoDirectory = async (input) => {
     const directory = path.resolve(candidate)
 
     if (!isInside(directory, photosRoot)) {
-        throw new CliError(`Photo must be inside src/photos: ${formatPath(directory)}`)
+        throw new CliError(`Photo must be inside src/content/photos: ${formatPath(directory)}`)
     }
 
     if (!(await pathExists(path.join(directory, "index.md")))) {

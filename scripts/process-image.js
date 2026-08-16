@@ -29,9 +29,9 @@ const usage = `Usage:
   npm run image:process -- <image> [more images] [options]
 
 Examples:
-  npm run image:process -- src/photos/example/photo.jpg
-  npm run image:process -- src/photos/example/photo.jpg --quality 88 --watermark-opacity 0.45
-  npm run image:process -- src/photos/example/photo.webp --watermark-width 420 --watermark-margin 80
+  npm run image:process -- src/content/photos/example/photo.jpg
+  npm run image:process -- src/content/photos/example/photo.jpg --quality 88 --watermark-opacity 0.45
+  npm run image:process -- src/content/photos/example/photo.webp --watermark-width 420 --watermark-margin 80
 
 Options:
   -o, --output <file>                 Write to a specific output file. Only valid for one input.

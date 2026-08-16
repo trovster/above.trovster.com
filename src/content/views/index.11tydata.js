@@ -1,6 +1,6 @@
-import readPublishedViews from "../../11ty/utils/read-published-views.js"
-import siblings from "../../11ty/utils/photo-siblings.js"
-import buildViewImages, { hasEnabledImages } from "../../11ty/utils/view-images.js"
+import readPublishedViews from "../../../11ty/utils/read-published-views.js"
+import siblings from "../../../11ty/utils/photo-siblings.js"
+import buildViewImages, { hasEnabledImages } from "../../../11ty/utils/view-images.js"
 
 const isEnabled = (value) => Number(value) === 1
 

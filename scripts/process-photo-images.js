@@ -8,8 +8,8 @@ import { fileURLToPath } from "node:url"
 import { CliError, parseArgs, printResult, processImage } from "./process-image.js"
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
-const photosDirectory = path.join(projectRoot, "src/photos")
-const panoramasDirectory = path.join(projectRoot, "src/360")
+const photosDirectory = path.join(projectRoot, "src/content/photos")
+const panoramasDirectory = path.join(projectRoot, "src/content/360")
 const defaultPhotosDirectories = [photosDirectory, panoramasDirectory]
 const jpegExtensions = new Set([".jpg", ".jpeg"])
 
@@ -19,10 +19,10 @@ const usage = `Usage:
 Examples:
   npm run image:process:photos --
   npm run image:process:photos -- --dry-run
-  npm run image:process:photos -- src/photos/wold-newton --quality 88 --watermark-fill
+  npm run image:process:photos -- src/content/photos/wold-newton --quality 88 --watermark-fill
 
 Scans each directory recursively for original JPG/JPEG images and processes each
-one with the same options as npm run image:process. Images in src/360 are
+one with the same options as npm run image:process. Images in src/content/360 are
 always resized to 6000px wide and processed without a watermark. --output is not
 supported for batch processing because each image writes its own .webp file
 beside the source.

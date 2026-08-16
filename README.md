@@ -75,7 +75,7 @@ local `.env` only, never as repository secrets or in the workflow.
 
 ## Adding Photos
 
-Create a new folder in `src/photos/` for each image. Add the photo file and an
+Create a new folder in `src/content/photos/` for each image. Add the photo file and an
 `index.md` file beside it.
 
 ```md
@@ -121,7 +121,7 @@ content.
 Process source photos before referencing them in front-matter:
 
 ```bash
-npm run image:process -- src/photos/photo-title/photo.jpg
+npm run image:process -- src/content/photos/photo-title/photo.jpg
 ```
 
 The command writes an optimized WebP image beside the source, resizes only when
@@ -129,7 +129,7 @@ the image is wider than 2500px, preserves image metadata, and adds the Above SVG
 watermark in the bottom-right corner. Re-run it with options to tune the output:
 
 ```bash
-npm run image:process -- src/photos/photo-title/photo.jpg --quality 88 --watermark-opacity 0.45 --watermark-width 420 --watermark-margin 80
+npm run image:process -- src/content/photos/photo-title/photo.jpg --quality 88 --watermark-opacity 0.45 --watermark-width 420 --watermark-margin 80
 ```
 
 Add `--watermark-fill` to fill the SVG watermark. It uses `--watermark-color`
@@ -137,7 +137,7 @@ by default, or `--watermark-fill-color` when you want a different fill.
 
 Run `npm run image:process -- --help` for all options.
 
-Process every original JPG/JPEG image in `src/photos/` with:
+Process every original JPG/JPEG image in `src/content/photos/` with:
 
 ```bash
 npm run image:process:photos --
@@ -151,7 +151,7 @@ Copy `.env.example` to `.env` and set `MASTODON_INSTANCE_URL` and
 `MASTODON_ACCESS_TOKEN`. The access token needs `write:media` and
 `write:statuses` scopes.
 
-Post a regular photo from `src/photos` with:
+Post a regular photo from `src/content/photos` with:
 
 ```bash
 npm run mastodon:post -- beelsby

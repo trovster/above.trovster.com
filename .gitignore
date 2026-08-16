@@ -20,8 +20,11 @@ package-lock.json
 .env
 
 # Generated photo derivatives
-src/photos/**/*.webp
-src/360/**/*.webp
+src/content/photos/**/*.webp
+src/content/360/**/*.webp
 
 # Editors
 .vscode
+
+# Local scratch
+_to_delete/
