@@ -10,7 +10,7 @@ meta:
   Type: Church
   Built: 1865
 location:
-  name: Aylesby
+  name: Great Coates
   region: Lincolnshire, England
   latitude: 53.570339
   longitude: -0.139956
