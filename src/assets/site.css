@@ -1096,29 +1096,8 @@
 
     .photo-carousel.photo-carousel {
         position: relative;
-        overflow: hidden;
         min-inline-size: 0;
-        inline-size: 100%;
-    }
-
-    .photo-carousel::before,
-    .photo-carousel::after {
-        content: "";
-        position: absolute;
-        inset-block: 0;
-        z-index: 4;
-        inline-size: var(--space-m);
-        pointer-events: none;
-    }
-
-    .photo-carousel::before {
-        inset-inline-start: 0;
-        background: linear-gradient(90deg, var(--color-background), transparent);
-    }
-
-    .photo-carousel::after {
-        inset-inline-end: 0;
-        background: linear-gradient(270deg, var(--color-background), transparent);
+        margin-inline: calc(-1 * var(--page-padding));
     }
 
     .photo-carousel > ol {
@@ -1127,10 +1106,10 @@
         overflow-x: auto;
         overscroll-behavior-x: contain;
         scroll-snap-type: x mandatory;
-        scroll-padding-inline-start: var(--page-padding);
-        padding-inline: var(--page-padding);
-        margin-inline: calc(-1 * var(--page-padding));
-        -webkit-overflow-scrolling: touch;
+        scroll-padding-inline-start: var(--space-s);
+        padding-inline: var(--space-s);
+        padding-block: var(--space-s);
+        /* -webkit-overflow-scrolling: touch; */
         scrollbar-width: none;
     }
 
@@ -1153,7 +1132,7 @@
         flex: none;
         display: block;
         inline-size: min(82vw, 26rem);
-        scroll-snap-align: start;
+        scroll-snap-align: center;
         border: 0;
         background: none;
         padding: 0;

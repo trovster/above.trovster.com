@@ -19,6 +19,7 @@ const buildViewImages = async (entry) => {
 
             return {
                 src,
+                url: entry.url,
                 number,
                 alt: `${entry.data.title} — photo ${number} of ${images.length}`,
                 blurhash: await blurhash(file),

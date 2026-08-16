@@ -34,7 +34,27 @@ export default (config) => {
             plugin: feedPlugin,
             options: {
                 type: "atom",
-                outputPath: "/feed.xml",
+                outputPath: "/public/feed.xml",
+                collection: {
+                    name: "photos",
+                    limit: 10,
+                },
+                metadata: {
+                    language: "en",
+                    title: site.title,
+                    subtitle: site.description,
+                    base: site.url,
+                    author: {
+                        name: site.author,
+                    },
+                },
+            },
+        },
+        {
+            plugin: feedPlugin,
+            options: {
+                type: "json",
+                outputPath: "/public/feed.json",
                 collection: {
                     name: "photos",
                     limit: 10,

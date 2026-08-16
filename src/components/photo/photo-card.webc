@@ -9,7 +9,7 @@
                 aria-hidden="true"
             ></canvas>
 
-            <img :src="photo.data.src" :alt="photo.data.alt" loading="lazy" />
+            <img :src="photo.data.src" :alt="photo.data.alt" loading="lazy" :eleventy:output="photo.url" />
         </figure>
     </a>
 
@@ -27,7 +27,7 @@
             aria-hidden="true"
         ></canvas>
 
-        <img data-panorama-image :src="photo.data.src" :alt="photo.data.alt" loading="lazy" />
+        <img data-panorama-image :src="photo.data.src" :alt="photo.data.alt" loading="lazy" :eleventy:output="photo.url" />
 
         <div class="photo-panorama__mount" data-panorama-mount aria-hidden="true"></div>
     </figure>

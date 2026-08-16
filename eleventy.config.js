@@ -58,10 +58,10 @@ export default (config) => {
         config.ignores.add(file)
     }
 
-    config.addPassthroughCopy("CNAME")
-    config.addPassthroughCopy({ "src/icons/favicon.svg": "favicon.svg" })
-    config.addPassthroughCopy({ "src/icons/favicon.ico": "favicon.ico" })
-    config.addPassthroughCopy({ "src/icons/apple-touch-icon.png": "apple-touch-icon.png" })
+    config.addPassthroughCopy({ CNAME: "public/CNAME" })
+    config.addPassthroughCopy({ "src/icons/favicon.svg": "public/favicon.svg" })
+    config.addPassthroughCopy({ "src/icons/favicon.ico": "public/favicon.ico" })
+    config.addPassthroughCopy({ "src/icons/apple-touch-icon.png": "public/apple-touch-icon.png" })
 
     return {
         dir: {

@@ -21,7 +21,7 @@
             :data-url="photo.url"
             :data-thumbnail="photo.thumbnail"
         >
-            <img :src="photo.src" :alt="photo.alt" width="800" loading="eager" decoding="async" />
+            <img :src="photo.src" :alt="photo.alt" width="800" loading="eager" decoding="async" :eleventy:output="photo.url" />
         </li>
     </ol>
 
@@ -49,7 +49,7 @@
         </button>
 
         <figure>
-            <img data-map-popover-image src="" alt="" />
+            <img src="" alt="" data-map-popover-image />
         </figure>
 
         <div class="map-popover__body">

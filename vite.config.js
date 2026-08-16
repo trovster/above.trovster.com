@@ -1,9 +1,24 @@
-import { resolve } from "node:path"
+import { dirname, relative, resolve, sep } from "node:path"
 import { defineConfig } from "vite"
+
+const assetFileNames = (assetInfo) => {
+    const original = assetInfo.originalFileNames?.[0]
+
+    if (original) {
+        const segments = relative(process.cwd(), dirname(original)).split(sep)
+        const folder = segments.slice(1).join("/")
+
+        if (folder) {
+            return `${folder}/[name].[hash][extname]`
+        }
+    }
+
+    return "assets/[name].[hash][extname]"
+}
 
 export default defineConfig({
     appType: "mpa",
-    publicDir: false,
+    publicDir: "public",
     server: {
         mode: "development",
         middlewareMode: true,
@@ -27,7 +42,7 @@ export default defineConfig({
         manifest: true,
         rolldownOptions: {
             output: {
-                assetFileNames: "assets/[name].[hash][extname]",
+                assetFileNames,
                 chunkFileNames: "assets/[name].[hash].js",
                 entryFileNames: "assets/[name].[hash].js",
             },

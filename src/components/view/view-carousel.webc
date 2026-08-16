@@ -16,7 +16,7 @@
                         aria-hidden="true"
                     ></canvas>
 
-                    <img :src="image.src" :alt="image.alt" loading="lazy" width="1000" />
+                    <img :src="image.src" :alt="image.alt" loading="lazy" width="1000" :eleventy:output="image.url" />
 
                     <span class="photo-carousel__number" aria-hidden="true" @text="image.number"></span>
                 </figure>
@@ -37,7 +37,7 @@
                     </svg>
                 </button>
 
-                <img :src="image.src" :alt="image.alt" width="1600" />
+                <img :src="image.src" :alt="image.alt" width="1600" :eleventy:output="image.url" />
             </dialog>
         </li>
     </ol>

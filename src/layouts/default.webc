@@ -26,7 +26,8 @@
         <link rel="icon" href="/favicon.ico" sizes="any"/>
         <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 
-        <link rel="alternate" type="application/atom+xml" :title="site.title" href="/feed.xml" />
+        <link rel="alternate" type="application/atom+xml" :title="site.title" href="/feed.xml"/>
+        <link rel="alternate" type="application/feed+json" :title="site.title" href="/feed.json"/>
 
         <script webc:keep src="/assets/site.js" type="module"></script>
     </head>
