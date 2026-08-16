@@ -1,14 +1,13 @@
-import { dirname, relative, resolve, sep } from "node:path"
+import { dirname, resolve } from "node:path"
 import { defineConfig } from "vite"
 
 const assetFileNames = (assetInfo) => {
     const original = assetInfo.originalFileNames?.[0]
 
     if (original) {
-        const segments = relative(process.cwd(), dirname(original)).split(sep)
-        const folder = segments.slice(1).join("/")
+        const folder = dirname(original)
 
-        if (folder) {
+        if (folder && folder !== ".") {
             return `${folder}/[name].[hash][extname]`
         }
     }
