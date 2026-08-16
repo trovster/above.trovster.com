@@ -40,6 +40,7 @@ jobs:
 
       - name: Build
         run: npm run build
+        timeout-minutes: 15
         env:
           GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
           GOOGLE_MAPS_MAP_ID: ${{ secrets.GOOGLE_MAPS_MAP_ID }}
