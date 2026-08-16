@@ -34,11 +34,12 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version-file: ".nvmrc"
+          cache: 'npm'
 
       - name: Install
-        run: npm install
+        run: npm ci
 
-      - name: Build
+      - name: Process Photos
         run: npm run image:process:photos
         timeout-minutes: 5
 
