@@ -73,7 +73,7 @@ export default (config) => {
         {
             plugin: eleventyImageTransformPlugin,
             options: {
-                formats: ["avif", "webp", "jpeg"],
+                formats: ["avif", "webp"],
                 htmlOptions: {
                     imgAttributes: {
                         loading: "lazy",
