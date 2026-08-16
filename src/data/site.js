@@ -8,7 +8,7 @@ export default {
     title: "Above",
     logo,
     description: "Aerial landscape photography, from around Lincolnshire, captured by Trevor Morris.",
-    keywords: ["landscape photography", "aerial photography", "drone photography", "drone", "photos", "11ty"],
+    keywords: ["landscape photography", "aerial photography", "drone photography", "drone", "photos", "Lincolnshire", "11ty"],
     url: process.env.URL ?? "https://www.example.com",
     author: profile.name,
 }
