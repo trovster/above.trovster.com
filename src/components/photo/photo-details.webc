@@ -33,7 +33,7 @@
     <photo-palette :palette="photo.data.palette"></photo-palette>
 
     <header>
-        <p class="pre-title" webc:if="photo.data.category" @text="photo.data.category"></p>
+        <p webc:if="photo.data.category" class="pre-title" @text="photo.data.category"></p>
 
         <div>
             <h1 @text="photo.data.title"></h1>
@@ -46,16 +46,16 @@
         <p>Taken on <time @text="date(photo.date, 'cccc dS LLLL y')"></time></p>
     </header>
 
-    <section  webc:if="photo.data.views" class="photo-views">
+    <section webc:if="photo.data.views" class="photo-views">
         <view-carousel :images="photo.data.views.images" :id="photo.data.id"></view-carousel>
     </section>
 
     <div webc:if="photo.data.viewer !== 'pannellum'">
-        <section aria-labelledby="photo-description-title" webc:if="description?.trim() || photo.data.wikipedia?.url">
+        <section webc:if="description?.trim() || photo.data.wikipedia?.url" aria-labelledby="photo-description-title">
             <p class="pre-title">Field Notes</p>
             <h2 id="photo-description-title" @text="description?.trim() ? 'Description' : 'Source'"></h2>
-            <div class="prose" webc:if="description?.trim()" @raw="description"></div>
-            <p class="prose photo-source" webc:if="photo.data.wikipedia?.url">
+            <div webc:if="description?.trim()" @raw="description" class="prose"></div>
+            <p webc:if="photo.data.wikipedia?.url" class="prose photo-source">
                 Wikipedia:
                 <a :href="photo.data.wikipedia.url" rel="external noopener" @text="photo.data.wikipedia.title || photo.data.title"></a>.
             </p>

@@ -1,4 +1,4 @@
-<ul class="photo-palette" webc:if="palette?.length" aria-label="Photo colour palette">
+<ul webc:if="palette?.length" class="photo-palette" aria-label="Photo colour palette">
     <li webc:for="(index, color) in palette" :style="`--proportion: ${color.proportion};`">
         <span :style="`background-color: ${color.hex};`" :title="color.hex"></span>
         <span class="u-visually-hidden" @text="color.hex"></span>
