@@ -40,11 +40,11 @@ jobs:
 
       - name: Build
         run: npm run image:process:photos
-        timeout-minutes: 10
+        timeout-minutes: 5
 
       - name: Build
         run: npm run ci
-        timeout-minutes: 10
+        timeout-minutes: 20
         env:
           GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
           GOOGLE_MAPS_MAP_ID: ${{ secrets.GOOGLE_MAPS_MAP_ID }}
