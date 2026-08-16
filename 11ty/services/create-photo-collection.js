@@ -76,6 +76,9 @@ const buildViewsReference = async (view) => {
         return null
     }
 
+    // @todo temporarily disabled view carousel on photos page.
+    return null
+
     return {
         url: view.url,
         title: view.data.title,
