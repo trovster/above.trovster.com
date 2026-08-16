@@ -1,4 +1,4 @@
-import { dirname, resolve } from "node:path"
+import { dirname, isAbsolute, resolve } from "node:path"
 import { defineConfig } from "vite"
 
 const assetFileNames = (assetInfo) => {
@@ -7,7 +7,7 @@ const assetFileNames = (assetInfo) => {
     if (original) {
         const folder = dirname(original)
 
-        if (folder && folder !== ".") {
+        if (folder && folder !== "." && !folder.startsWith("..") && !isAbsolute(folder)) {
             return `${folder}/[name].[hash][extname]`
         }
     }
