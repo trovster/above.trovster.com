@@ -13,7 +13,7 @@ bodyClass: page page--about
             This project is a collection of aerial photographs taken
             around Lincolnshire, and captured
             by <a :href="profile.website" @text="profile.name" class="link" rel="me external"></a>
-            using consumer drones.
+            using drones.
         </p>
 
         <hr />
