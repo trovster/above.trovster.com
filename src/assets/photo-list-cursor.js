@@ -1,8 +1,8 @@
+import cursorIcon from "../icons/cursor/arrow-up-right.svg?raw"
 import { createPointerCursor, createPointerCursorTracker, supportsFinePointer } from "./pointer-cursor.js"
 
 const cursorScopeSelector = ".page--home [data-photo-list], .page--gallery:not(.page--360) [data-photo-list]"
 const cursorTargetSelector = ".photo-card > a"
-const cursorIconPath = "M4.5 19.5 19.5 4.5m0 0H8.25m11.25 0v11.25"
 
 const getImageLinkTarget = (target) => {
     if (!(target instanceof Element)) {
@@ -25,7 +25,7 @@ export const initPhotoListCursor = () => {
         return
     }
 
-    const cursor = createPointerCursor(cursorIconPath)
+    const cursor = createPointerCursor(cursorIcon)
     const tracker = createPointerCursorTracker(cursor)
 
     const showCursor = (event) => {

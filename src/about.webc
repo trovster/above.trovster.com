@@ -43,6 +43,13 @@ bodyClass: page page--about
         </p>
 
         <p>
+            The cursor icons are from <a href="https://heroicons.com" class="link" rel="external">Heroicons.</a>
+            The icons for Exposure Time, Aperture, Focal Length, Camera, and Flash
+            are by Denis Klyuchnikov from
+            <a href="https://thenounproject.com" class="link" rel="external">Noun Project</a>.
+        </p>
+
+        <p>
             A few packages are used to build specific features. The EXIF data is pulled using the
             <a href="https://www.npmjs.com/package/exifr" class="link" rel="external">exifr</a> package,
             and <a href="https://lokeshdhakar.com/projects/color-thief/" class="link" rel="external">colorthief</a> is used

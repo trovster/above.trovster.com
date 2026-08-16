@@ -1,10 +1,9 @@
 import "pannellum/build/pannellum.js"
+import dragCursorIcon from "../icons/cursor/arrows-pointing-out.svg?raw"
 import { createPointerCursor, createPointerCursorTracker, supportsFinePointer } from "./pointer-cursor.js"
 
 let panoramaObserver
 let panoramaCursor
-
-const dragCursorIconPath = "M5 9 2 12l3 3m4-10 3-3 3 3m0 14-3 3-3-3m10-10 3 3-3 3M2 12h20M12 2v20"
 
 const firstSourceCandidate = (image) => image.closest("picture")?.querySelector("source[srcset]")?.srcset.split(",").at(0)?.trim().split(/\s+/).at(0)
 
@@ -139,7 +138,7 @@ const initPanoramaCursor = (root) => {
     }
 
     if (!panoramaCursor) {
-        const cursor = createPointerCursor(dragCursorIconPath)
+        const cursor = createPointerCursor(dragCursorIcon)
         const tracker = createPointerCursorTracker(cursor)
 
         document.body.append(cursor)

@@ -1,17 +1,11 @@
 export const supportsFinePointer = () => window.matchMedia("(hover: hover) and (pointer: fine)").matches
 
-export const createPointerCursor = (iconPath) => {
+export const createPointerCursor = (iconSvg) => {
     const cursor = document.createElement("div")
 
     cursor.className = "pointer-cursor"
     cursor.setAttribute("aria-hidden", "true")
-    cursor.innerHTML = `
-        <div class="pointer-cursor__circle">
-            <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
-                <path d="${iconPath}" />
-            </svg>
-        </div>
-    `
+    cursor.innerHTML = `<div class="pointer-cursor__circle">${iconSvg}</div>`
 
     return cursor
 }
