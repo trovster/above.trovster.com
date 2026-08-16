@@ -26,6 +26,7 @@
     "start": "eleventy $npm_config_pathprefix --serve --quiet",
     "prebuild": "npm run clean",
     "build": "npm run image:process:photos && eleventy $npm_config_pathprefix",
+    "preview": "vite preview --open --host above.trovster.test",
     "image:metadata": "node scripts/update-photo-metadata.js",
     "image:process": "node scripts/process-image.js",
     "image:process:photos": "node scripts/process-photo-images.js",
