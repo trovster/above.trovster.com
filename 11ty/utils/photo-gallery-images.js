@@ -8,7 +8,7 @@ const enabledImages = (images) => (Array.isArray(images) ? images.filter((image)
 
 const hasEnabledImages = (images) => enabledImages(images).length > 0
 
-const buildViewImages = async (entry) => {
+const galleryImages = async (entry) => {
     const images = enabledImages(entry.data.images)
 
     return Promise.all(
@@ -28,5 +28,5 @@ const buildViewImages = async (entry) => {
     )
 }
 
-export default buildViewImages
+export default galleryImages
 export { hasEnabledImages }

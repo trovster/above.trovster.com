@@ -1,9 +1,0 @@
-<article class="photo-card photo-card--view">
-    <section webc:if="view.data.images" class="photo-views">
-        <view-carousel :images="view.data.images" :id="view.data.id"></view-carousel>
-    </section>
-
-    <h2>
-        <a :href="view.url" @text="view.data.title"></a>
-    </h2>
-</article>

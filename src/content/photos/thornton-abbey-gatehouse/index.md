@@ -4,6 +4,13 @@ enabled: 1
 title: Thornton Abbey Gatehouse
 src: image.webp
 alt: Aerial photograph of Thornton Abbey Gatehouse in Lincolnshire.
+images:
+  - src: 1.jpg
+    enabled: 0
+  - src: 2.jpg
+    enabled: 1
+  - src: 3.jpg
+    enabled: 1
 category: Architecture
 meta:
   Type: Gatehouse

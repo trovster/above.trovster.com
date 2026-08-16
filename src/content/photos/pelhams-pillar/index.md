@@ -4,6 +4,17 @@ enabled: 1
 title: "Pelham's Pillar"
 src: image.webp
 alt: Aerial photograph of Pelham's Pillar in Lincolnshire.
+images:
+  - src: 1.jpg
+    enabled: 1
+  - src: 2.jpg
+    enabled: 1
+  - src: 3.jpg
+    enabled: 1
+  - src: 4.jpg
+    enabled: 1
+  - src: 5.jpg
+    enabled: 1
 category: Monument
 meta:
   Type: Tower

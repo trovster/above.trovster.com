@@ -4,6 +4,13 @@ enabled: 1
 title: Riby
 src: image.webp
 alt: Aerial photograph of the church in Riby, Lincolnshire.
+images:
+  - src: 1.jpg
+    enabled: 1
+  - src: 2.jpg
+    enabled: 1
+  - src: 3.jpg
+    enabled: 1
 category: Church
 meta:
   Name: St. Edmunds

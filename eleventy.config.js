@@ -8,14 +8,13 @@ import functions from "./11ty/functions/index.js"
 import plugins from "./11ty/plugins/index.js"
 import shortcodes from "./11ty/shortcodes/index.js"
 
-const photoDirectories = ["src/content/photos", "src/content/360", "src/content/views"]
+const photoDirectories = ["src/content/photos", "src/content/360"]
 
 const isPhotoEnabled = (source) => {
     const enabled = source.match(/^enabled:\s*["']?([01])["']?\s*$/m)
 
     return Number(enabled?.[1]) === 1
 }
-const hasEnabledImage = (source) => /^[ \t]+enabled:\s*["\']?1["\']?\s*$/m.test(source)
 
 const getDisabledPhotoFiles = () => {
     return photoDirectories.flatMap((directory) => {
@@ -23,18 +22,7 @@ const getDisabledPhotoFiles = () => {
             return readdirSync(directory, { withFileTypes: true })
                 .filter((entry) => entry.isDirectory())
                 .map((entry) => join(directory, entry.name, "index.md"))
-                .filter((file) => {
-                    const source = readFileSync(file, "utf8")
-
-                    if (!isPhotoEnabled(source)) {
-                        return true
-                    }
-
-                    // Views items list individually enabled/disabled images. An item with
-                    // no enabled images should be treated as disabled, regardless of its
-                    // own top-level `enabled` flag.
-                    return directory === "src/content/views" && !hasEnabledImage(source)
-                })
+                .filter((file) => !isPhotoEnabled(readFileSync(file, "utf8")))
         } catch {
             return []
         }

@@ -5,7 +5,7 @@ import exif from "../utils/exif.js"
 import createMarkerThumbnail from "../utils/marker-thumbnail.js"
 import palette from "../utils/palette.js"
 import siblings from "../utils/photo-siblings.js"
-import buildViewImages, { hasEnabledImages } from "../utils/view-images.js"
+import galleryImages, { hasEnabledImages } from "../utils/photo-gallery-images.js"
 
 const toCoordinate = (value) => {
     if (typeof value === "number") {
@@ -69,31 +69,23 @@ const buildPanoramaReference = (panorama) => {
     }
 }
 
-const findViews = (views, photo) => views.find((view) => view.page.fileSlug === photo.page.fileSlug) ?? null
-
-const buildViewsReference = async (view) => {
-    if (!view) {
+const buildGallery = async (photo) => {
+    if (!hasEnabledImages(photo.data.images)) {
         return null
     }
 
-    // @todo temporarily disabled view carousel on photos page.
-    return null
+    // @todo temporarily disable the gallery, until a better implementation has been built.
+    return null;
 
     return {
-        url: view.url,
-        title: view.data.title,
-        images: await buildViewImages(view),
+        images: await galleryImages(photo),
     }
 }
 
-const createPhotoCollection = async (api, { glob, panoramaGlob, viewsGlob }) => {
+const createPhotoCollection = async (api, { glob, panoramaGlob }) => {
     const photos = api.getFilteredByGlob(glob).filter((photo) => isEnabled(photo.data.enabled))
 
     const panoramas = panoramaGlob ? api.getFilteredByGlob(panoramaGlob).filter((photo) => isEnabled(photo.data.enabled)) : []
-
-    const views = viewsGlob
-        ? api.getFilteredByGlob(viewsGlob).filter((view) => isEnabled(view.data.enabled) && hasEnabledImages(view.data.images))
-        : []
 
     return Promise.all(
         photos.map(async (photo, index) => {
@@ -118,7 +110,7 @@ const createPhotoCollection = async (api, { glob, panoramaGlob, viewsGlob }) => 
                     previous,
                     next,
                     panorama: buildPanoramaReference(findPanorama(panoramas, photo)),
-                    views: await buildViewsReference(findViews(views, photo)),
+                    gallery: await buildGallery(photo),
                 },
             }
         }),
