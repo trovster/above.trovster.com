@@ -2,16 +2,16 @@ import "pannellum/build/pannellum.css"
 import "./site.css"
 import { initBlurhashPlaceholders } from "./blurhash.js"
 import { initPanoramaViewers } from "./panorama.js"
-import { initPhotoCarouselCursor } from "./photo-carousel-cursor.js"
-import { initPhotoCarouselDrag } from "./photo-carousel-drag.js"
 import { initPhotoListCursor } from "./photo-list-cursor.js"
 
 if (typeof document !== "undefined" && typeof window !== "undefined") {
     initBlurhashPlaceholders()
     initPanoramaViewers()
     initPhotoListCursor()
-    initPhotoCarouselCursor()
-    initPhotoCarouselDrag()
+
+    if (document.querySelector("[data-photo-carousel]")) {
+        import("./photo-carousel.js").then(({ initPhotoCarousel }) => initPhotoCarousel())
+    }
 
     if (document.querySelector("[data-photo-map]")) {
         import("./photo-map.js").then(({ initPhotoMap }) => initPhotoMap())

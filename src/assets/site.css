@@ -350,8 +350,7 @@
 
     @media (hover: hover) and (pointer: fine) {
         .page--home [data-photo-list] .photo-card > a:has(img),
-        .page--gallery:not(.page--360) [data-photo-list] .photo-card > a:has(img),
-        .photo-carousel__item:has(img) {
+        .page--gallery:not(.page--360) [data-photo-list] .photo-card > a:has(img) {
             cursor: none;
         }
 
@@ -1089,49 +1088,36 @@
     }
 
 
+    /* Full-width like the primary photo, with a small gap on each side. */
     .photo-carousel.photo-carousel {
         position: relative;
+        inline-size: 100%;
         min-inline-size: 0;
-        margin-inline: calc(-1 * var(--page-padding));
-    }
-
-    .photo-carousel > ol {
-        display: flex;
-        gap: var(--space-s);
-        overflow-x: auto;
-        overscroll-behavior-x: contain;
-        scroll-snap-type: x mandatory;
-        scroll-padding-inline-start: var(--space-s);
-        padding-inline: var(--space-s);
+        max-inline-size: 100%;
+        margin-inline: auto;
         padding-block: var(--space-s);
-        /* -webkit-overflow-scrolling: touch; */
-        scrollbar-width: none;
     }
 
-    .photo-carousel > ol::-webkit-scrollbar {
-        display: none;
+    /* Swiper drives the grab/grabbing cursor on the container; let it flow down. */
+    .photo-carousel .swiper-wrapper,
+    .photo-carousel .swiper-slide,
+    .photo-carousel__item,
+    .photo-carousel__item * {
+        cursor: inherit;
     }
 
-    .photo-carousel > ol.is-dragging {
-        scroll-snap-type: none;
-        scroll-behavior: auto;
-        user-select: none;
-    }
-
-    body.is-photo-carousel-dragging,
-    body.is-photo-carousel-dragging * {
-        cursor: grabbing !important;
+    .photo-carousel .swiper-slide {
+        inline-size: 80%;
+        max-inline-size: 22rem;
+        block-size: auto;
     }
 
     .photo-carousel__item {
-        flex: none;
         display: block;
-        inline-size: min(82vw, 26rem);
-        scroll-snap-align: center;
+        inline-size: 100%;
         border: 0;
         background: none;
         padding: 0;
-        cursor: pointer;
     }
 
     .photo-carousel__item figure {
@@ -1193,6 +1179,74 @@
         font-size: 5rem;
     }
 
+    /* Prev/next arrows are hidden on mobile (swipe/scroll only). */
+    .photo-carousel__nav {
+        display: none;
+    }
+
+    @media (min-width: 34.001rem) {
+        .photo-carousel .swiper-slide {
+            inline-size: 58%;
+            max-inline-size: 26rem;
+        }
+
+        /* Floating, semi-transparent arrows centred on either side. */
+        .photo-carousel__nav {
+            position: absolute;
+            z-index: 4;
+            inset-block-start: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            inline-size: 2.75rem;
+            block-size: 2.75rem;
+            border: 1px solid var(--color-border);
+            background: var(--color-surface);
+            color: var(--color-primary);
+            padding: 0;
+            opacity: 0.65;
+            translate: 0 -50%;
+            cursor: pointer;
+            transition:
+                background-color var(--transition-fast),
+                border-color var(--transition-fast),
+                color var(--transition-fast),
+                opacity var(--transition-fast);
+        }
+
+        .photo-carousel__nav--prev {
+            inset-inline-start: var(--space-s);
+        }
+
+        .photo-carousel__nav--next {
+            inset-inline-end: var(--space-s);
+        }
+
+        .photo-carousel__nav:is(:hover, :focus-visible) {
+            border-color: var(--color-primary);
+            background: var(--color-primary);
+            color: var(--color-background);
+            opacity: 1;
+            outline: 0;
+        }
+
+        .photo-carousel__nav svg {
+            inline-size: 1.35rem;
+            block-size: 1.35rem;
+        }
+
+        .photo-carousel__nav.swiper-button-disabled {
+            display: none;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        /* Swiper adds this when every slide already fits (e.g. a single image). */
+        .photo-carousel__nav.swiper-button-lock {
+            display: none;
+        }
+    }
+
     .view-popover {
         position: fixed;
         inset: 0;
@@ -1221,7 +1275,7 @@
         overflow-y: hidden;
     }
 
-    body:has(:popover-open) :is(button, a) {
+    body:has(:popover-open) :is(button, a, .photo-carousel, .swiper-slide) {
         pointer-events: none;
     }
 
@@ -1254,13 +1308,9 @@
     }
 
     @media (min-width: 52.001rem) {
-        .photo-carousel__item {
-            inline-size: min(38vw, 30rem);
-        }
-
-        .photo-carousel[data-count="1"] > ol,
-        .photo-carousel[data-count="2"] > ol {
-            justify-content: center;
+        .photo-carousel .swiper-slide {
+            inline-size: 44%;
+            max-inline-size: 30rem;
         }
     }
 }

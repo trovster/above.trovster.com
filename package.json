@@ -23,7 +23,7 @@
     "prepare": "npm run hooks:install",
     "hooks:install": "git config core.hooksPath .githooks",
     "prestart": "npm run clean",
-    "start": "eleventy $npm_config_pathprefix --serve --quiet",
+    "start": "eleventy $npm_config_pathprefix --serve --quiet --incremental",
     "prebuild": "npm run clean",
     "build": "npm run image:process:photos && eleventy $npm_config_pathprefix",
     "preview": "vite preview --open --host above.trovster.test",
@@ -51,6 +51,7 @@
   },
   "dependencies": {
     "@googlemaps/markerclusterer": "^2.6.2",
-    "pannellum": "^2.5.7"
+    "pannellum": "^2.5.7",
+    "swiper": "^14.1.0"
   }
 }

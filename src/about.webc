@@ -1,8 +1,5 @@
----
-title: About
-description: More about this website.
-bodyClass: page page--about
----
+--- title: About description: More about this website. bodyClass: page
+page--about ---
 <section class="page-section page-section--about">
     <div>
         <h1>About</h1>
@@ -10,44 +7,60 @@ bodyClass: page page--about
 
     <div class="prose">
         <p class="lede">
-            This project is a collection of aerial photographs taken
-            around Lincolnshire, and captured
-            by <a :href="profile.website" @text="profile.name" class="link" rel="me external"></a>
-            using drones.
+            This project is a collection of aerial photographs taken around
+            Lincolnshire, and captured by <a :href="profile.website"
+            @text="profile.name" class="link" rel="me external"></a>
+            using consumer drones.
         </p>
 
         <hr />
 
         <p>
-            I first started flying drones in the summer of 2017, when I purchased
-            a small entry-level consumer drone; the DJI Spark.
-            In September 2025, I upgraded to the newly released DJI Mini 5 Pro.
+            I first started flying drones in the summer of 2017, when I
+            purchased a small entry-level consumer drone; the DJI Spark. In
+            September 2025, I upgraded to the newly released DJI Mini 5 Pro.
         </p>
 
         <p>
-            I love how these devices allow you to see and appreciate the world from
-            not just great heights but a whole new perspective. I enjoy taking it to
-            familiar places and seeing what new angles I can capture.
+            I love how these devices allow you to see and appreciate the world
+            from not just great heights but a whole new perspective. I enjoy
+            taking it to familiar places and seeing what new angles I can
+            capture.
         </p>
 
         <hr />
+
+        <h3>How this site is built…</h3>
 
         <p>
             The project is built using the static site generator
             <a href="https://www.11ty.dev" class="link" rel="external">11ty</a>.
-            The design uses plain HTML, BEM-based CSS, and a small amount of
-            JavaScript for progressive navigation behavior. The EXIF data is pulled using the
-            <a href="https://www.npmjs.com/package/exifr" class="link" rel="external">exifr</a> package,
-            and <a href="https://lokeshdhakar.com/projects/color-thief/" class="link" rel="external">colorthief</a> is used
-            for the photo colour palette. <a href="https://blurha.sh" class="link" rel="external">
-            BlurHash</a> is used as photo placeholder during loading.
-            The 360-degree photos use <a href="https://pannellum.org" class="link" rel="external">Pannellum</a>,
-            a lightweight WebGL panorama viewer. Google Maps is used to show the photo locations.
+            It uses WebC as the templating language. The design uses plain HTML,
+            BEM-based CSS, and a small amount of JavaScript for progressive
+            navigation behaviour.
+        </p>
+
+        <p>
+            A few packages are used to build specific features. The EXIF data is
+            pulled using the
+            <a href="https://www.npmjs.com/package/exifr" class="link"
+            rel="external">exifr</a> package, and <a
+            href="https://lokeshdhakar.com/projects/color-thief/" class="link"
+            rel="external">colorthief</a> is used for the photo colour palette.
+            <a href="https://blurha.sh" class="link" rel="external">
+            BlurHash</a> is used as photo placeholder during loading. The
+            360-degree photos use <a href="https://pannellum.org" class="link"
+            rel="external">Pannellum</a>, a lightweight WebGL panorama viewer.
+            The carousel gallery is powered by
+            <a href="https://swiperjs.com" class="link"
+            rel="external">Swiper</a>. Google Maps is used to show the
+            locations.
         </p>
     </div>
 
     <div>
         <a href="/" class="button">Browse the Photos</a>
-        <a webc:if="profile.website.length" :href="profile.website" rel="me external" class="button button--secondary">Visit my Website</a>
+        <a webc:if="profile.website.length" :href="profile.website" rel="me
+        external" class="button button--secondary">Visit my Website</a>
     </div>
 </section>
