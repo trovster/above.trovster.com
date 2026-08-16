@@ -4,6 +4,15 @@ enabled: 1
 title: Caistor
 src: image.webp
 alt: Aerial photograph of the church in Caistor, Lincolnshire.
+images:
+  - src: 1.jpg
+    enabled: 1
+  - src: 2.jpg
+    enabled: 1
+  - src: 3.jpg
+    enabled: 1
+  - src: 4.jpg
+    enabled: 1
 category: Church
 meta:
   Name: St Peter and St Paul
