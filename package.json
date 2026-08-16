@@ -23,9 +23,10 @@
     "prepare": "npm run hooks:install",
     "hooks:install": "git config core.hooksPath .githooks",
     "prestart": "npm run clean",
-    "start": "eleventy $npm_config_pathprefix --serve --quiet",
+    "start": "eleventy $npm_config_pathprefix --serve --quiet --incremental",
     "prebuild": "npm run clean",
     "build": "npm run image:process:photos && eleventy $npm_config_pathprefix",
+    "serve": "http-server dist -o",
     "image:metadata": "node scripts/update-photo-metadata.js",
     "image:process": "node scripts/process-image.js",
     "image:process:photos": "node scripts/process-photo-images.js",
@@ -50,6 +51,7 @@
   },
   "dependencies": {
     "@googlemaps/markerclusterer": "^2.6.2",
+    "http-server": "^14.1.1",
     "pannellum": "^2.5.7"
   }
 }
