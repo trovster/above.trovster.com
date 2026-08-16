@@ -21,7 +21,7 @@
             :data-url="photo.url"
             :data-thumbnail="photo.thumbnail"
         >
-            <img :src="photo.src" :alt="photo.alt" width="800" loading="eager" decoding="async" :eleventy:output="photo.url" />
+            <img :src="photo.src" :alt="photo.alt" width="800" loading="eager" :eleventy:output="photo.url" />
         </li>
     </ol>
 
@@ -54,7 +54,7 @@
 
         <div class="map-popover__body">
             <h2 id="map-popover-title" data-map-popover-title></h2>
-            <a class="button" data-map-popover-link href="#">View Photo</a>
+            <a class="button" href="#" data-map-popover-link>View</a>
         </div>
     </dialog>
 </section>

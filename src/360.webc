@@ -1,5 +1,5 @@
 <section class="gallery" aria-labelledby="gallery-title">
-    <header>
+    <header webc:if="pagination.pageNumber === 0">
         <p class="lede">
             <strong>360 aerial</strong> photography from around Lincolnshire.
             Drag and rotate the images to explore the landscape from above.

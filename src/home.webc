@@ -1,5 +1,5 @@
 <section class="gallery" aria-labelledby="gallery-title">
-    <header>
+    <header webc:if="pagination.pageNumber === 0">
         <p class="lede">
             Aerial landscape photography, from around Lincolnshire,
             captured by <strong @text="profile.name"></strong>.

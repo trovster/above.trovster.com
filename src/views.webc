@@ -1,5 +1,5 @@
 <section class="gallery" aria-labelledby="gallery-title">
-    <header>
+    <header webc:if="pagination.pageNumber === 0">
         <p class="lede">
             <strong>More scenic views</strong> from around Lincolnshire.
             Swipe through each set to see more of the place.
