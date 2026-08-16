@@ -1224,12 +1224,19 @@
         inset: 0;
         z-index: 10;
         box-sizing: border-box;
-        inline-size: min(calc(100% - (2 * var(--page-padding))), 64rem);
-        block-size: min(calc(100% - (2 * var(--page-padding))), 90svh);
+        block-size: min(calc(100% - (2 * var(--page-padding))), 100svw);
+        width: fit-content;
         margin: auto;
         border: 0;
         background: var(--color-surface);
         padding: 0;
+    }
+
+    @supports (min-block-size: 100dvh) {
+        .view-popover {
+            block-size: min(calc(100% - (2 * var(--page-padding))), 100dvw);
+            width: fit-content;
+        }
     }
 
     .view-popover:popover-open {
