@@ -74,9 +74,6 @@ const buildGallery = async (photo) => {
         return null
     }
 
-    // @todo temporarily disable the gallery, until a better implementation has been built.
-    return null;
-
     return {
         images: await galleryImages(photo),
     }
