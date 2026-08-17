@@ -8,9 +8,18 @@ panorama:
   enabled: 1
   src: panorama.webp
   alt: 360 aerial photograph of Swallow, Lincolnshire.
+category: Church
+meta:
+  Name: Holy Trinity
+  Listing: Grade II
+  Type: Church
+  Built: 1868
 location:
   name: Swallow
   region: Lincolnshire, England
   latitude: 53.510527
   longitude: -0.227787
+wikipedia:
+  title: "Swallow"
+  url: "https://en.wikipedia.org/wiki/Swallow,_Lincolnshire"
 ---
