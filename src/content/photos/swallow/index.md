@@ -20,6 +20,6 @@ location:
   latitude: 53.510527
   longitude: -0.227787
 wikipedia:
-  title: "Swallow"
+  title: Swallow
   url: "https://en.wikipedia.org/wiki/Swallow,_Lincolnshire"
 ---
