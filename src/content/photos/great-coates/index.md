@@ -4,6 +4,10 @@ enabled: 1
 title: Great Coates
 src: image.webp
 alt: Aerial photograph of the church in Great Coates, Lincolnshire.
+panorama:
+  enabled: 1
+  src: panorama.webp
+  alt: 360 aerial photograph of Great Coates, Lincolnshire.
 category: Church
 meta:
   Name: Great Coates

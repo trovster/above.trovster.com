@@ -4,6 +4,10 @@ enabled: 1
 title: Healing
 src: image.webp
 alt: Aerial photograph of the church in Healing, Lincolnshire.
+panorama:
+  enabled: 1
+  src: panorama.webp
+  alt: 360 aerial photograph of Healing, Lincolnshire.
 category: Church
 meta:
   Name: St Peter & St Paul

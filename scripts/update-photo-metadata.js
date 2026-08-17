@@ -11,7 +11,7 @@ import exifr from "exifr"
 
 const execFileAsync = promisify(execFile)
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
-const photoRoots = [path.join(projectRoot, "src/content/photos"), path.join(projectRoot, "src/content/360")]
+const photoRoots = [path.join(projectRoot, "src/content/photos")]
 const photoRootPaths = photoRoots.map((root) => path.relative(projectRoot, root))
 const metadataExtensions = new Set([".jpg", ".jpeg", ".webp", ".tif", ".tiff", ".heic", ".heif", ".png"])
 const originalImageExtensions = new Set([".jpg", ".jpeg", ".tif", ".tiff", ".heic", ".heif", ".png"])
@@ -25,7 +25,7 @@ Examples:
   npm run image:metadata -- --all
   npm run image:metadata -- src/content/photos/beelsby
 
-By default, git status is used to find new images in src/content/photos and src/content/360 and
+By default, git status is used to find new images in src/content/photos and
 update the matching index.md front matter with EXIF date, latitude, and
 longitude.
 
@@ -228,13 +228,28 @@ const chooseMetadataImage = (files) =>
         return rank === 0 ? first.localeCompare(second) : rank
     })[0]
 
-const discoverPhotoDirectories = async ({ inputs, options }) => {
+const isPanoramaImage = (file) => path.basename(file, path.extname(file)).toLowerCase() === "panorama"
+
+const targetsForDirectory = async (directory) => {
+    const images = await collectImageFiles(directory)
+    const standard = chooseMetadataImage(images.filter((image) => !isPanoramaImage(image)))
+
+    return standard ? [{ directory, image: standard }] : []
+}
+
+const uniqueTargets = (targets) => [...new Map(targets.map((target) => [target.image, target])).values()]
+
+const targetsForDirectories = async (directories) => uniqueTargets((await Promise.all(directories.map(targetsForDirectory))).flat())
+
+const discoverPhotoTargets = async ({ inputs, options }) => {
     if (options.all) {
-        return (await Promise.all(photoRoots.map(collectPhotoDirectories))).flat()
+        const directories = (await Promise.all(photoRoots.map(collectPhotoDirectories))).flat()
+
+        return targetsForDirectories(directories)
     }
 
     if (inputs.length) {
-        const directories = []
+        const targets = []
 
         for (const input of inputs) {
             if (!(await pathExists(input))) {
@@ -244,7 +259,7 @@ const discoverPhotoDirectories = async ({ inputs, options }) => {
             const stat = await fs.stat(input)
 
             if (stat.isDirectory()) {
-                directories.push(...(await collectPhotoDirectories(input)))
+                targets.push(...(await targetsForDirectories(await collectPhotoDirectories(input))))
                 continue
             }
 
@@ -255,22 +270,16 @@ const discoverPhotoDirectories = async ({ inputs, options }) => {
             const directory = photoDirectoryFor(input)
 
             if (!directory) {
-                throw new CliError(`Image is not inside a src/content/photos/<name> or src/content/360/<name> directory: ${formatPath(input)}`)
+                throw new CliError(`Image is not inside a src/content/photos/<name> directory: ${formatPath(input)}`)
             }
 
-            directories.push(directory)
+            targets.push({ directory, image: input })
         }
 
-        return [...new Set(directories)]
+        return uniqueTargets(targets)
     }
 
-    return [...new Set((await collectNewImageFilesFromGit()).map(photoDirectoryFor).filter(Boolean))]
-}
-
-const readMetadataImageForDirectory = async (directory) => {
-    const images = await collectImageFiles(directory)
-
-    return chooseMetadataImage(images)
+    return uniqueTargets((await collectNewImageFilesFromGit()).map((image) => ({ directory: photoDirectoryFor(image), image })).filter((target) => target.directory))
 }
 
 const parseMetadata = async (image) => {
@@ -424,15 +433,15 @@ const updateFrontMatter = (frontMatter, fields) => {
     return lines.join("\n")
 }
 
-const updatePhotoMarkdown = async (directory, options) => {
+const updatePhotoMarkdown = async ({ directory, image }, options) => {
     const markdownPath = path.join(directory, "index.md")
-    const image = await readMetadataImageForDirectory(directory)
 
-    if (!image) {
+    if (isPanoramaImage(image)) {
         return {
             directory,
+            image,
             skipped: true,
-            reason: "no supported image found",
+            reason: "panorama metadata is inherited from the main photo",
         }
     }
 
@@ -523,15 +532,15 @@ const main = async () => {
         return
     }
 
-    const directories = await discoverPhotoDirectories({ inputs, options })
+    const targets = await discoverPhotoTargets({ inputs, options })
 
-    if (directories.length === 0) {
+    if (targets.length === 0) {
         console.log("No new photo images found in git status.")
         return
     }
 
-    for (const directory of directories.sort((first, second) => first.localeCompare(second))) {
-        printResult(await updatePhotoMarkdown(directory, options), options)
+    for (const target of targets.sort((first, second) => first.image.localeCompare(second.image))) {
+        printResult(await updatePhotoMarkdown(target, options), options)
     }
 }
 

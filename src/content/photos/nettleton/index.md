@@ -4,6 +4,10 @@ enabled: 1
 title: Nettleton
 src: image.webp
 alt: Aerial photograph of the church in Nettleton, Lincolnshire.
+panorama:
+  enabled: 1
+  src: panorama.webp
+  alt: 360 aerial photograph of Nettleton, Lincolnshire.
 category: Church
 meta:
   Name: St John

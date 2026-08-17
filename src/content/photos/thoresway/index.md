@@ -4,6 +4,10 @@ enabled: 1
 title: Thoresway
 src: image.webp
 alt: Aerial photograph of the church in Thoresway, Lincolnshire.
+panorama:
+  enabled: 1
+  src: panorama.webp
+  alt: 360 aerial photograph of Thoresway, Lincolnshire.
 images:
   - src: 1.jpg
     enabled: 0

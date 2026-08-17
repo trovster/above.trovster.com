@@ -23,6 +23,8 @@ const formatCoordinate = (value) => value.toFixed(4)
 
 const isEnabled = (value) => Number(value) === 1
 
+const isObject = (value) => value && typeof value === "object" && !Array.isArray(value)
+
 const normalizeMeta = (meta) => {
     if (!meta || typeof meta !== "object" || Array.isArray(meta)) {
         return []
@@ -56,16 +58,22 @@ const buildMap = (location) => {
     }
 }
 
-const findPanorama = (panoramas, photo) => panoramas.find((panorama) => panorama.page.fileSlug === photo.page.fileSlug) ?? null
+const panoramaData = (photo) => (isObject(photo.data.panorama) ? photo.data.panorama : null)
 
-const buildPanoramaReference = (panorama) => {
-    if (!panorama) {
+const isPanoramaEnabled = (panorama) => panorama && isEnabled(panorama.enabled) && panorama.src
+
+const panoramaUrl = (photo) => `/360/${photo.page.fileSlug}/`
+
+const buildPanoramaReference = (photo) => {
+    const panorama = panoramaData(photo)
+
+    if (!isPanoramaEnabled(panorama)) {
         return null
     }
 
     return {
-        url: panorama.url,
-        title: panorama.data.title,
+        url: panoramaUrl(photo),
+        title: photo.data.title,
     }
 }
 
@@ -79,10 +87,54 @@ const buildGallery = async (photo) => {
     }
 }
 
-const createPhotoCollection = async (api, { glob, panoramaGlob }) => {
-    const photos = api.getFilteredByGlob(glob).filter((photo) => isEnabled(photo.data.enabled))
+const panoramaPhoto = (photo) => {
+    const panorama = panoramaData(photo)
 
-    const panoramas = panoramaGlob ? api.getFilteredByGlob(panoramaGlob).filter((photo) => isEnabled(photo.data.enabled)) : []
+    if (!isPanoramaEnabled(panorama)) {
+        return null
+    }
+
+    return {
+        date: photo.date,
+        data: {
+            ...panorama,
+            location: photo.data.location,
+            title: photo.data.title,
+            viewer: "pannellum",
+        },
+        filePathStem: photo.filePathStem,
+        inputPath: photo.inputPath,
+        page: photo.page,
+        url: panoramaUrl(photo),
+    }
+}
+
+const standardPhoto = (photo) => {
+    if (!isEnabled(photo.data.enabled)) {
+        return null
+    }
+
+    return {
+        date: photo.date,
+        data: {
+            ...photo.data,
+            panorama: buildPanoramaReference(photo),
+        },
+        filePathStem: photo.filePathStem,
+        inputPath: photo.inputPath,
+        page: photo.page,
+        url: photo.url,
+    }
+}
+
+const byDate = (first, second) => first.date.getTime() - second.date.getTime()
+
+const createPhotoCollection = async (api, { glob, panorama = false }) => {
+    const photos = api
+        .getFilteredByGlob(glob)
+        .map((photo) => (panorama ? panoramaPhoto(photo) : standardPhoto(photo)))
+        .filter(Boolean)
+        .sort(byDate)
 
     return Promise.all(
         photos.map(async (photo, index) => {
@@ -106,7 +158,6 @@ const createPhotoCollection = async (api, { glob, panoramaGlob }) => {
                     src,
                     previous,
                     next,
-                    panorama: buildPanoramaReference(findPanorama(panoramas, photo)),
                     gallery: await buildGallery(photo),
                 },
             }

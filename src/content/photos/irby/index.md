@@ -4,6 +4,10 @@ enabled: 1
 title: Irby
 src: image.webp
 alt: Aerial photograph of the church in Irby, Lincolnshire.
+panorama:
+  enabled: 1
+  src: panorama.webp
+  alt: 360 aerial photograph of Irby, Lincolnshire.
 category: Church
 meta:
   Name: Saint Andrew

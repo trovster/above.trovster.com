@@ -391,8 +391,21 @@ ${innerSvg}
 
 const formatPath = (file) => path.relative(process.cwd(), file) || "."
 
+const optionsForInput = (input, options) => {
+    if (path.basename(input, path.extname(input)).toLowerCase() !== "panorama") {
+        return options
+    }
+
+    return {
+        ...options,
+        maxWidth: 6000,
+        watermark: null,
+    }
+}
+
 const processImage = async (input, options) => {
     const inputPath = path.resolve(input)
+    options = optionsForInput(inputPath, options)
     const outputPath = resolveOutputPath(inputPath, options)
 
     if (!(await pathExists(inputPath))) {

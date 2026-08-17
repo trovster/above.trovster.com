@@ -4,6 +4,10 @@ enabled: 1
 title: Little Coates
 src: image.webp
 alt: Aerial photograph of the church in Little Coates, Lincolnshire.
+panorama:
+  enabled: 1
+  src: panorama.webp
+  alt: 360 aerial photograph of Little Coates, Lincolnshire.
 category: Church
 meta:
   Name: St Michael

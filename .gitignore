@@ -21,7 +21,6 @@ package-lock.json
 
 # Generated photo derivatives
 src/content/photos/**/*.webp
-src/content/360/**/*.webp
 
 # Editors
 .vscode

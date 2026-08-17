@@ -22,11 +22,13 @@ const truncate = (value, length = 255) => {
 
 const isEnabled = (value) => Number(value) === 1
 
+const hasEnabledPanorama = (panorama) => panorama && typeof panorama === "object" && isEnabled(panorama.enabled) && panorama.src
+
 export default {
-    layout: "photo.webc",
     permalink: ({ enabled, page }) => (isEnabled(enabled) ? `/${page.fileSlug}/` : false),
     eleventyComputed: {
-        eleventyExcludeFromCollections: ({ enabled }) => !isEnabled(enabled),
+        layout: ({ enabled }) => (isEnabled(enabled) ? "photo.webc" : false),
+        eleventyExcludeFromCollections: ({ enabled, panorama }) => !isEnabled(enabled) && !hasEnabledPanorama(panorama),
         photo: async ({ collections, enabled, page }) => {
             if (!isEnabled(enabled)) {
                 return null

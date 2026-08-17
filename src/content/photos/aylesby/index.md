@@ -4,6 +4,10 @@ enabled: 1
 title: Aylesby
 src: image.webp
 alt: Aerial photograph of the church in Aylesby, Lincolnshire.
+panorama:
+  enabled: 1
+  src: panorama.webp
+  alt: 360 aerial photograph of Aylesby, Lincolnshire.
 images:
   - src: 1.jpg
     enabled: 0

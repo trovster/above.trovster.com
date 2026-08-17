@@ -2,31 +2,32 @@ import "dotenv/config"
 
 import { readdirSync, readFileSync } from "node:fs"
 import { join } from "node:path"
+import matter from "gray-matter"
 import collections from "./11ty/collections/index.js"
 import filters from "./11ty/filters/index.js"
 import functions from "./11ty/functions/index.js"
 import plugins from "./11ty/plugins/index.js"
 import shortcodes from "./11ty/shortcodes/index.js"
 
-const photoDirectories = ["src/content/photos", "src/content/360"]
+const photosDirectory = "src/content/photos"
 
-const isPhotoEnabled = (source) => {
-    const enabled = source.match(/^enabled:\s*["']?([01])["']?\s*$/m)
+const isEnabled = (value) => Number(value) === 1
 
-    return Number(enabled?.[1]) === 1
-}
+const hasEnabledPanorama = (panorama) => panorama && typeof panorama === "object" && isEnabled(panorama.enabled) && panorama.src
 
-const getDisabledPhotoFiles = () => {
-    return photoDirectories.flatMap((directory) => {
-        try {
-            return readdirSync(directory, { withFileTypes: true })
-                .filter((entry) => entry.isDirectory())
-                .map((entry) => join(directory, entry.name, "index.md"))
-                .filter((file) => !isPhotoEnabled(readFileSync(file, "utf8")))
-        } catch {
-            return []
-        }
-    })
+const getUnpublishedPhotoFiles = () => {
+    try {
+        return readdirSync(photosDirectory, { withFileTypes: true })
+            .filter((entry) => entry.isDirectory())
+            .map((entry) => join(photosDirectory, entry.name, "index.md"))
+            .filter((file) => {
+                const { data } = matter(readFileSync(file, "utf8"))
+
+                return !isEnabled(data.enabled) && !hasEnabledPanorama(data.panorama)
+            })
+    } catch {
+        return []
+    }
 }
 
 export default (config) => {
@@ -42,7 +43,7 @@ export default (config) => {
 
     config.addLayoutAlias("default", "layouts/default.webc")
 
-    for (const file of getDisabledPhotoFiles()) {
+    for (const file of getUnpublishedPhotoFiles()) {
         config.ignores.add(file)
     }
 
@@ -59,7 +60,6 @@ export default (config) => {
             layouts: "layouts",
             includes: "includes",
         },
-        markdownTemplateEngine: "webc",
         htmlTemplateEngine: "webc",
     }
 }

@@ -4,6 +4,10 @@ enabled: 1
 title: Beelsby
 src: image.webp
 alt: Aerial photograph of the church in Beelsby, Lincolnshire.
+panorama:
+  enabled: 1
+  src: panorama.webp
+  alt: 360 aerial photograph of Beelsby, Lincolnshire.
 images:
   - src: 1.jpg
     enabled: 0

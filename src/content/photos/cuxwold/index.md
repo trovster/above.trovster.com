@@ -4,6 +4,10 @@ enabled: 1
 title: Cuxwold
 src: image.webp
 alt: Aerial photograph of the church in Cuxwold, Lincolnshire.
+panorama:
+  enabled: 1
+  src: panorama.webp
+  alt: 360 aerial photograph of Cuxwold, Lincolnshire.
 images:
   - src: 1.jpg
     enabled: 0

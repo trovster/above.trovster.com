@@ -85,6 +85,10 @@ enabled: 1
 title: Beelsby
 src: image.webp
 alt: Aerial photograph of the church in Beelsby, Lincolnshire.
+panorama:
+  enabled: 1
+  src: panorama.webp
+  alt: 360 aerial photograph of Beelsby, Lincolnshire.
 category: Church
 meta:
   Name: St. Andrew
@@ -108,6 +112,9 @@ content.
 
 - `enabled` — set to `1` to publish the photo, or `0` to keep it out of the
   site while you're still working on it.
+- `panorama` — optional 360 photo data used to generate the separate 360
+  collection and `/360/<photo>/` detail page. Its source image should be named
+  `panorama.jpg`; set its nested `enabled` value to `0` to keep it unpublished. Panorama dates, titles, and locations are inherited from the main photo.
 - `category` — used to group and filter photos (for example `Church`,
   `Architecture`, `Maritime`).
 - `meta` — optional key/value pairs shown alongside the photo (for listed
@@ -142,6 +149,9 @@ Process every original JPG/JPEG image in `src/content/photos/` with:
 ```bash
 npm run image:process:photos --
 ```
+
+Files named `panorama.jpg` or `panorama.jpeg` are resized to 6000px and are
+always processed without a watermark.
 
 Use `--dry-run` to preview the files and output paths without writing images.
 

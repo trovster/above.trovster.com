@@ -4,6 +4,10 @@ enabled: 1
 title: Rothwell
 src: image.webp
 alt: Aerial photograph of the church in Rothwell, Lincolnshire.
+panorama:
+  enabled: 1
+  src: panorama.webp
+  alt: 360 aerial photograph of Rothwell, Lincolnshire.
 category: Church
 meta:
   Name: St Mary Magdalene

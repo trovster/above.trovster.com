@@ -9,8 +9,7 @@ import { CliError, parseArgs, printResult, processImage } from "./process-image.
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const photosDirectory = path.join(projectRoot, "src/content/photos")
-const panoramasDirectory = path.join(projectRoot, "src/content/360")
-const defaultPhotosDirectories = [photosDirectory, panoramasDirectory]
+const defaultPhotosDirectories = [photosDirectory]
 const jpegExtensions = new Set([".jpg", ".jpeg"])
 
 const usage = `Usage:
@@ -24,9 +23,9 @@ Examples:
 Scans each directory recursively for original JPG/JPEG images and processes each
 one with the same options as npm run image:process. Only main images are
 processed; numbered images (1.jpg, 2.jpg, …) are treated as carousel images and
-skipped. Images in src/content/360 are always resized to 6000px wide and
-processed without a watermark. --output is not supported for batch processing
-because each image writes its own .webp file beside the source.
+skipped. Images named panorama.jpg or panorama.jpeg are always resized to
+6000px wide and processed without a watermark. --output is not supported for
+batch processing because each image writes its own .webp file beside the source.
 `
 
 const isJpeg = (file) => jpegExtensions.has(path.extname(file).toLowerCase())
@@ -66,14 +65,10 @@ const collectJpegs = async (directory) => {
 
 const unique = (files) => [...new Set(files)]
 
-const isInside = (file, directory) => {
-    const relative = path.relative(directory, file)
-
-    return relative && !relative.startsWith("..") && !path.isAbsolute(relative)
-}
+const isPanorama = (file) => path.basename(file, path.extname(file)).toLowerCase() === "panorama"
 
 const optionsForImage = (image, options) => {
-    if (isInside(image, panoramasDirectory)) {
+    if (isPanorama(image)) {
         return {
             ...options,
             maxWidth: 6000,
