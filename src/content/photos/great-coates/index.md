@@ -8,6 +8,17 @@ panorama:
   enabled: 1
   src: panorama.webp
   alt: 360 aerial photograph of Great Coates, Lincolnshire.
+images:
+  - src: 1.jpg
+    enabled: 1
+  - src: 2.jpg
+    enabled: 1
+  - src: 3.jpg
+    enabled: 1
+  - src: 4.jpg
+    enabled: 1
+  - src: 5.jpg
+    enabled: 1
 category: Church
 meta:
   Name: Great Coates
