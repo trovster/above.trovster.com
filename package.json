@@ -19,6 +19,7 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
+    "create": "node scripts/create-photo.js",
     "prepare": "npm run hooks:install",
     "hooks:install": "git config core.hooksPath .githooks",
     "prestart": "npm run clean",

@@ -75,8 +75,16 @@ local `.env` only, never as repository secrets or in the workflow.
 
 ## Adding Photos
 
-Create a new folder in `src/content/photos/` for each image. Add the photo file and an
-`index.md` file beside it.
+Create a new photo folder and basic unpublished `index.md` from its title:
+
+```bash
+npm run create -- Aylesby
+npm run create -- "Cleethorpes Country Park"
+```
+
+The command converts the title into a kebab-case folder name inside
+`src/content/photos/`. Add the photo file beside the generated `index.md`, then
+complete its front matter and set `enabled` to `1` when it is ready to publish.
 
 ```md
 ---
