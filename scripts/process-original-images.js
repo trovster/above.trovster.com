@@ -17,6 +17,7 @@ const jpegOptions = Object.freeze({
     chromaSubsampling: "4:4:4",
     quality: 100,
 })
+const metadataFields = Object.freeze(["exif", "icc", "iptc", "xmp"])
 
 const usage = `Usage:
   npm run image:process:originals -- [photos-dir ...] [options]
@@ -105,6 +106,19 @@ const collectOriginalImages = async (directory) => {
     return files
 }
 
+const metadataPresent = (value) => value != null && value.length > 0
+
+const verifyMetadata = async (file, sourceMetadata) => {
+    const outputMetadata = await sharp(file, { failOn: "warning" }).metadata()
+    const missingMetadata = metadataFields.filter(
+        (field) => metadataPresent(sourceMetadata[field]) && !metadataPresent(outputMetadata[field]),
+    )
+
+    if (missingMetadata.length > 0) {
+        throw new CliError(`Resized image is missing source metadata (${missingMetadata.join(", ")}): ${formatPath(file)}`)
+    }
+}
+
 const resizeOriginalImage = async (file, { dryRun = false } = {}) => {
     const inputPath = path.resolve(file)
     const definition = originalImageType(inputPath)
@@ -157,10 +171,11 @@ const resizeOriginalImage = async (file, { dryRun = false } = {}) => {
                 width: definition.maxWidth,
                 withoutEnlargement: true,
             })
-            .keepMetadata()
             .jpeg(jpegOptions)
+            .keepMetadata()
             .toFile(temporaryPath)
 
+        await verifyMetadata(temporaryPath, metadata)
         await fs.chmod(temporaryPath, sourceStat.mode & 0o7777)
         await fs.rename(temporaryPath, inputPath)
     } catch (error) {
@@ -256,4 +271,4 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     main().catch(handleCliError)
 }
 
-export { collectOriginalImages, jpegOptions, originalImageType, parseArgs, resizeOriginalImage }
+export { collectOriginalImages, jpegOptions, metadataFields, originalImageType, parseArgs, resizeOriginalImage, verifyMetadata }
