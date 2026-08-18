@@ -21,7 +21,7 @@
             :data-url="photo.url"
             :data-thumbnail="photo.thumbnail"
         >
-            <img :src="photo.src" :alt="photo.alt" width="800" loading="eager" :eleventy:output="photo.url" />
+            <img :src="photo.src" :alt="photo.alt" width="800" height="450" loading="eager" :eleventy:output="photo.url" />
         </li>
     </ol>
 
