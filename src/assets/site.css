@@ -1248,35 +1248,67 @@
     }
 
     .view-popover {
+        --view-popover-available-width: calc(100vw - (2 * var(--page-padding)));
+        --view-popover-available-height: calc(100vh - (2 * var(--page-padding)));
+
         position: fixed;
         inset: 0;
         z-index: 10;
+        display: none;
         box-sizing: border-box;
-        block-size: min(calc(100% - (2 * var(--page-padding))), 100svw);
-        width: fit-content;
+        width: min(1000px, var(--view-popover-available-width));
+        height: auto;
+        max-width: var(--view-popover-available-width);
+        max-height: var(--view-popover-available-height);
+        aspect-ratio: 3 / 4;
         margin: auto;
+        overflow: visible;
         border: 0;
         background: var(--color-surface);
         padding: 0;
+        overscroll-behavior: none;
+        pointer-events: auto;
+        touch-action: none;
     }
 
-    @supports (min-block-size: 100dvh) {
+    @supports (height: 100svh) {
         .view-popover {
-            block-size: min(calc(100% - (2 * var(--page-padding))), 100dvw);
-            width: fit-content;
+            --view-popover-available-width: calc(
+                100svw - max(var(--page-padding), env(safe-area-inset-left)) - max(var(--page-padding), env(safe-area-inset-right))
+            );
+            --view-popover-available-height: calc(
+                100svh - max(var(--page-padding), env(safe-area-inset-top)) - max(var(--page-padding), env(safe-area-inset-bottom))
+            );
+        }
+    }
+
+    @media (min-aspect-ratio: 3 / 4) {
+        .view-popover {
+            width: auto;
+            height: min(1333px, var(--view-popover-available-height));
         }
     }
 
     .view-popover:popover-open {
-        display: grid;
+        display: block;
     }
 
-    body:has(:popover-open) {
-        overflow-y: hidden;
+    html:has(.view-popover:popover-open),
+    body:has(.view-popover:popover-open) {
+        overflow: hidden;
+        overscroll-behavior: none;
+    }
+
+    body:has(.view-popover:popover-open) {
+        touch-action: none;
     }
 
     body:has(:popover-open) :is(button, a, .photo-carousel, .swiper-slide) {
         pointer-events: none;
+    }
+
+    .swiper-no-swiping {
+        cursor: default;
     }
 
     body:has(:popover-open) [popover] :is(button, a) {
@@ -1297,8 +1329,8 @@
     .view-popover__close {
         position: absolute;
         z-index: 100;
-        inset-block-start: var(--space-s);
-        inset-inline-end: var(--space-s);
+        inset-block-start: var(--space-xs);
+        inset-inline-end: var(--space-xs);
     }
 
     .photo-gallery.photo-gallery {
@@ -1308,6 +1340,12 @@
     }
 
     @media (min-width: 52.001rem) {
+        .view-popover__close {
+            inset-block-start: 0;
+            inset-inline-end: 0;
+            translate: 50% -50%;
+        }
+
         .photo-carousel .swiper-slide {
             inline-size: 44%;
             max-inline-size: 30rem;

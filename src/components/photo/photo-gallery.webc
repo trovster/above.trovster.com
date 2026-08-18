@@ -4,6 +4,7 @@
             <button
                 type="button"
                 class="photo-carousel__item"
+                aria-haspopup="dialog"
                 :popovertarget="`${id}-view-${image.number}`"
                 popovertargetaction="show"
             >
@@ -24,11 +25,16 @@
                 <span class="u-visually-hidden" @text="`Open photo ${image.number} of ${images.length}`"></span>
             </button>
 
-            <dialog :id="`${id}-view-${image.number}`" popover="auto" class="view-popover">
+            <dialog
+                :id="`${id}-view-${image.number}`"
+                popover="auto"
+                class="view-popover swiper-no-swiping"
+                :aria-label="`Expanded view: ${image.alt}`"
+            >
                 <button
                     type="button"
                     class="metadata-button view-popover__close"
-                    aria-label="Close"
+                    aria-label="Close expanded photo"
                     :popovertarget="`${id}-view-${image.number}`"
                     popovertargetaction="hide"
                 >
