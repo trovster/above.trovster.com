@@ -38,10 +38,6 @@ jobs:
       - name: Install
         run: npm install
 
-      - name: Process Photos
-        run: npm run image:process:photos
-        timeout-minutes: 5
-
       - name: Build
         run: npm run ci
         timeout-minutes: 20

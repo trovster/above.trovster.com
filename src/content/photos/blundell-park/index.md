@@ -2,7 +2,7 @@
 date: "2026-07-03T14:57:41+00:00"
 enabled: 1
 title: Blundell Park
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of Blundell Park in Cleethorpes.
 images:
   - src: 1.jpg

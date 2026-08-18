@@ -2,11 +2,11 @@
 date: "2026-08-09T11:32:09+00:00"
 enabled: 1
 title: Thoresway
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of the church in Thoresway, Lincolnshire.
 panorama:
   enabled: 1
-  src: panorama.webp
+  src: panorama.jpg
   alt: 360 aerial photograph of Thoresway, Lincolnshire.
 images:
   - src: 1.jpg

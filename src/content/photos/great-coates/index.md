@@ -2,11 +2,11 @@
 date: "2026-08-16T14:30:20+00:00"
 enabled: 1
 title: Great Coates
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of the church in Great Coates, Lincolnshire.
 panorama:
   enabled: 1
-  src: panorama.webp
+  src: panorama.jpg
   alt: 360 aerial photograph of Great Coates, Lincolnshire.
 images:
   - src: 1.jpg

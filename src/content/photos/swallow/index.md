@@ -2,11 +2,11 @@
 date: "2026-07-30T16:35:56+00:00"
 enabled: 0
 title: Swallow
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of the church in Swallow, Lincolnshire.
 panorama:
   enabled: 1
-  src: panorama.webp
+  src: panorama.jpg
   alt: 360 aerial photograph of Swallow, Lincolnshire.
 category: Church
 meta:

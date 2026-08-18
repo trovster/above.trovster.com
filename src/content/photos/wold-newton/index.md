@@ -2,7 +2,7 @@
 date: "2026-04-08T12:00:00+00:00"
 enabled: 1
 title: Wold Newton
-src: image.webp
+src: image.jpg
 alt: The church in Wold Newton, Lincolnshire.
 images:
   - src: 1.jpg

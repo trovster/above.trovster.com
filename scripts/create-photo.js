@@ -59,11 +59,11 @@ const wikipediaUrlFor = (title) => `https://en.wikipedia.org/wiki/${encodeURICom
 const markdownFor = (title) => `---
 enabled: 0
 title: ${JSON.stringify(title)}
-src: image.webp
+src: image.jpg
 alt: ${JSON.stringify(`Aerial photograph of the church in ${title}, Lincolnshire.`)}
 panorama:
   enabled: 0
-  src: panorama.webp
+  src: panorama.jpg
   alt: ${JSON.stringify(`360 aerial photograph of ${title}, Lincolnshire.`)}
 images:
   - src: 1.jpg

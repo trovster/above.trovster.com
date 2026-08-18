@@ -2,7 +2,7 @@
 date: "2025-10-20T15:26:05+00:00"
 enabled: 1
 title: Victoria Flour Mill
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of Victoria Flour Mill in Grimsby.
 category: Architecture
 meta:

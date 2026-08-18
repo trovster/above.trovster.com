@@ -17,7 +17,15 @@
                         aria-hidden="true"
                     ></canvas>
 
-                    <img :src="image.src" :alt="image.alt" width="1000" height="1333" :eleventy:output="image.url" />
+                    <img
+                        :src="image.src"
+                        :alt="image.alt"
+                        width="1200"
+                        height="1600"
+                        eleventy:widths="320,400,500,800,1200"
+                        sizes="100vw"
+                        :eleventy:output="image.url"
+                    />
 
                     <span class="photo-carousel__number" aria-hidden="true" @text="image.number"></span>
                 </figure>
@@ -46,8 +54,9 @@
                 <img
                     :src="image.src"
                     :alt="image.alt"
-                    width="1600"
-                    eleventy:widths="360,500,600,1000"
+                    width="1200"
+                    height="1600"
+                    eleventy:widths="400,800,1200,1400,auto"
                     sizes="100vw"
                     :eleventy:output="image.url"
                 />

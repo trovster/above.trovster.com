@@ -5,6 +5,7 @@ import EleventyVitePlugin from "@11ty/eleventy-plugin-vite"
 import EleventyWebcPlugin from "@11ty/eleventy-plugin-webc"
 import site from "../../src/data/site.js"
 import { applyHtmlBasePathPrefix } from "../utils/html-base.js"
+import transformImage from "../utils/image-transform.js"
 import viteConfig from "../../vite.config.js"
 
 export default (config) => {
@@ -74,6 +75,12 @@ export default (config) => {
             plugin: eleventyImageTransformPlugin,
             options: {
                 formats: ["webp"],
+                sharpWebpOptions: {
+                    effort: 5,
+                    quality: 82,
+                    smartSubsample: true,
+                },
+                transform: transformImage,
                 htmlOptions: {
                     imgAttributes: {
                         loading: "lazy",

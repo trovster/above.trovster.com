@@ -91,11 +91,11 @@ complete its front matter and set `enabled` to `1` when it is ready to publish.
 date: "2026-08-04T16:03:54+00:00"
 enabled: 1
 title: Beelsby
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of the church in Beelsby, Lincolnshire.
 panorama:
   enabled: 1
-  src: panorama.webp
+  src: panorama.jpg
   alt: 360 aerial photograph of Beelsby, Lincolnshire.
 category: Church
 meta:
@@ -133,39 +133,14 @@ content.
 
 ### Processing Photos
 
-Process source photos before referencing them in front-matter:
+Reference the original JPG files directly in front matter. During the Eleventy
+build, primary, panorama, and gallery images produce responsive WebP variants.
+Primary files named `image.jpg` receive the "Above" watermark; panoramas and
+numbered gallery images remain unwatermarked. The build reports each resize,
+format conversion, and watermark operation as it is applied.
 
-```bash
-npm run image:process -- src/content/photos/photo-title/photo.jpg
-```
-
-The command writes an optimized WebP image beside the source, resizes only when
-the image is wider than 2500px, preserves image metadata, and adds the Above SVG
-watermark in the bottom-right corner. Re-run it with options to tune the output:
-
-```bash
-npm run image:process -- src/content/photos/photo-title/photo.jpg --quality 88 --watermark-opacity 0.45 --watermark-width 420 --watermark-margin 80
-```
-
-Add `--watermark-fill` to fill the SVG watermark. It uses `--watermark-color`
-by default, or `--watermark-fill-color` when you want a different fill.
-
-Run `npm run image:process -- --help` for all options.
-
-Process every original JPG/JPEG image in `src/content/photos/` with:
-
-```bash
-npm run image:process:photos --
-```
-
-Files named `panorama.jpg` or `panorama.jpeg` are resized to 6000px and are
-always processed without a watermark.
-
-During the Eleventy build, primary and panorama images also produce responsive
-WebP variants at 400px, 800px, 1200px, and 1400px wide. Their original 2500px
-and 6000px outputs remain available as the largest `srcset` candidates.
-
-Use `--dry-run` to preview the files and output paths without writing images.
+Primary and panorama images produce variants at 400px, 800px, 1200px, and
+1400px wide, plus the original image width as the largest `srcset` candidate.
 
 ### Resizing Committed Originals
 

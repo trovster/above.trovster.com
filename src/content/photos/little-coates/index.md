@@ -2,11 +2,11 @@
 date: "2026-08-16T14:19:54+00:00"
 enabled: 1
 title: Little Coates
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of the church in Little Coates, Lincolnshire.
 panorama:
   enabled: 1
-  src: panorama.webp
+  src: panorama.jpg
   alt: 360 aerial photograph of Little Coates, Lincolnshire.
 images:
   - src: 1.jpg

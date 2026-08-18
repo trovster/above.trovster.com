@@ -2,7 +2,7 @@
 date: "2026-05-16T11:24:35+00:00"
 enabled: 1
 title: Thornton Abbey Gatehouse
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of Thornton Abbey Gatehouse in Lincolnshire.
 images:
   - src: 1.jpg

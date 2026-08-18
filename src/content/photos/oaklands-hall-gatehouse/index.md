@@ -2,7 +2,7 @@
 date: "2026-06-14T15:16:10+00:00"
 enabled: 1
 title: Oaklands Hall Gatehouse
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of Oaklands Hall Gatehouse near Laceby.
 category: Architecture
 meta:

@@ -2,7 +2,7 @@
 date: "2026-07-31T17:54:34+00:00"
 enabled: 1
 title: Biscathorpe
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of the church in Biscathorpe, Lincolnshire.
 images:
   - src: 1.jpg

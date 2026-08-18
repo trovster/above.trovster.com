@@ -2,11 +2,11 @@
 date: "2026-08-09T11:53:38+00:00"
 enabled: 1
 title: Rothwell
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of the church in Rothwell, Lincolnshire.
 panorama:
   enabled: 1
-  src: panorama.webp
+  src: panorama.jpg
   alt: 360 aerial photograph of Rothwell, Lincolnshire.
 category: Church
 meta:

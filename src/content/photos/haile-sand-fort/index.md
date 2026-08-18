@@ -2,7 +2,7 @@
 date: "2025-09-26T09:55:35+00:00"
 enabled: 1
 title: Haile Sand Fort
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of Haile Sand Fort in the Humber Estuary.
 category: Architecture
 meta:

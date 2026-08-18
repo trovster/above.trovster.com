@@ -2,7 +2,7 @@
 date: "2026-06-15T17:19:08+00:00"
 enabled: 1
 title: Cleethorpes Country Park
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of Cleethorpes Country Park.
 category: Green Space
 meta:

@@ -2,7 +2,7 @@
 date: "2026-06-28T14:32:05+00:00"
 enabled: 0
 title: Brocklesby Park Mausoleum
-src: image.webp
+src: image.jpg
 alt: Close aerial photograph of Brocklesby Park Mausoleum, Lincolnshire.
 category: Monument
 meta:

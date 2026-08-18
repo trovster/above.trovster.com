@@ -2,7 +2,7 @@
 date: "2025-10-20T15:28:05+00:00"
 enabled: 1
 title: Boats
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of boats at Grimsby Docks.
 category: Maritime
 location:

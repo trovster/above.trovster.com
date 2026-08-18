@@ -2,7 +2,7 @@
 date: "2025-09-30T18:47:43+00:00"
 enabled: 0
 title: Laceby at Night
-src: image.webp
+src: image.jpg
 alt: Night aerial photograph of the church in Laceby, Lincolnshire.
 category: Church
 meta:

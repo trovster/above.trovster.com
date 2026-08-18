@@ -2,11 +2,11 @@
 date: "2026-08-09T10:47:25+00:00"
 enabled: 1
 title: Nettleton
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of the church in Nettleton, Lincolnshire.
 panorama:
   enabled: 1
-  src: panorama.webp
+  src: panorama.jpg
   alt: 360 aerial photograph of Nettleton, Lincolnshire.
 category: Church
 meta:

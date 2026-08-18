@@ -2,11 +2,11 @@
 date: "2026-08-09T10:24:37+00:00"
 enabled: 1
 title: Caistor
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of the church in Caistor, Lincolnshire.
 panorama:
   enabled: 1
-  src: panorama.webp
+  src: panorama.jpg
   alt: 360 aerial photograph of Caistor, Lincolnshire.
 images:
   - src: 1.jpg

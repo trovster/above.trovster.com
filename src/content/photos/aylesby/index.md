@@ -2,11 +2,11 @@
 date: "2026-07-30T15:38:17+00:00"
 enabled: 1
 title: Aylesby
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of the church in Aylesby, Lincolnshire.
 panorama:
   enabled: 1
-  src: panorama.webp
+  src: panorama.jpg
   alt: 360 aerial photograph of Aylesby, Lincolnshire.
 images:
   - src: 1.jpg

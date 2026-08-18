@@ -2,7 +2,7 @@
 date: "2026-06-28T14:04:41+00:00"
 enabled: 1
 title: "Pelham's Pillar"
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of Pelham's Pillar in Lincolnshire.
 images:
   - src: 1.jpg

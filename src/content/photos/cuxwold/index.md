@@ -2,11 +2,11 @@
 date: "2026-08-09T12:07:26+00:00"
 enabled: 1
 title: Cuxwold
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of the church in Cuxwold, Lincolnshire.
 panorama:
   enabled: 1
-  src: panorama.webp
+  src: panorama.jpg
   alt: 360 aerial photograph of Cuxwold, Lincolnshire.
 images:
   - src: 1.jpg

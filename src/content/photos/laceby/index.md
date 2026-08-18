@@ -2,7 +2,7 @@
 date: "2025-09-22T14:30:31+00:00"
 enabled: 0
 title: Laceby
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of the church in Laceby, Lincolnshire.
 category: Church
 meta:

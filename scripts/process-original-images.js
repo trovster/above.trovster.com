@@ -7,17 +7,27 @@ import { fileURLToPath } from "node:url"
 
 import sharp from "sharp"
 
-import { CliError, imageWidths } from "./process-image.js"
-
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const photosDirectory = path.join(projectRoot, "src/content/photos")
 const defaultPhotosDirectories = [photosDirectory]
 const jpegExtensions = new Set([".jpg", ".jpeg"])
+const imageWidths = Object.freeze({
+    gallery: 1200,
+    panorama: 6000,
+    primary: 2500,
+})
 const jpegOptions = Object.freeze({
     chromaSubsampling: "4:4:4",
     quality: 100,
 })
 const metadataFields = Object.freeze(["exif", "icc", "iptc", "xmp"])
+
+class CliError extends Error {
+    constructor(message) {
+        super(message)
+        this.name = "CliError"
+    }
+}
 
 const usage = `Usage:
   npm run image:process:originals -- [photos-dir ...] [options]
@@ -110,9 +120,7 @@ const metadataPresent = (value) => value != null && value.length > 0
 
 const verifyMetadata = async (file, sourceMetadata) => {
     const outputMetadata = await sharp(file, { failOn: "warning" }).metadata()
-    const missingMetadata = metadataFields.filter(
-        (field) => metadataPresent(sourceMetadata[field]) && !metadataPresent(outputMetadata[field]),
-    )
+    const missingMetadata = metadataFields.filter((field) => metadataPresent(sourceMetadata[field]) && !metadataPresent(outputMetadata[field]))
 
     if (missingMetadata.length > 0) {
         throw new CliError(`Resized image is missing source metadata (${missingMetadata.join(", ")}): ${formatPath(file)}`)

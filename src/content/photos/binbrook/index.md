@@ -2,11 +2,11 @@
 date: "2026-07-17T11:07:25+00:00"
 enabled: 1
 title: Binbrook
-src: image.webp
+src: image.jpg
 alt: Aerial photograph of the church in Binbrook, Lincolnshire.
 panorama:
   enabled: 1
-  src: panorama.webp
+  src: panorama.jpg
   alt: 360 aerial photograph of Binbrook, Lincolnshire.
 images:
   - src: 1.jpg
