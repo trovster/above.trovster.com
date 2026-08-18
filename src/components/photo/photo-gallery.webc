@@ -36,12 +36,12 @@
             <dialog
                 :id="`${id}-view-${image.number}`"
                 popover="auto"
-                class="view-popover swiper-no-swiping"
+                class="gallery-popover swiper-no-swiping"
                 :aria-label="`Expanded view: ${image.alt}`"
             >
                 <button
                     type="button"
-                    class="metadata-button view-popover__close"
+                    class="metadata-button gallery-popover__close"
                     aria-label="Close expanded photo"
                     :popovertarget="`${id}-view-${image.number}`"
                     popovertargetaction="hide"
