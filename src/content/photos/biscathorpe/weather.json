@@ -1,0 +1,59 @@
+{
+  "latitude": 53.347733,
+  "longitude": -0.1496582,
+  "elevation": 73,
+  "timezone": "GMT",
+  "utc_offset_seconds": 0,
+  "units": {
+    "time": "iso8601",
+    "weather_code": "wmo code",
+    "temperature_2m": "°C",
+    "apparent_temperature": "°C",
+    "relative_humidity_2m": "%",
+    "cloud_cover": "%",
+    "precipitation": "mm",
+    "rain": "mm",
+    "snowfall": "cm",
+    "snow_depth": "m",
+    "wind_speed_10m": "km/h",
+    "wind_gusts_10m": "km/h",
+    "wind_direction_10m": "°",
+    "visibility": "m",
+    "is_day": ""
+  },
+  "weather": {
+    "time": "2026-07-31T18:00",
+    "weather_code": 1,
+    "temperature_2m": 20.4,
+    "apparent_temperature": 17.2,
+    "relative_humidity_2m": 38,
+    "cloud_cover": 44,
+    "precipitation": 0,
+    "rain": 0,
+    "snowfall": 0,
+    "snow_depth": 0,
+    "wind_speed_10m": 14.4,
+    "wind_gusts_10m": 26.3,
+    "wind_direction_10m": 294,
+    "visibility": 39840,
+    "is_day": 1
+  },
+  "daily_units": {
+    "time": "iso8601",
+    "weather_code": "wmo code",
+    "temperature_2m_max": "°C",
+    "temperature_2m_min": "°C",
+    "sunrise": "iso8601",
+    "sunset": "iso8601",
+    "precipitation_sum": "mm"
+  },
+  "daily": {
+    "time": "2026-07-31",
+    "weather_code": 3,
+    "temperature_2m_max": 21.1,
+    "temperature_2m_min": 11.3,
+    "sunrise": "2026-07-31T04:15",
+    "sunset": "2026-07-31T19:58",
+    "precipitation_sum": 0
+  }
+}

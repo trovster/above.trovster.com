@@ -28,4 +28,7 @@ location:
 wikipedia:
   title: Little Coates
   url: https://en.wikipedia.org/wiki/Little_Coates
+weather:
+  summary: "Overcast, light breeze"
+  temperature: "21°C"
 ---

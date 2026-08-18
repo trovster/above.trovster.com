@@ -9,6 +9,8 @@ import { fileURLToPath } from "node:url"
 
 import exifr from "exifr"
 
+import { describeWeather, fetchWeather, toWeatherPoint } from "./fetch-weather-data.js"
+
 const execFileAsync = promisify(execFile)
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const photoRoots = [path.join(projectRoot, "src/content/photos")]
@@ -27,12 +29,17 @@ Examples:
 
 By default, git status is used to find new images in src/content/photos and
 update the matching index.md front matter with EXIF date, latitude, and
-longitude.
+longitude. When a photo has a date and coordinates, Open-Meteo weather for that
+location and time is stored as weather.json in the photo folder and summarised
+into a weather.summary front matter description. Weather is only fetched when
+weather.json is missing, unless --refresh-weather is passed.
 
 Options:
-  --all       Process every photo directory with an image and index.md.
-  --dry-run   Print changes without writing markdown files.
-  --help      Show this help text.
+  --all               Process every photo directory with an image and index.md.
+  --dry-run           Print changes without writing markdown or weather files.
+  --refresh-weather   Re-fetch weather.json even when it already exists.
+  --skip-weather      Do not fetch weather data or set weather.summary.
+  --help              Show this help text.
 `
 
 class CliError extends Error {
@@ -60,6 +67,8 @@ const parseArgs = (args) => {
         all: false,
         dryRun: false,
         help: false,
+        refreshWeather: false,
+        skipWeather: false,
     }
     const inputs = []
 
@@ -76,6 +85,16 @@ const parseArgs = (args) => {
 
         if (arg === "--dry-run") {
             options.dryRun = true
+            continue
+        }
+
+        if (arg === "--refresh-weather") {
+            options.refreshWeather = true
+            continue
+        }
+
+        if (arg === "--skip-weather") {
+            options.skipWeather = true
             continue
         }
 
@@ -415,6 +434,45 @@ const setNestedValue = (lines, section, key, value) => {
     lines[bounds.start + 1 + index] = replacement
 }
 
+const escapeYaml = (value) => value.replace(/\\/g, "\\\\").replace(/"/g, '\\"')
+
+const unquoteValue = (value) => {
+    const quote = value[0]
+
+    return (quote === '"' || quote === "'") && value.endsWith(quote) ? value.slice(1, -1) : value
+}
+
+const readTopLevelValue = (frontMatter, key) => {
+    const line = frontMatter.split("\n").find((line) => new RegExp(`^${key}:`).test(line))
+
+    return line ? unquoteValue(line.slice(line.indexOf(":") + 1).trim()) : null
+}
+
+const readNestedValue = (frontMatter, section, key) => {
+    const lines = frontMatter.split("\n")
+    const bounds = sectionBounds(lines, section)
+
+    if (!bounds) {
+        return null
+    }
+
+    const line = lines.slice(bounds.start + 1, bounds.end).find((line) => new RegExp(`^  ${key}:`).test(line))
+
+    return line ? unquoteValue(line.slice(line.indexOf(":") + 1).trim()) : null
+}
+
+const frontMatterDate = (frontMatter) => {
+    const value = readTopLevelValue(frontMatter, "date")
+
+    if (!value) {
+        return null
+    }
+
+    const date = new Date(value)
+
+    return Number.isNaN(date.getTime()) ? null : date
+}
+
 const updateFrontMatter = (frontMatter, fields) => {
     const lines = frontMatter.split("\n")
 
@@ -430,7 +488,52 @@ const updateFrontMatter = (frontMatter, fields) => {
         setNestedValue(lines, "location", "longitude", fields.longitude)
     }
 
+    if (fields.weatherSummary) {
+        setNestedValue(lines, "weather", "summary", `"${escapeYaml(fields.weatherSummary)}"`)
+    }
+
+    if (fields.weatherTemperature) {
+        setNestedValue(lines, "weather", "temperature", `"${escapeYaml(fields.weatherTemperature)}"`)
+    }
+
     return lines.join("\n")
+}
+
+const weatherFileName = "weather.json"
+
+const resolveWeather = async ({ directory, latitude, longitude, date }, options) => {
+    const weatherPath = path.join(directory, weatherFileName)
+    const existing = (await pathExists(weatherPath)) ? await fs.readFile(weatherPath, "utf8") : null
+    const fetched = options.refreshWeather || existing === null
+
+    try {
+        const source = fetched ? await fetchWeather({ latitude, longitude, date }) : JSON.parse(existing)
+        const point = toWeatherPoint(source, date)
+
+        if (!point) {
+            throw new Error("Open-Meteo response did not include 15-minute data.")
+        }
+
+        const serialised = `${JSON.stringify(point, null, 2)}\n`
+        const changed = serialised !== existing
+        let written = false
+
+        if (changed && !options.dryRun) {
+            await fs.writeFile(weatherPath, serialised)
+            written = true
+        }
+
+        const described = describeWeather(point)
+
+        return {
+            changed,
+            summary: described?.summary ?? null,
+            temperature: described?.temperature ?? null,
+            written,
+        }
+    } catch (error) {
+        return { error: error.message }
+    }
 }
 
 const updatePhotoMarkdown = async ({ directory, image }, options) => {
@@ -462,11 +565,27 @@ const updatePhotoMarkdown = async ({ directory, image }, options) => {
         latitude,
         longitude,
     }
-    const missing = Object.entries(fields)
+
+    const markdown = await fs.readFile(markdownPath, "utf8")
+    const { body, frontMatter } = parseMarkdown(markdown, markdownPath)
+
+    // Weather is based on the front matter's date and coordinates. Freshly-read
+    // EXIF wins, but the existing front matter is used when the image carries no
+    // EXIF (for example after originals have been resized and stripped).
+    const weatherDate = date ?? frontMatterDate(frontMatter)
+    const weatherLatitude = latitude ?? readNestedValue(frontMatter, "location", "latitude")
+    const weatherLongitude = longitude ?? readNestedValue(frontMatter, "location", "longitude")
+    const missing = [
+        ["date", weatherDate],
+        ["latitude", weatherLatitude],
+        ["longitude", weatherLongitude],
+    ]
         .filter(([, value]) => !value)
         .map(([key]) => key)
 
-    if (!fields.date && !fields.latitude && !fields.longitude) {
+    const weather = !options.skipWeather && weatherDate && weatherLatitude && weatherLongitude ? await resolveWeather({ directory, latitude: weatherLatitude, longitude: weatherLongitude, date: weatherDate }, options) : null
+
+    if (!fields.date && !fields.latitude && !fields.longitude && !weather) {
         return {
             directory,
             image,
@@ -476,9 +595,7 @@ const updatePhotoMarkdown = async ({ directory, image }, options) => {
         }
     }
 
-    const markdown = await fs.readFile(markdownPath, "utf8")
-    const { body, frontMatter } = parseMarkdown(markdown, markdownPath)
-    const nextFrontMatter = updateFrontMatter(frontMatter, fields)
+    const nextFrontMatter = updateFrontMatter(frontMatter, { ...fields, weatherSummary: weather?.summary ?? null, weatherTemperature: weather?.temperature ?? null })
     const nextMarkdown = `---\n${nextFrontMatter}\n---${body}`
 
     if (nextMarkdown === markdown) {
@@ -488,6 +605,7 @@ const updatePhotoMarkdown = async ({ directory, image }, options) => {
             image,
             missing,
             unchanged: true,
+            weather,
         }
     }
 
@@ -501,6 +619,7 @@ const updatePhotoMarkdown = async ({ directory, image }, options) => {
         image,
         missing,
         updated: true,
+        weather,
         written: !options.dryRun,
     }
 }
@@ -519,9 +638,30 @@ const printResult = (result, options) => {
         .filter(([, value]) => value)
         .map(([key, value]) => `${key}=${value}`)
         .join(", ")
-    const missing = result.missing.length ? `; missing ${result.missing.join(", ")}` : ""
+    const missing = result.missing.length ? `missing ${result.missing.join(", ")}` : ""
+    const summary = [fields, missing].filter(Boolean).join("; ")
+    const suffix = summary ? `: ${summary}` : ""
 
-    console.log(`${action} ${path.join(directory, "index.md")}${image}: ${fields}${missing}`)
+    console.log(`${action} ${path.join(directory, "index.md")}${image}${suffix}`)
+
+    printWeatherResult(result.weather, directory, options)
+}
+
+const printWeatherResult = (weather, directory, options) => {
+    if (!weather) {
+        return
+    }
+
+    if (weather.error) {
+        console.warn(`  Weather skipped for ${directory}: ${weather.error}`)
+        return
+    }
+
+    const action = weather.changed ? (weather.written ? "wrote" : "would write") : "reused"
+    const detail = [weather.summary, weather.temperature && `(${weather.temperature})`].filter(Boolean).join(" ")
+    const suffix = detail ? `: ${detail}` : ""
+
+    console.log(`  Weather ${action} ${weatherFileName}${suffix}`)
 }
 
 const main = async () => {

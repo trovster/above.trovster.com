@@ -29,4 +29,7 @@ location:
 wikipedia:
   title: Pelham's Pillar
   url: https://en.wikipedia.org/wiki/Pelham%27s_Pillar
+weather:
+  summary: "Overcast, gentle breeze"
+  temperature: "21°C"
 ---

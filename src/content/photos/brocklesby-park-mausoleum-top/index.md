@@ -18,4 +18,7 @@ location:
 wikipedia:
   title: Brocklesby
   url: https://en.wikipedia.org/wiki/Brocklesby
+weather:
+  summary: "Partly cloudy, gentle breeze"
+  temperature: "22°C"
 ---

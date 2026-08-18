@@ -31,6 +31,9 @@ location:
 wikipedia:
   title: Blundell Park
   url: https://en.wikipedia.org/wiki/Blundell_Park
+weather:
+  summary: "Overcast, light breeze"
+  temperature: "25°C"
 ---
 Blundell Park is a football ground in Cleethorpes, North East Lincolnshire,
 England and home to Grimsby Town Football Club. The stadium was built in 1899.

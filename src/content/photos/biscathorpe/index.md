@@ -22,4 +22,7 @@ location:
 wikipedia:
   title: Biscathorpe
   url: https://en.wikipedia.org/wiki/Biscathorpe
+weather:
+  summary: "Mainly clear, light breeze"
+  temperature: "20°C"
 ---

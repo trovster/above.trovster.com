@@ -29,4 +29,7 @@ location:
 wikipedia:
   title: Hatcliffe
   url: "https://en.wikipedia.org/wiki/Hatcliffe"
+weather:
+  summary: "Partly cloudy, gentle breeze"
+  temperature: "28°C"
 ---

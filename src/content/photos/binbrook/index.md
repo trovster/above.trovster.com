@@ -30,4 +30,7 @@ location:
 wikipedia:
   title: Binbrook
   url: "https://en.wikipedia.org/wiki/Binbrook"
+weather:
+  summary: "Overcast, light breeze"
+  temperature: "20°C"
 ---

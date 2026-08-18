@@ -20,4 +20,7 @@ location:
 wikipedia:
   title: Irby upon Humber
   url: https://en.wikipedia.org/wiki/Irby_upon_Humber
+weather:
+  summary: "Partly cloudy, gentle breeze"
+  temperature: "23°C"
 ---

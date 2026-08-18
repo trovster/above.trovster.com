@@ -11,7 +11,27 @@
             </div>
         </dl>
 
-        <a class="link" :href="photo.data.map.linkUrl" rel="external noopener" target="_blank">View on Google Maps</a>
+        <h3>Taken</h3>
+        <dl>
+            <div>
+                <dt>Date</dt>
+                <dd><time @text="date(photo.date, 'cccc dS LLLL y')"></time></dd>
+            </div>
+            <div>
+                <dt>Time</dt>
+                <dd><time @text="date(photo.date, 'h:mm a')"></time></dd>
+            </div>
+            <div webc:if="photo.data.weather?.summary">
+                <dt>Conditions</dt>
+                <dd @text="photo.data.weather.summary"></dd>
+            </div>
+            <div webc:if="photo.data.weather?.temperature">
+                <dt>Temperature</dt>
+                <dd @text="photo.data.weather.temperature"></dd>
+            </div>
+        </dl>
+
+        <a class="link" :href="photo.data.map.linkUrl" rel="external noopener" target="_blank" hidden>View on Google Maps</a>
     </div>
 
     <div

@@ -30,4 +30,7 @@ location:
 wikipedia:
   title: Caistor
   url: https://en.wikipedia.org/wiki/Caistor
+weather:
+  summary: "Overcast, light breeze"
+  temperature: "25°C"
 ---

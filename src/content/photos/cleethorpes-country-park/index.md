@@ -15,4 +15,7 @@ location:
 wikipedia:
   title: Cleethorpes Country Park
   url: https://en.wikipedia.org/wiki/Cleethorpes_Country_Park
+weather:
+  summary: "Overcast, gentle breeze"
+  temperature: "13°C"
 ---

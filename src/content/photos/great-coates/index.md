@@ -32,4 +32,7 @@ location:
 wikipedia:
   title: Great Coates
   url: https://en.wikipedia.org/wiki/Great_Coates
+weather:
+  summary: "Overcast, light breeze"
+  temperature: "21°C"
 ---

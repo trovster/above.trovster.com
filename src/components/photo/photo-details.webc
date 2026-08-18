@@ -79,7 +79,6 @@
         </section>
 
         <photo-location-map :photo="photo" :apikey="apikey" :mapid="mapid"></photo-location-map>
-
     </div>
 
     <photo-exif :photo="photo"></photo-exif>

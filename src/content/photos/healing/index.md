@@ -31,6 +31,9 @@ location:
   region: Lincolnshire, England
   latitude: 53.573892
   longitude: -0.167922
+weather:
+  summary: "Overcast, light breeze"
+  temperature: "21°C"
 wikipedia:
   title: Healing
   url: "https://en.wikipedia.org/wiki/Healing,_Lincolnshire"

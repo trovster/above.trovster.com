@@ -31,4 +31,7 @@ location:
 wikipedia:
   title: Beelsby
   url: https://en.wikipedia.org/wiki/Beelsby
+weather:
+  summary: "Overcast, gentle breeze"
+  temperature: "29°C"
 ---

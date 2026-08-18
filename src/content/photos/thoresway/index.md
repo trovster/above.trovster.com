@@ -33,4 +33,7 @@ location:
 wikipedia:
   title: Thoresway
   url: https://en.wikipedia.org/wiki/Thoresway
+weather:
+  summary: "Overcast, gentle breeze"
+  temperature: "26°C"
 ---

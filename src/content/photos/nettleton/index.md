@@ -21,4 +21,7 @@ location:
 wikipedia:
   title: Nettleton, Lincolnshire
   url: https://en.wikipedia.org/wiki/Nettleton,_Lincolnshire
+weather:
+  summary: "Overcast, light breeze"
+  temperature: "25°C"
 ---

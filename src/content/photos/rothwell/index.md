@@ -22,4 +22,7 @@ location:
 wikipedia:
   title: Rothwell, Lincolnshire
   url: https://en.wikipedia.org/wiki/Rothwell,_Lincolnshire
+weather:
+  summary: "Overcast, light breeze"
+  temperature: "26°C"
 ---

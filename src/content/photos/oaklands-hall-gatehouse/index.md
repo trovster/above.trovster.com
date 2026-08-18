@@ -12,4 +12,7 @@ location:
   region: Lincolnshire, England
   latitude: 53.532403
   longitude: -0.179844
+weather:
+  summary: "Overcast, light breeze"
+  temperature: "16°C"
 ---

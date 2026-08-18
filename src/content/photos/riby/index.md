@@ -28,6 +28,9 @@ location:
 wikipedia:
   title: Riby
   url: https://en.wikipedia.org/wiki/Riby
+weather:
+  summary: "Overcast, gentle breeze"
+  temperature: "23°C"
 ---
 The Church of St Edmund retains a Decorated or Perpendicular tower, although was
 almost entirely rebuilt in 1868. In the north wall of the nave is a Norman

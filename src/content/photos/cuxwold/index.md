@@ -33,4 +33,7 @@ location:
 wikipedia:
   title: Cuxwold
   url: https://en.wikipedia.org/wiki/Cuxwold
+weather:
+  summary: "Overcast, light breeze"
+  temperature: "26°C"
 ---

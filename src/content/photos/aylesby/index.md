@@ -30,4 +30,7 @@ location:
 wikipedia:
   title: Aylesby
   url: https://en.wikipedia.org/wiki/Aylesby
+weather:
+  summary: "Overcast, gentle breeze"
+  temperature: "23°C"
 ---
