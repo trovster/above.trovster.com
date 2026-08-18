@@ -64,7 +64,7 @@
     </header>
 
     <section webc:if="photo.data.gallery" class="photo-gallery">
-        <photo-gallery :images="photo.data.gallery.images" :id="photo.data.id"></view-gallery>
+        <photo-gallery :images="photo.data.gallery.images" :id="photo.data.id"></photo-gallery>
     </section>
 
     <div webc:if="photo.data.viewer !== 'pannellum'">
