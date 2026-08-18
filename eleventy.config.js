@@ -38,7 +38,6 @@ export default (config) => {
     config.addPlugin(shortcodes)
 
     config.setDataDeepMerge(true)
-    config.setQuietMode(true)
     config.setDataFileBaseName("index")
 
     config.addLayoutAlias("default", "layouts/default.webc")
