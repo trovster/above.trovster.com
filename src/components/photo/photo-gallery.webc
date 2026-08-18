@@ -37,7 +37,14 @@
                     </svg>
                 </button>
 
-                <img :src="image.src" :alt="image.alt" width="1600" :eleventy:output="image.url" />
+                <img
+                    :src="image.src"
+                    :alt="image.alt"
+                    width="1600"
+                    eleventy:widths="360,500,600,1000"
+                    sizes="100vw"
+                    :eleventy:output="image.url"
+                />
             </dialog>
         </div>
     </div>

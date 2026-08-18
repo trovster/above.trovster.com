@@ -31,6 +31,7 @@
     "image:metadata": "node scripts/update-photo-metadata.js",
     "image:process": "node scripts/process-image.js",
     "image:process:photos": "node scripts/process-photo-images.js",
+    "image:process:originals": "node scripts/process-original-images.js",
     "mastodon:post": "node scripts/post-photo-to-mastodon.js",
     "test": "node --test",
     "prettier": "npx prettier --write ."

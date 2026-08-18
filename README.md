@@ -161,7 +161,28 @@ npm run image:process:photos --
 Files named `panorama.jpg` or `panorama.jpeg` are resized to 6000px and are
 always processed without a watermark.
 
+During the Eleventy build, primary and panorama images also produce responsive
+WebP variants at 400px, 800px, 1200px, and 1400px wide. Their original 2500px
+and 6000px outputs remain available as the largest `srcset` candidates.
+
 Use `--dry-run` to preview the files and output paths without writing images.
+
+### Resizing Committed Originals
+
+Resize the committed JPG/JPEG source files in place before generating their
+WebP versions:
+
+```bash
+npm run image:process:originals -- --dry-run
+npm run image:process:originals --
+```
+
+The command limits `image.jpg` to 2500px wide, `panorama.jpg` to 6000px,
+and numbered gallery images such as `1.jpg` to 2000px. It does not enlarge or
+rewrite images that are already within their limit. Resized files use JPEG
+quality 100 with no watermark or other visual changes, and preserve all
+supported EXIF, ICC, XMP, and IPTC metadata. Review and commit the resulting
+original JPG changes separately.
 
 ## Posting to Mastodon
 

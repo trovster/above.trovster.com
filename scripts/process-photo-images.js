@@ -5,7 +5,7 @@ import path from "node:path"
 import process from "node:process"
 import { fileURLToPath } from "node:url"
 
-import { CliError, parseArgs, printResult, processImage } from "./process-image.js"
+import { CliError, imageWidths, parseArgs, printResult, processImage } from "./process-image.js"
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const photosDirectory = path.join(projectRoot, "src/content/photos")
@@ -71,7 +71,7 @@ const optionsForImage = (image, options) => {
     if (isPanorama(image)) {
         return {
             ...options,
-            maxWidth: 6000,
+            maxWidth: imageWidths.panorama,
             watermark: null,
         }
     }
@@ -91,6 +91,7 @@ const main = async () => {
         allowOutput: false,
         requireInputs: false,
     })
+
     const roots = directories.length ? directories.map((directory) => path.resolve(directory)) : defaultPhotosDirectories
     const images = unique((await Promise.all(roots.map(collectJpegs))).flat())
 

@@ -9,10 +9,16 @@ import sharp from "sharp"
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 
+const imageWidths = Object.freeze({
+    gallery: 1200,
+    panorama: 6000,
+    primary: 2500,
+})
+
 const defaults = {
     effort: 5,
     keepMetadata: true,
-    maxWidth: 2500,
+    maxWidth: imageWidths.primary,
     overwrite: true,
     quality: 82,
     watermark: path.join(projectRoot, "src/icons/above-logo.svg"),
@@ -398,7 +404,7 @@ const optionsForInput = (input, options) => {
 
     return {
         ...options,
-        maxWidth: 6000,
+        maxWidth: imageWidths.panorama,
         watermark: null,
     }
 }
@@ -534,4 +540,4 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     main().catch(handleCliError)
 }
 
-export { CliError, defaults, handleCliError, parseArgs, printResult, processImage }
+export { CliError, defaults, handleCliError, imageWidths, parseArgs, printResult, processImage }
