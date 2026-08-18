@@ -1,6 +1,6 @@
 ---
 date: "2026-08-17T16:24:56+00:00"
-enabled: 0
+enabled: 1
 title: "Ashby cum Fenby"
 src: image.jpg
 alt: "Aerial photograph of the church in Ashby cum Fenby, Lincolnshire."

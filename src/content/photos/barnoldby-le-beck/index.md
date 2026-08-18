@@ -1,6 +1,6 @@
 ---
 date: "2026-08-17T15:52:44+00:00"
-enabled: 0
+enabled: 1
 title: "Barnoldby le Beck"
 src: image.jpg
 alt: "Aerial photograph of the church in Barnoldby le Beck, Lincolnshire."
