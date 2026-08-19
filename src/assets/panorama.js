@@ -5,9 +5,39 @@ import { createPointerCursor, createPointerCursorTracker, supportsFinePointer } 
 let panoramaObserver
 let panoramaCursor
 
-const firstSourceCandidate = (image) => image.closest("picture")?.querySelector("source[srcset]")?.srcset.split(",").at(0)?.trim().split(/\s+/).at(0)
+const parseSrcsetCandidates = (srcset) =>
+    (srcset ?? "")
+        .split(",")
+        .map((entry) => entry.trim())
+        .filter(Boolean)
+        .map((entry) => {
+            const [url, descriptor] = entry.split(/\s+/)
+            return { url, width: descriptor?.endsWith("w") ? Number.parseInt(descriptor, 10) : Number.NaN }
+        })
+        .filter((candidate) => candidate.url)
 
-const getPanoramaSource = (image) => image.currentSrc || firstSourceCandidate(image) || image.src || image.getAttribute("src")
+const collectSrcsets = (image) => [
+    ...Array.from(image.closest("picture")?.querySelectorAll("source[srcset]") ?? [], (source) => source.srcset),
+    image.srcset,
+]
+
+// A panorama viewer only ever shows a slice of the full equirectangular width, so
+// always pick the largest generated variant. Relying on currentSrc/src would use
+// whatever the lazy <img> resolved to — often the smallest (400w) file if the viewer
+// initialises before the image loads, causing pixellation.
+const largestPanoramaCandidate = (image) => {
+    const candidates = collectSrcsets(image)
+        .flatMap(parseSrcsetCandidates)
+        .filter((candidate) => Number.isFinite(candidate.width))
+
+    if (!candidates.length) {
+        return null
+    }
+
+    return candidates.reduce((largest, candidate) => (candidate.width > largest.width ? candidate : largest)).url
+}
+
+const getPanoramaSource = (image) => largestPanoramaCandidate(image) || image.currentSrc || image.src || image.getAttribute("src")
 
 const getPannellum = () => window.pannellum ?? globalThis.pannellum
 

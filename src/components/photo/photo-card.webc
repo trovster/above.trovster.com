@@ -40,7 +40,7 @@
             :alt="photo.data.alt"
             width="6000"
             height="3000"
-            eleventy:widths="400,800,1200,1400,auto"
+            eleventy:widths="1200,1400,2500,3600,auto"
             sizes="100vw"
             :eleventy:output="photo.url"
             data-panorama-image
