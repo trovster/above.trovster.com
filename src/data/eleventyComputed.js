@@ -22,16 +22,17 @@ const defaultPhoto = (photos) => {
     return asSource(pinned) ?? asSource(photos.at(-1))
 }
 
-// Resolve which photo an Open Graph card should be built from:
+// Resolve which photo an Open Graph card should be built from. Individual pages
+// carry a `title` (overlaid on the card); the shared default card does not.
 //   - a standard photo page uses its own primary photo
 //   - a 360 page uses the sibling primary `image.jpg`, if one exists
-//   - everything else (home, map, about, 404, galleries) uses the latest photo
+//   - everything else (home, map, about, 404, galleries) uses the default photo
 const resolveOgSource = async (data) => {
     const { photo, view } = data
     const photos = await Promise.all(data.collections?.photos ?? [])
 
     if (photo?.data?.src) {
-        return asSource(photo)
+        return { ...asSource(photo), title: photo.data.title }
     }
 
     if (view?.data?.src) {
@@ -41,7 +42,11 @@ const resolveOgSource = async (data) => {
         if (existsSync(file)) {
             const sibling = photos.find((entry) => entry?.data?.id === view.data.id)
 
-            return { file, alt: sibling?.data?.alt ?? view.data.alt ?? view.data.title }
+            return {
+                file,
+                alt: sibling?.data?.alt ?? view.data.alt ?? view.data.title,
+                title: sibling?.data?.title ?? view.data.title,
+            }
         }
     }
 
@@ -59,7 +64,7 @@ export default {
                 return null
             }
 
-            const image = await createOgImage(source.file)
+            const image = await createOgImage(source.file, { title: source.title })
 
             if (!image) {
                 return null
