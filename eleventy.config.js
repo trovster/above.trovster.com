@@ -51,6 +51,8 @@ export default (config) => {
     config.addPassthroughCopy({ "src/icons/favicon.ico": "public/favicon.ico" })
     config.addPassthroughCopy({ "src/icons/favicon-96x96.png": "public/favicon-96x96.png" })
     config.addPassthroughCopy({ "src/icons/apple-touch-icon.png": "public/apple-touch-icon.png" })
+    config.addPassthroughCopy({ "src/icons/web-app-manifest-192x192.png": "public/web-app-manifest-192x192.png" })
+    config.addPassthroughCopy({ "src/icons/web-app-manifest-512x512.png": "public/web-app-manifest-512x512.png" })
     config.addPassthroughCopy({ "src/site.webmanifest": "public/site.webmanifest" })
 
     return {
