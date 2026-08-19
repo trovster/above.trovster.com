@@ -28,6 +28,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Setup Pages
+        id: pages
         uses: actions/configure-pages@v6
 
       - name: Setup Node
@@ -42,6 +43,8 @@ jobs:
         run: npm run ci
         timeout-minutes: 20
         env:
+          URL: ${{ steps.pages.outputs.base_url }}
+          OG_IMAGE: ${{ vars.OG_IMAGE }}
           GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
           GOOGLE_MAPS_MAP_ID: ${{ secrets.GOOGLE_MAPS_MAP_ID }}
 

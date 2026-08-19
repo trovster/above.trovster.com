@@ -49,7 +49,9 @@ export default (config) => {
     config.addPassthroughCopy({ CNAME: "public/CNAME" })
     config.addPassthroughCopy({ "src/icons/favicon.svg": "public/favicon.svg" })
     config.addPassthroughCopy({ "src/icons/favicon.ico": "public/favicon.ico" })
+    config.addPassthroughCopy({ "src/icons/favicon-96x96.png": "public/favicon-96x96.png" })
     config.addPassthroughCopy({ "src/icons/apple-touch-icon.png": "public/apple-touch-icon.png" })
+    config.addPassthroughCopy({ "src/site.webmanifest": "public/site.webmanifest" })
 
     return {
         dir: {

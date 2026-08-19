@@ -64,31 +64,34 @@ const removePaintDeclarations = (svg) =>
 
 const addNonScalingStroke = (svg) => svg.replace(/<(path|circle|ellipse|line|polyline|polygon|rect)\b(?![^>]*\svector-effect=)/gi, '<$1 vector-effect="non-scaling-stroke"')
 
-const createWatermark = async (imageWidth, imageHeight) => {
+const createWatermark = async (imageWidth, imageHeight, overrides = {}) => {
+    const options = { ...watermarkOptions, ...overrides }
     const source = await watermarkSource
     const viewBox = parseViewBox(source)
-    const margin = Math.max(1, Math.round(imageWidth * watermarkOptions.margin))
-    const requestedWidth = Math.max(1, Math.round(imageWidth * watermarkOptions.width))
+    const margin = Math.max(1, Math.round(imageWidth * options.margin))
+    const requestedWidth = Math.max(1, Math.round(imageWidth * options.width))
     const maxWidth = Math.max(1, imageWidth - margin * 2)
     const maxHeight = Math.max(1, imageHeight - margin * 2)
     const requestedHeight = Math.round((requestedWidth * viewBox.height) / viewBox.width)
     const scale = Math.min(1, maxWidth / requestedWidth, maxHeight / requestedHeight)
     const width = Math.max(1, Math.round(requestedWidth * scale))
     const height = Math.max(1, Math.round(requestedHeight * scale))
-    const color = escapeXmlAttribute(watermarkOptions.color)
-    const strokeWidth = (imageWidth / 2500) * watermarkOptions.strokeWidthAtFullSize
+    const color = escapeXmlAttribute(options.color)
+    const strokeWidth = (imageWidth / 2500) * options.strokeWidthAtFullSize
     const innerSvg = addNonScalingStroke(removePaintDeclarations(stripSvgWrapper(source)))
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox.value}" width="${width}" height="${height}">
-<g fill="${color}" stroke="${color}" stroke-width="${strokeWidth}" stroke-linecap="round" stroke-linejoin="round" opacity="${watermarkOptions.opacity}">
+<g fill="${color}" stroke="${color}" stroke-width="${strokeWidth}" stroke-linecap="round" stroke-linejoin="round" opacity="${options.opacity}">
 ${innerSvg}
 </g>
 </svg>`
 
+    const centred = options.position === "center"
+
     return {
         buffer: Buffer.from(svg),
         height,
-        left: Math.max(margin, imageWidth - width - margin),
-        top: Math.max(margin, imageHeight - height - margin),
+        left: centred ? Math.round((imageWidth - width) / 2) : Math.max(margin, imageWidth - width - margin),
+        top: centred ? Math.round((imageHeight - height) / 2) : Math.max(margin, imageHeight - height - margin),
         width,
     }
 }
